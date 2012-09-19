@@ -13,6 +13,7 @@ public class TanqueRedeDAO extends HibernateConnection implements TanqueRedeUtil
 
 	@Override
 	public void salvar(TanqueRede entidade) {
+		
 		if(entidade.getId()	!= null)
 			merge(entidade);
 		else
