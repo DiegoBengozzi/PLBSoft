@@ -12,8 +12,7 @@ import javax.persistence.Table;
 
 @Table(name="TANQUE_REDE")
 @Entity
-public class TanqueRede implements Serializable{
-	
+public class TanqueRede implements Serializable{	
 	/**
 	 * 
 	 */
@@ -28,6 +27,9 @@ public class TanqueRede implements Serializable{
 	
 	@Column 
 	private BigDecimal tamanho;
+	
+	@Column
+	private Boolean status;	
 
 	public Long getId() {
 		return id;
@@ -51,6 +53,14 @@ public class TanqueRede implements Serializable{
 
 	public void setTamanho(BigDecimal tamanho) {
 		this.tamanho = tamanho;
+	}
+	
+	public Boolean getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override
