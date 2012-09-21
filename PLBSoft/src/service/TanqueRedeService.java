@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import modelo.TanqueRede;
 import DAO.TanqueRedeDAO;
 
@@ -13,7 +15,10 @@ public class TanqueRedeService{
 	}
 	
 	public TanqueRede buscar(Long id){
-		return (TanqueRede) TanqueRede;
+		return dao.buscar(id);
+	}
+	public List<TanqueRede> buscarTodos(){
+		return  dao.buscarTodos();
 	}
 	 
 }
