@@ -8,10 +8,6 @@
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/BancoPLBSoft</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">admin</property>
-
-		
-
-
 		<mapping class="modelo.TanqueRede" />
 
 	</session-factory>

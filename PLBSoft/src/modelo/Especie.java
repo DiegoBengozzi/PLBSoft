@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Especie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY);
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column
