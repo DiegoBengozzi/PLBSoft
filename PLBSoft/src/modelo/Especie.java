@@ -8,31 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table
-@Entity(name="ESPECIE")
+@Entity(name = "ESPECIE")
 public class Especie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String especie;
-	
+
 	@Column
 	private String linhegem;
-	
+
 	@Column
 	private String hidrido;
-	
-	@Column 
+
+	@Column
 	private String genero;
-	
-	@Column 
+
+	@Column
 	private Long toleranciaSalinidade;
-	
-	@Column 
+
+	@Column
 	private Long toleranciaFrio;
-	
+
 	@Column
 	private Long maturacaoSexual;
 
@@ -124,6 +124,5 @@ public class Especie {
 			return false;
 		return true;
 	}
-	
-	
+
 }

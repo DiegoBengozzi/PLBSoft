@@ -10,26 +10,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name="TANQUE_REDE")
+@Table(name = "TANQUE_REDE")
 @Entity
-public class TanqueRede implements Serializable{	
+public class TanqueRede implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;//cara nem eu sei mas deixa aiii.asdfgiuyy->"Cristiano"
+	private static final long serialVersionUID = 3592892633201964136L;// cara
+																		// nem
+																		// eu
+																		// sei
+																		// mas
+																		// deixa
+																		// aiii.asdfgiuyy->"Cristiano"
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String Nome;
-	
-	@Column 
-	private BigDecimal tamanho;
-	
+
 	@Column
-	private Boolean status;	
+	private BigDecimal tamanho;
+
+	@Column
+	private Boolean status;
 
 	public Long getId() {
 		return id;
@@ -54,11 +60,11 @@ public class TanqueRede implements Serializable{
 	public void setTamanho(BigDecimal tamanho) {
 		this.tamanho = tamanho;
 	}
-	
+
 	public Boolean getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
@@ -87,6 +93,5 @@ public class TanqueRede implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

@@ -8,49 +8,48 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 @SuppressWarnings("deprecation")
 public class HibernateConnection {
-	
+
 	private static SessionFactory sf;
 	private static Session session;
 	private static Transaction tx;
-  
-	public void initSystem() {  
-  
-        // Cria uma configuração para a classe 
+
+	public void initSystem() {
+
 		AnnotationConfiguration cfg = new AnnotationConfiguration();
 		sf = cfg.configure().buildSessionFactory();
 		create(cfg);
-    }  
-	
-	public static Session getSession(){
-		if(session == null)
+	}
+
+	public static Session getSession() {
+		if (session == null)
 			openConnection();
-		
+
 		return session;
 	}
-	
+
 	public static void create(AnnotationConfiguration cfg) {
 		SchemaExport esquema = new SchemaExport(cfg);
 		esquema.execute(true, true, false, true);
-    }
-	
-	public static void openConnection(){
-		
+	}
+
+	public static void openConnection() {
+
 		session = sf.openSession();
 
 		tx = session.beginTransaction();
 
 	}
-	
-	public void merge(Object modelo){
+
+	public void merge(Object modelo) {
 		getSession().merge(modelo);
 		tx.commit();
 		tx = session.beginTransaction();
 	}
 
-	public void persist(Object modelo){
+	public void persist(Object modelo) {
 		getSession().persist(modelo);
 		tx.commit();
 		tx = session.beginTransaction();
 	}
-	
-}  
+
+}

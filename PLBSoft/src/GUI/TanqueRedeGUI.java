@@ -7,8 +7,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import service.TanqueRedeService;
-
 public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Text tNome;
 	private Text tTamanho;
@@ -18,40 +16,42 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	}
 
 	@Override
-	public void novo() {
-		
+	public void excluir() {
+
 	}
 
 	@Override
 	public void buscar() {
-		
+
 	}
 
 	@Override
 	public void salvar() {
-		
-			
+		//TanqueRedeService e = new TanqueRedeService();
+		//e.salvar();
 	}
-	
+
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		composite.setLayout(new GridLayout(2, false));
-		
+
 		Label lblNome = new Label(composite, SWT.NONE);
-		lblNome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
 		lblNome.setText("Nome:");
-		
+
 		tNome = new Text(composite, SWT.BORDER);
 		tNome.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
-		
+
 		Label lblTamanhaM = new Label(composite, SWT.NONE);
-		lblTamanhaM.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTamanhaM.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblTamanhaM.setText("Tamanha m2:");
-		
+
 		tTamanho = new Text(composite, SWT.BORDER);
-		tTamanho.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
+		tTamanho.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
+
 	}
-	
-	
+
 }
