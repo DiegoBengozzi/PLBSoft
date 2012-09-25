@@ -9,11 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-@Table(name="TIPO_TANQUE")
+@Table(name = "TIPO_TANQUE")
 @Entity
-
-public class TipoTanque implements Serializable{
+public class TipoTanque implements Serializable {
 
 	/**
 	 * 
@@ -21,15 +19,15 @@ public class TipoTanque implements Serializable{
 	private static final long serialVersionUID = 60227753724977383L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String nome;
-	
-	@Column 
+
+	@Column
 	private String revestimento;
-	
+
 	@Column
 	private Boolean status;
 
@@ -89,5 +87,5 @@ public class TipoTanque implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
