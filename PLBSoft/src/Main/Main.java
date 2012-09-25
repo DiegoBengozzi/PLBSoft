@@ -1,6 +1,6 @@
 package Main;
 
-import conexao.HibernateConnection;
+import GUI.JanelaPrincipalGUI;
 
 public class Main {
 
@@ -9,8 +9,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		HibernateConnection hibernate = new HibernateConnection();
-        hibernate.initSystem();
+//		HibernateConnection hibernate = new HibernateConnection();
+//        hibernate.initSystem();
+        new JanelaPrincipalGUI().open();
+        
 
 
 	}

@@ -8,13 +8,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-public class TelaEdicaoGUI extends Composite {
+public abstract class TelaEdicaoGUI extends Composite {
 
 	/**
 	 * Create the composite.
 	 * @param parent
 	 * @param style
 	 */
+	public abstract void novo();
+	public abstract void buscar();
+	public abstract void salvar();
+	public abstract void adicionarComponentes(Composite composite);	
+	
 	public TelaEdicaoGUI(Composite parent, int style) {
 		super(parent, style);
 		setLayout(new GridLayout(2, false));
@@ -69,7 +74,9 @@ public class TelaEdicaoGUI extends Composite {
 		adicionarComponentes(compositePrincipal);	
 
 	}
-	
+	public void voltar(){
+		dispose();
+	}
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
