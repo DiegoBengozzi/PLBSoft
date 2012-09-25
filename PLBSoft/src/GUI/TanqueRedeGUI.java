@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import service.TanqueRedeService;
+
 public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Text tNome;
 	private Text tTamanho;
@@ -28,6 +30,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	@Override
 	public void salvar() {
 		
+			
 	}
 	
 	@Override

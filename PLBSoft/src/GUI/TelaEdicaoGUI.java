@@ -76,6 +76,8 @@ public abstract class TelaEdicaoGUI extends Composite {
 	}
 	public void voltar(){
 		dispose();
+		
+		
 	}
 	@Override
 	protected void checkSubclass() {

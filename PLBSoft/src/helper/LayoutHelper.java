@@ -2,7 +2,7 @@ package helper;
 
 import org.eclipse.swt.widgets.Shell;
 
-public class ShellHelper {
+public class LayoutHelper{
 	public static Shell shell;
 	
 	public static Shell getShellAtivo(){
@@ -11,5 +11,7 @@ public class ShellHelper {
 		}
 		return shell;
 	}
+	
+	
 	
 }

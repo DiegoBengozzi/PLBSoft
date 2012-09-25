@@ -123,7 +123,9 @@ public class JanelaPrincipalGUI {
 		textStatus = new Text(compositeStatus, SWT.BORDER);
 		textStatus.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		textStatus.setEditable(false);
-		textStatus.setText("Status");
+		textStatus.setText("Barra de Status");
 
 	}
+
+
 }
