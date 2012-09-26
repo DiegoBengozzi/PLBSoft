@@ -9,6 +9,7 @@
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">admin</property>
 		<mapping class="modelo.TanqueRede" />
+		<mapping class="modelo.TipoTanque" />
 
 	</session-factory>
 </hibernate-configuration>

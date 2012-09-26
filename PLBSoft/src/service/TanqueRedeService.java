@@ -14,8 +14,8 @@ public class TanqueRedeService {
 
 	}
 
-	public TanqueRede buscar(Long id) {
-		return dao.buscar(id);
+	public TanqueRede buscar(String nome) {
+		return dao.buscar(nome);
 	}
 
 	public List<TanqueRede> buscarTodos() {

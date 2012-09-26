@@ -22,10 +22,11 @@ public class TanqueRedeDAO extends HibernateConnection implements
 	}
 
 	@Override
-	public TanqueRede buscar(Long id) {
+	public TanqueRede buscar(String nome) {
 		Query q = getSession().createQuery(
-				"select t from TanqueRede t where t.id=:id");
-		q.setParameter("id", id);
+				"select t from TanqueRede t where t.nome=:nome");
+		q.setParameter("nome", nome);
+		//q.setParameter("status", "TRUE");AND t.status = IS TRUE
 		return (TanqueRede) q.uniqueResult();
 	}
 
@@ -35,5 +36,6 @@ public class TanqueRedeDAO extends HibernateConnection implements
 		Query q = getSession().createQuery("select t from TanqueRede t");
 		return q.list();
 	}
+
 
 }

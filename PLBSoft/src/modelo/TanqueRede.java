@@ -16,20 +16,14 @@ public class TanqueRede implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;// cara
-																		// nem
-																		// eu
-																		// sei
-																		// mas
-																		// deixa
-																		// aiii.asdfgiuyy->"Cristiano"
+	private static final long serialVersionUID = 3592892633201964136L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
-	private String Nome;
+	private String nome;
 
 	@Column
 	private BigDecimal tamanho;
@@ -46,11 +40,11 @@ public class TanqueRede implements Serializable {
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public BigDecimal getTamanho() {

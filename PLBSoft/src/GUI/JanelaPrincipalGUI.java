@@ -6,10 +6,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -22,6 +24,7 @@ public class JanelaPrincipalGUI {
 	private ScrolledComposite scrolledComposite;
 	@SuppressWarnings("unused")
 	private Text txtStatus;
+	private DateTime dateTime;
 
 	/**
 	 * Open the window.
@@ -40,9 +43,11 @@ public class JanelaPrincipalGUI {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shlPlbsoft = new Shell();
+		shlPlbsoft.setMinimumSize(new Point(600, 400));
 		// shlPlbsoft = ShellHelper.getShellAtivo();
 		shlPlbsoft.setSize(453, 317);
 		shlPlbsoft.setText("PLBSoft");
@@ -69,12 +74,34 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmTanqueRede.setText("Tanque Rede");
+		
+		MenuItem mntmTipoDeTanque = new MenuItem(menu_1, SWT.NONE);
+		mntmTipoDeTanque.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TipoTanqueGUI tipoTanque = new TipoTanqueGUI(scrolledComposite,
+						SWT.BORDER);
+				scrolledComposite.setContent(tipoTanque);
+				scrolledComposite.setMinSize(tipoTanque.computeSize(
+						SWT.DEFAULT, SWT.DEFAULT));
+			}
+		});
+		mntmTipoDeTanque.setText("Tipo de Tanque");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
 
 		Menu menu_2 = new Menu(mntmRelatorios);
 		mntmRelatorios.setMenu(menu_2);
+		
+		MenuItem mntmRelatoriosNok = new MenuItem(menu_2, SWT.NONE);
+		mntmRelatoriosNok.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				StatusHelper.mensagemError("Relatórios não disponiveis");
+			}
+		});
+		mntmRelatoriosNok.setText("Relatorios NOK");
 
 		Composite compositeLateral = new Composite(shlPlbsoft, SWT.NONE);
 		GridData gd_compositeLateral = new GridData(SWT.LEFT, SWT.FILL, false,
@@ -82,8 +109,15 @@ public class JanelaPrincipalGUI {
 		gd_compositeLateral.heightHint = 167;
 		compositeLateral.setLayoutData(gd_compositeLateral);
 		compositeLateral.setLayout(new GridLayout(1, false));
+		
+		setDateTime(new DateTime(compositeLateral, SWT.BORDER | SWT.DROP_DOWN));
 
 		Button btInicio = new Button(compositeLateral, SWT.NONE);
+		btInicio.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
 		btInicio.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
 				1, 1));
 		btInicio.setText("Inicio");
@@ -102,7 +136,7 @@ public class JanelaPrincipalGUI {
 		});
 		btAgenda.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
 				1, 1));
-		btAgenda.setText("Agenda");
+		btAgenda.setText("Test");
 
 		Button button_3 = new Button(compositeLateral, SWT.NONE);
 		button_3.addSelectionListener(new SelectionAdapter() {
@@ -142,4 +176,11 @@ public class JanelaPrincipalGUI {
 
 	}
 
+	public DateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
+	}
 }

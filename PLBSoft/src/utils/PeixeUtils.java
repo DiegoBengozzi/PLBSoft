@@ -6,7 +6,7 @@ public interface PeixeUtils<T> {
 
 	void salvar(T entidade);
 
-	T buscar(Long id);
+	T buscar(String nome);
 
 	List<T> buscarTodos();
 
