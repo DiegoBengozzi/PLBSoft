@@ -1,6 +1,6 @@
 package GUI;
 
-import helper.LayoutHelper;
+import helper.StatusHelper;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -22,21 +22,6 @@ public class JanelaPrincipalGUI {
 	private ScrolledComposite scrolledComposite;
 	@SuppressWarnings("unused")
 	private Text txtStatus;
-
-	/**
-	 * Launch the application.
-	 * 
-	 * @param args
-	 */
-
-	public static void main(String[] args) {
-		try {
-			JanelaPrincipalGUI window = new JanelaPrincipalGUI();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Open the window.
@@ -109,16 +94,34 @@ public class JanelaPrincipalGUI {
 		btTanque.setText("Tanques");
 
 		Button btAgenda = new Button(compositeLateral, SWT.NONE);
+		btAgenda.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				StatusHelper.mensagemError("mensagem de erro");	
+			}
+		});
 		btAgenda.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
 				1, 1));
 		btAgenda.setText("Agenda");
 
 		Button button_3 = new Button(compositeLateral, SWT.NONE);
+		button_3.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				StatusHelper.mensagemWarning("mensagem de alerta amarela");
+			}
+		});
 		button_3.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
 				1, 1));
 		button_3.setText("Teste");
 
 		Button button_4 = new Button(compositeLateral, SWT.NONE);
+		button_4.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				StatusHelper.mensagemInfo("mensagem informacao");
+			}
+		});
 		button_4.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
 				1, 1));
 		button_4.setText("Teste2");
@@ -135,7 +138,7 @@ public class JanelaPrincipalGUI {
 		compositeStatus.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true,
 				false, 2, 1));
 
-		txtStatus = LayoutHelper.getStatusAtivo(compositeStatus);
+		txtStatus = StatusHelper.getStatusAtivo(compositeStatus);
 
 	}
 

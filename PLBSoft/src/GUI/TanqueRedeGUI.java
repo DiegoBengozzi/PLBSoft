@@ -1,5 +1,9 @@
 package GUI;
 
+import java.math.BigDecimal;
+
+import modelo.TanqueRede;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -7,12 +11,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import service.TanqueRedeService;
+
 public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Text tNome;
 	private Text tTamanho;
 
+	TanqueRedeService tanqueRede = new TanqueRedeService();
+	private TanqueRede entidade;
+	
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
+		entidade = new TanqueRede();
 	}
 
 	@Override
@@ -27,8 +37,10 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void salvar() {
-		//TanqueRedeService e = new TanqueRedeService();
-		//e.salvar();
+		entidade.setNome(tNome.getText());
+		entidade.setTamanho(new BigDecimal(tTamanho.getText()));
+		tanqueRede.salvar(entidade);
+		
 	}
 
 	@Override
