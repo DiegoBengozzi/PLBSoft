@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,12 @@ import javax.persistence.Table;
 
 @Table
 @Entity(name = "ESPECIE")
-public class Especie {
+public class Especie implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1593030897560368773L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

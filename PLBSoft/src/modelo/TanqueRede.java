@@ -3,11 +3,14 @@ package modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "TANQUE_REDE")
@@ -30,6 +33,10 @@ public class TanqueRede implements Serializable {
 
 	@Column
 	private Boolean status;
+	
+	@ManyToOne(cascade=CascadeType.ALL) 
+	@JoinColumn(name="id") 
+	private Tanque tanque; 
 
 	public Long getId() {
 		return id;
@@ -62,6 +69,14 @@ public class TanqueRede implements Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+	
+	public Tanque getTanque() {
+		return tanque;
+	}
+	
+	public void setTanque(Tanque tanque) {
+		this.tanque = tanque;
+	}
 
 	@Override
 	public int hashCode() {
@@ -87,5 +102,6 @@ public class TanqueRede implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

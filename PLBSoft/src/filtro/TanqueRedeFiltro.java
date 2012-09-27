@@ -1,22 +1,23 @@
 package filtro;
 
-import org.eclipse.jface.viewers.ViewerFilter;
+import modelo.TanqueRede;
+import org.eclipse.jface.viewers.Viewer;
 
-public abstract class TanqueRedeFiltro extends ViewerFilter{
-	
-	private String filtro;
-
-	public String getFiltro() {
-		return filtro;
+public class TanqueRedeFiltro extends TabelaFiltro {
+	@Override
+	public boolean select(Viewer viewer, Object parentElement, Object element) {
+		if (verificar())
+			return true;
+		TanqueRede tanqueRede = (TanqueRede) element;
+		if (tanqueRede.getNome().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+		
+//		if (tanqueRede.getStatus().toLowerCase().matches(filtro.toLowerCase()))
+//			return true;
+		
+//		if (tanqueRede.getTamanho().toBigInteger().matches);
+//			return true;	
+			
+		return false;
 	}
-
-	public void setFiltro(String filtro) {
-		this.filtro = ".*"+filtro+".*";
-	}
-	 public Boolean verificar() {
-		return filtro == null || filtro.isEmpty();
-	}
-	
-	 
-
 }

@@ -1,21 +1,21 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "TIPO_TANQUE")
-@Entity
-public class TipoTanque implements Serializable {
+@Table(name = "TANQUE")
+public class Tanque implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 60227753724977383L;
+	private static final long serialVersionUID = 5445981170097635735L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,19 @@ public class TipoTanque implements Serializable {
 
 	@Column
 	private String nome;
-
+	
 	@Column
-	private String revestimento;
-
+	private String descricao;
+	
+	@Column
+	private int acessibilidade;
+	
+	@Column 
+	private BigDecimal laminaAgua;
+	
+	@Column
+	private BigDecimal profundidade;
+	
 	@Column
 	private Boolean status;
 
@@ -46,12 +55,36 @@ public class TipoTanque implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getRevestimento() {
-		return revestimento;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setRevestimento(String revestimento) {
-		this.revestimento = revestimento;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public int getAcessibilidade() {
+		return acessibilidade;
+	}
+
+	public void setAcessibilidade(int acessibilidade) {
+		this.acessibilidade = acessibilidade;
+	}
+
+	public BigDecimal getLaminaAgua() {
+		return laminaAgua;
+	}
+
+	public void setLaminaAgua(BigDecimal laminaAgua) {
+		this.laminaAgua = laminaAgua;
+	}
+
+	public BigDecimal getProfundidade() {
+		return profundidade;
+	}
+
+	public void setProfundidade(BigDecimal profundidade) {
+		this.profundidade = profundidade;
 	}
 
 	public Boolean getStatus() {
@@ -78,7 +111,7 @@ public class TipoTanque implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoTanque other = (TipoTanque) obj;
+		Tanque other = (Tanque) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -86,5 +119,5 @@ public class TipoTanque implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 }

@@ -2,20 +2,24 @@ package modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TIPO_TANQUE")
+@Table(name = "PASSARELA")
 @Entity
-public class TipoTanque implements Serializable {
+public class Passarela implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 60227753724977383L;
+	private static final long serialVersionUID = -1284887355248326454L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +29,14 @@ public class TipoTanque implements Serializable {
 	private String nome;
 
 	@Column
-	private String revestimento;
+	private Long capacidade;
 
 	@Column
 	private Boolean status;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private Hapa hapa;
 
 	public Long getId() {
 		return id;
@@ -46,12 +54,12 @@ public class TipoTanque implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getRevestimento() {
-		return revestimento;
+	public Long getCapacidade() {
+		return capacidade;
 	}
 
-	public void setRevestimento(String revestimento) {
-		this.revestimento = revestimento;
+	public void setCapacidade(Long capacidade) {
+		this.capacidade = capacidade;
 	}
 
 	public Boolean getStatus() {
@@ -60,6 +68,14 @@ public class TipoTanque implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Hapa getHapa() {
+		return hapa;
+	}
+
+	public void setHapa(Hapa hapa) {
+		this.hapa = hapa;
 	}
 
 	@Override
@@ -78,7 +94,7 @@ public class TipoTanque implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoTanque other = (TipoTanque) obj;
+		Passarela other = (Passarela) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -58,7 +58,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	@Override
 	public void buscar() {
 		if (tNome.getText() == null && tTamanho.getText() == null) {
-//			tanqueRede.buscarTodos();
+			// tanqueRede.buscarTodos();
 			StatusHelper.mensagemInfo("Listar todos os cadastrados!");
 		} else if (tNome != null) {
 			try {
@@ -76,7 +76,9 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void salvar() {
-		if(tNome.getText() == null || tTamanho.getText() == null|| tNome.getText().equalsIgnoreCase("") || tTamanho.getText().equalsIgnoreCase("")){
+		if (tNome.getText() == null || tTamanho.getText() == null
+				|| tNome.getText().equalsIgnoreCase("")
+				|| tTamanho.getText().equalsIgnoreCase("")) {
 			try {
 				entidade.setNome(tNome.getText());
 				entidade.setTamanho(new BigDecimal(tTamanho.getText()));
@@ -86,7 +88,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 			} catch (Exception e) {
 				StatusHelper.mensagemWarning("Erro de cadastro");
 			}
-		}
+		}else StatusHelper.mensagemWarning("Informe todos os dados pra o cadastro!");
 	}
 
 	@Override
@@ -118,19 +120,28 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		combo = new Combo(composite, SWT.NONE);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
 				1));
-		
-		tvTanqueRede = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+
+		tvTanqueRede = new TableViewer(composite, SWT.BORDER
+				| SWT.FULL_SELECTION);
 		table = tvTanqueRede.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance()); //Naum esquecer.... o cristiano esta com fome nesse momento
-		
+		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance()); // Naum
+																				// esquecer....
+																				// o
+																				// cristiano
+																				// esta
+																				// com
+																				// fome
+																				// nesse
+																				// momento
+
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnNome = tvcNome.getColumn();
 		tblclmnNome.setWidth(113);
 		tblclmnNome.setText("Nome");
-		
+
 		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnTamanhoM = tvcTamanho.getColumn();
 		tblclmnTamanhoM.setWidth(113);

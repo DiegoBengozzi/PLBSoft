@@ -1,21 +1,26 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TIPO_TANQUE")
+@Table(name = "HAPA")
 @Entity
-public class TipoTanque implements Serializable {
+public class Hapa implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 60227753724977383L;
+	private static final long serialVersionUID = 3140593762407882917L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +30,14 @@ public class TipoTanque implements Serializable {
 	private String nome;
 
 	@Column
-	private String revestimento;
+	private BigDecimal tamanho;
 
 	@Column
 	private Boolean status;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private Passarela passarela;
 
 	public Long getId() {
 		return id;
@@ -46,12 +55,12 @@ public class TipoTanque implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getRevestimento() {
-		return revestimento;
+	public BigDecimal getTamanho() {
+		return tamanho;
 	}
 
-	public void setRevestimento(String revestimento) {
-		this.revestimento = revestimento;
+	public void setTamanho(BigDecimal tamanho) {
+		this.tamanho = tamanho;
 	}
 
 	public Boolean getStatus() {
@@ -60,6 +69,14 @@ public class TipoTanque implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Passarela getPassarela() {
+		return passarela;
+	}
+
+	public void setPassarela(Passarela passarela) {
+		this.passarela = passarela;
 	}
 
 	@Override
@@ -78,7 +95,7 @@ public class TipoTanque implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoTanque other = (TipoTanque) obj;
+		Hapa other = (Hapa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -86,5 +103,4 @@ public class TipoTanque implements Serializable {
 			return false;
 		return true;
 	}
-
 }

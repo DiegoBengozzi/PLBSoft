@@ -1,34 +1,42 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TIPO_TANQUE")
+@Table(name = "ADUBACAO")
 @Entity
-public class TipoTanque implements Serializable {
+public class Adubacao implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 60227753724977383L;
+	private static final long serialVersionUID = -9093680731355126195L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
-	private String nome;
-
+	private String descricao;
+	
 	@Column
-	private String revestimento;
+	private Date data;
 
 	@Column
 	private Boolean status;
+
+	@ManyToOne
+	// (cascade=CascadeType.ALL)
+	@JoinColumn(name = "id")
+	private Tanque tanque;
 
 	public Long getId() {
 		return id;
@@ -38,28 +46,36 @@ public class TipoTanque implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getRevestimento() {
-		return revestimento;
+	public Date getData() {
+		return data;
 	}
 
-	public void setRevestimento(String revestimento) {
-		this.revestimento = revestimento;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public Boolean getStatus() {
+	public Boolean getSatatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setSatatus(Boolean satatus) {
+		this.status = satatus;
+	}
+
+	public Tanque getTanque() {
+		return tanque;
+	}
+
+	public void setTanque(Tanque tanque) {
+		this.tanque = tanque;
 	}
 
 	@Override
@@ -78,7 +94,7 @@ public class TipoTanque implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoTanque other = (TipoTanque) obj;
+		Adubacao other = (Adubacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
