@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.Text;
 
 import service.TanqueRedeService;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 
 public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Text tNome;
@@ -24,11 +27,14 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	TanqueRedeService tanqueRede = new TanqueRedeService();
 	private TanqueRede entidade;
-	private Table table;
-	private TableColumn tblclmnNome;
-	private TableColumn tblclmnTamanhoM;
 	private Label lblTanque;
 	private Combo combo;
+	private Table table;
+	private TableViewer tvTanqueRede;
+	private TableColumn tblclmnNome;
+	private TableViewerColumn tvcNome;
+	private TableColumn tblclmnTamanhoM;
+	private TableViewerColumn tvcTamanho;
 
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
@@ -52,7 +58,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	@Override
 	public void buscar() {
 		if (tNome.getText() == null && tTamanho.getText() == null) {
-			tanqueRede.buscarTodos();
+//			tanqueRede.buscarTodos();
 			StatusHelper.mensagemInfo("Listar todos os cadastrados!");
 		} else if (tNome != null) {
 			try {
@@ -70,16 +76,17 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void salvar() {
-		try {
-			entidade.setNome(tNome.getText());
-			entidade.setTamanho(new BigDecimal(tTamanho.getText()));
-			entidade.setStatus(true);
-			tanqueRede.salvar(entidade);
-			StatusHelper.mensagemInfo("Cadastro Realizado!");
-		} catch (Exception e) {
-			StatusHelper.mensagemWarning("Erro de cadastro");
+		if(tNome.getText() == null || tTamanho.getText() == null|| tNome.getText().equalsIgnoreCase("") || tTamanho.getText().equalsIgnoreCase("")){
+			try {
+				entidade.setNome(tNome.getText());
+				entidade.setTamanho(new BigDecimal(tTamanho.getText()));
+				entidade.setStatus(true);
+				tanqueRede.salvar(entidade);
+				StatusHelper.mensagemInfo("Cadastro Realizado!");
+			} catch (Exception e) {
+				StatusHelper.mensagemWarning("Erro de cadastro");
+			}
 		}
-
 	}
 
 	@Override
@@ -111,18 +118,22 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		combo = new Combo(composite, SWT.NONE);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
 				1));
-
-		table = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		table.setHeaderVisible(true);
+		
+		tvTanqueRede = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tvTanqueRede.getTable();
 		table.setLinesVisible(true);
-
-		tblclmnNome = new TableColumn(table, SWT.NONE);
-		tblclmnNome.setWidth(100);
+		table.setHeaderVisible(true);
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance()); //Naum esquecer.... o cristiano esta com fome nesse momento
+		
+		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tblclmnNome = tvcNome.getColumn();
+		tblclmnNome.setWidth(113);
 		tblclmnNome.setText("Nome");
-
-		tblclmnTamanhoM = new TableColumn(table, SWT.NONE);
-		tblclmnTamanhoM.setWidth(104);
+		
+		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tblclmnTamanhoM = tvcTamanho.getColumn();
+		tblclmnTamanhoM.setWidth(113);
 		tblclmnTamanhoM.setText("Tamanho m\u00B3");
 	}
 
