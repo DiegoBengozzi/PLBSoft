@@ -11,7 +11,6 @@ public class TanqueRedeService {
 
 	public void salvar(TanqueRede entidade) {
 		dao.salvar(entidade);
-
 	}
 
 	public TanqueRede buscar(String nome) {

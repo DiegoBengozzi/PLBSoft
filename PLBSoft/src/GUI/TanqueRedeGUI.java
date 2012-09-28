@@ -33,8 +33,10 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private TableViewer tvTanqueRede;
 	private TableColumn tblclmnNome;
 	private TableViewerColumn tvcNome;
-	private TableColumn tblclmnTamanhoM;
+	private TableColumn tblclmnTamanho;
 	private TableViewerColumn tvcTamanho;
+	private TableColumn tblclmnIdentificador;
+	private TableViewerColumn tvcId;
 
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
@@ -128,24 +130,21 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance()); // Naum
-																				// esquecer....
-																				// o
-																				// cristiano
-																				// esta
-																				// com
-																				// fome
-																				// nesse
-																				// momento
+		
+		tvcId = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tblclmnIdentificador = tvcId.getColumn();
+		tblclmnIdentificador.setWidth(100);
+		tblclmnIdentificador.setText("Identificador");
 
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnNome = tvcNome.getColumn();
-		tblclmnNome.setWidth(113);
+		tblclmnNome.setWidth(100);
 		tblclmnNome.setText("Nome");
 
 		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
-		tblclmnTamanhoM = tvcTamanho.getColumn();
-		tblclmnTamanhoM.setWidth(113);
-		tblclmnTamanhoM.setText("Tamanho m\u00B3");
+		tblclmnTamanho = tvcTamanho.getColumn();
+		tblclmnTamanho.setWidth(100);
+		tblclmnTamanho.setText("Tamanho m\u00B3");
 	}
 
 }

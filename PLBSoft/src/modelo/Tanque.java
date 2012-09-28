@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "TANQUE")
+@Entity
 public class Tanque implements Serializable {
 
 	/**
@@ -23,21 +26,24 @@ public class Tanque implements Serializable {
 
 	@Column
 	private String nome;
-	
+
 	@Column
 	private String descricao;
-	
+
 	@Column
 	private int acessibilidade;
-	
-	@Column 
+
+	@Column
 	private BigDecimal laminaAgua;
-	
+
 	@Column
 	private BigDecimal profundidade;
-	
+
 	@Column
 	private Boolean status;
+
+	@ManyToOne
+	private TipoTanque tipoTanqueId;
 
 	public Long getId() {
 		return id;
@@ -95,6 +101,14 @@ public class Tanque implements Serializable {
 		this.status = status;
 	}
 
+	public TipoTanque getTipoTanqueId() {
+		return tipoTanqueId;
+	}
+	
+	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
+		this.tipoTanqueId = tipoTanqueId;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,5 +133,6 @@ public class Tanque implements Serializable {
 			return false;
 		return true;
 	}
-	
+
+
 }

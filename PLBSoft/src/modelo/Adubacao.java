@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -32,11 +31,10 @@ public class Adubacao implements Serializable {
 
 	@Column
 	private Boolean status;
-
+	
 	@ManyToOne
-	// (cascade=CascadeType.ALL)
-	@JoinColumn(name = "id")
-	private Tanque tanque;
+	private Tanque tanqueId;
+
 
 	public Long getId() {
 		return id;
@@ -69,14 +67,15 @@ public class Adubacao implements Serializable {
 	public void setSatatus(Boolean satatus) {
 		this.status = satatus;
 	}
-
-	public Tanque getTanque() {
-		return tanque;
+	
+	public Tanque getTanqueId() {
+		return tanqueId;
+	}
+	
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
 	}
 
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
 
 	@Override
 	public int hashCode() {
@@ -102,5 +101,6 @@ public class Adubacao implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

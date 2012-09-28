@@ -14,7 +14,6 @@ public class TanqueRedeDAO extends HibernateConnection implements
 
 	@Override
 	public void salvar(TanqueRede entidade) {
-
 		if (entidade.getId() != null)
 			merge(entidade);
 		else
@@ -26,7 +25,6 @@ public class TanqueRedeDAO extends HibernateConnection implements
 		Query q = getSession().createQuery(
 				"select t from TanqueRede t where t.nome=:nome");
 		q.setParameter("nome", nome);
-		//q.setParameter("status", "TRUE");AND t.status = IS TRUE
 		return (TanqueRede) q.uniqueResult();
 	}
 

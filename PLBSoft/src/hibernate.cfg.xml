@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/BancoPLBSoft</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">admin</property>
-		<mapping class="modelo.TanqueRede"/>
+		
 		<mapping class="modelo.TipoTanque"/>
 		<mapping class="modelo.Adubacao"/>
 		<mapping class="modelo.Especie"/>
@@ -16,6 +16,7 @@
 		<mapping class="modelo.Passarela"/>
 		<mapping class="modelo.SistemaProducao"/>
 		<mapping class="modelo.Tanque"/>
+		<mapping class="modelo.TanqueRede"/>
 
 	</session-factory>
 </hibernate-configuration>

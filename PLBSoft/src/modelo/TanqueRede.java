@@ -31,9 +31,10 @@ public class TanqueRede implements Serializable {
 
 	@Column
 	private Boolean status;
+
+	@ManyToOne
+	private Tanque tanque;
 	
-	@ManyToOne 
-	private Tanque tanque; 
 
 	public Long getId() {
 		return id;
@@ -66,14 +67,6 @@ public class TanqueRede implements Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	
-	public Tanque getTanque() {
-		return tanque;
-	}
-	
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
 
 	@Override
 	public int hashCode() {
@@ -100,5 +93,12 @@ public class TanqueRede implements Serializable {
 		return true;
 	}
 
+	public Tanque getTanque() {
+		return tanque;
+	}
+
+	public void setTanque(Tanque tanque) {
+		this.tanque = tanque;
+	}
 
 }

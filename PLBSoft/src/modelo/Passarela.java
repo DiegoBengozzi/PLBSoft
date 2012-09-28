@@ -2,13 +2,11 @@ package modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,9 +32,8 @@ public class Passarela implements Serializable {
 	@Column
 	private Boolean status;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
-	private Hapa hapa;
+	@ManyToOne
+	private Tanque tanqueId;
 
 	public Long getId() {
 		return id;
@@ -70,14 +67,14 @@ public class Passarela implements Serializable {
 		this.status = status;
 	}
 
-	public Hapa getHapa() {
-		return hapa;
+	public Tanque getTanqueId() {
+		return tanqueId;
 	}
-
-	public void setHapa(Hapa hapa) {
-		this.hapa = hapa;
+	
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,5 +99,6 @@ public class Passarela implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }
