@@ -44,7 +44,6 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
 		entidade = new TanqueRede();
-		filtro = new TanqueRedeFiltro();
 	}
 
 	@Override
@@ -85,6 +84,8 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
+		filtro = new TanqueRedeFiltro();
+		
 		composite.setLayout(new GridLayout(2, false));
 
 		Label lblNome = new Label(composite, SWT.NONE);
@@ -127,8 +128,8 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance());
 		tvTanqueRede.addFilter(filtro);
+		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance());
 		
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnNome = tvcNome.getColumn();
