@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,30 +11,30 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TANQUE_REDE")
+@Table(name = "ADUBACAO")
 @Entity
-public class TanqueRede implements Serializable {
+public class Adubacao implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;
+	private static final long serialVersionUID = -9093680731355126195L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
-	private String nome;
-
+	private String descricao;
+	
 	@Column
-	private BigDecimal tamanho;
+	private Date data;
 
 	@Column
 	private Boolean status;
-
-	@ManyToOne
-	private Tanque tanque;
 	
+	@ManyToOne
+	private Tanque tanqueId;
+
 
 	public Long getId() {
 		return id;
@@ -44,29 +44,38 @@ public class TanqueRede implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public BigDecimal getTamanho() {
-		return tamanho;
+	public Date getData() {
+		return data;
 	}
 
-	public void setTamanho(BigDecimal tamanho) {
-		this.tamanho = tamanho;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	public Boolean getStatus() {
+	public Boolean getSatatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setSatatus(Boolean satatus) {
+		this.status = satatus;
 	}
+	
+	public Tanque getTanqueId() {
+		return tanqueId;
+	}
+	
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -84,7 +93,7 @@ public class TanqueRede implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TanqueRede other = (TanqueRede) obj;
+		Adubacao other = (Adubacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,12 +102,5 @@ public class TanqueRede implements Serializable {
 		return true;
 	}
 
-	public Tanque getTanque() {
-		return tanque;
-	}
-
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
 
 }

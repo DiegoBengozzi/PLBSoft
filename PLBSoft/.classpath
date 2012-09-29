@@ -47,5 +47,6 @@
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.text_3.5.101.r371_v20110810-0800.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.forms_3.5.100.v20110425.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.workbench_3.7.0.I20110519-0100.jar"/>
+	<classpathentry kind="lib" path="swing2swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

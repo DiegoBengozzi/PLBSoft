@@ -11,13 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TANQUE_REDE")
+@Table(name = "TANQUE")
 @Entity
-public class TanqueRede implements Serializable {
+public class Tanque implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;
+	private static final long serialVersionUID = 5445981170097635735L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +28,22 @@ public class TanqueRede implements Serializable {
 	private String nome;
 
 	@Column
-	private BigDecimal tamanho;
+	private String descricao;
+
+	@Column
+	private int acessibilidade;
+
+	@Column
+	private BigDecimal laminaAgua;
+
+	@Column
+	private BigDecimal profundidade;
 
 	@Column
 	private Boolean status;
 
 	@ManyToOne
-	private Tanque tanque;
-	
+	private TipoTanque tipoTanqueId;
 
 	public Long getId() {
 		return id;
@@ -52,12 +61,36 @@ public class TanqueRede implements Serializable {
 		this.nome = nome;
 	}
 
-	public BigDecimal getTamanho() {
-		return tamanho;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setTamanho(BigDecimal tamanho) {
-		this.tamanho = tamanho;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public int getAcessibilidade() {
+		return acessibilidade;
+	}
+
+	public void setAcessibilidade(int acessibilidade) {
+		this.acessibilidade = acessibilidade;
+	}
+
+	public BigDecimal getLaminaAgua() {
+		return laminaAgua;
+	}
+
+	public void setLaminaAgua(BigDecimal laminaAgua) {
+		this.laminaAgua = laminaAgua;
+	}
+
+	public BigDecimal getProfundidade() {
+		return profundidade;
+	}
+
+	public void setProfundidade(BigDecimal profundidade) {
+		this.profundidade = profundidade;
 	}
 
 	public Boolean getStatus() {
@@ -68,6 +101,14 @@ public class TanqueRede implements Serializable {
 		this.status = status;
 	}
 
+	public TipoTanque getTipoTanqueId() {
+		return tipoTanqueId;
+	}
+	
+	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
+		this.tipoTanqueId = tipoTanqueId;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,7 +125,7 @@ public class TanqueRede implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TanqueRede other = (TanqueRede) obj;
+		Tanque other = (Tanque) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,12 +134,5 @@ public class TanqueRede implements Serializable {
 		return true;
 	}
 
-	public Tanque getTanque() {
-		return tanque;
-	}
-
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
 
 }

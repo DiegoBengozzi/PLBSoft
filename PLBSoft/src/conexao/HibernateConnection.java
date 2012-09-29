@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 @SuppressWarnings("deprecation")
@@ -16,14 +15,13 @@ public class HibernateConnection {
 
 	public void initSystem() {
 
-        // Cria uma configuração para a classe
 		AnnotationConfiguration cfg = new AnnotationConfiguration();
-    	cfg.configure();
-        create(cfg);
-    }
+		sf = cfg.configure().buildSessionFactory();
+		create(cfg);
+	}
 
-	public static Session getSession(){
-		if(session == null)
+	public static Session getSession() {
+		if (session == null)
 			openConnection();
 
 		return session;
@@ -32,10 +30,9 @@ public class HibernateConnection {
 	public static void create(AnnotationConfiguration cfg) {
 		SchemaExport esquema = new SchemaExport(cfg);
 		esquema.execute(true, true, false, true);
-    }
+	}
 
-	public static void openConnection(){
-		sf = new Configuration().configure().buildSessionFactory();
+	public static void openConnection() {
 
 		session = sf.openSession();
 
@@ -43,24 +40,16 @@ public class HibernateConnection {
 
 	}
 
-	public void merge(Object modelo){
+	public void merge(Object modelo) {
 		getSession().merge(modelo);
 		tx.commit();
-		session.clear();
 		tx = session.beginTransaction();
 	}
 
-	public void persist(Object modelo){
+	public void persist(Object modelo) {
 		getSession().persist(modelo);
 		tx.commit();
-		session.clear();
 		tx = session.beginTransaction();
 	}
 
-	public static void closeConnection(){
-
-		tx.commit();
-
-		session.close();
-	}
 }

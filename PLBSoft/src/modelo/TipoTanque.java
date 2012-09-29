@@ -1,23 +1,21 @@
 package modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TANQUE_REDE")
+@Table(name = "TIPO_TANQUE")
 @Entity
-public class TanqueRede implements Serializable {
+public class TipoTanque implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;
+	private static final long serialVersionUID = 60227753724977383L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +25,10 @@ public class TanqueRede implements Serializable {
 	private String nome;
 
 	@Column
-	private BigDecimal tamanho;
+	private String revestimento;
 
 	@Column
 	private Boolean status;
-
-	@ManyToOne
-	private Tanque tanque;
-	
 
 	public Long getId() {
 		return id;
@@ -52,12 +46,12 @@ public class TanqueRede implements Serializable {
 		this.nome = nome;
 	}
 
-	public BigDecimal getTamanho() {
-		return tamanho;
+	public String getRevestimento() {
+		return revestimento;
 	}
 
-	public void setTamanho(BigDecimal tamanho) {
-		this.tamanho = tamanho;
+	public void setRevestimento(String revestimento) {
+		this.revestimento = revestimento;
 	}
 
 	public Boolean getStatus() {
@@ -84,21 +78,13 @@ public class TanqueRede implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TanqueRede other = (TanqueRede) obj;
+		TipoTanque other = (TipoTanque) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public Tanque getTanque() {
-		return tanque;
-	}
-
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
 	}
 
 }

@@ -10,14 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Table(name = "TANQUE_REDE")
+@Table(name = "HAPA")
 @Entity
-public class TanqueRede implements Serializable {
+public class Hapa implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;
+	private static final long serialVersionUID = 3140593762407882917L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +35,8 @@ public class TanqueRede implements Serializable {
 	private Boolean status;
 
 	@ManyToOne
-	private Tanque tanque;
-	
+	@NotNull
+	private Passarela passarela;
 
 	public Long getId() {
 		return id;
@@ -68,6 +70,14 @@ public class TanqueRede implements Serializable {
 		this.status = status;
 	}
 
+	public Passarela getPassarela() {
+		return passarela;
+	}
+
+	public void setPassarela(Passarela passarela) {
+		this.passarela = passarela;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,7 +94,7 @@ public class TanqueRede implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TanqueRede other = (TanqueRede) obj;
+		Hapa other = (Hapa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -92,13 +102,4 @@ public class TanqueRede implements Serializable {
 			return false;
 		return true;
 	}
-
-	public Tanque getTanque() {
-		return tanque;
-	}
-
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
-
 }

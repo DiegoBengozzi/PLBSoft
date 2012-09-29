@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,13 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "TANQUE_REDE")
+@Table(name = "PASSARELA")
 @Entity
-public class TanqueRede implements Serializable {
+public class Passarela implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3592892633201964136L;
+	private static final long serialVersionUID = -1284887355248326454L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +27,13 @@ public class TanqueRede implements Serializable {
 	private String nome;
 
 	@Column
-	private BigDecimal tamanho;
+	private Long capacidade;
 
 	@Column
 	private Boolean status;
 
 	@ManyToOne
-	private Tanque tanque;
-	
+	private Tanque tanqueId;
 
 	public Long getId() {
 		return id;
@@ -52,12 +51,12 @@ public class TanqueRede implements Serializable {
 		this.nome = nome;
 	}
 
-	public BigDecimal getTamanho() {
-		return tamanho;
+	public Long getCapacidade() {
+		return capacidade;
 	}
 
-	public void setTamanho(BigDecimal tamanho) {
-		this.tamanho = tamanho;
+	public void setCapacidade(Long capacidade) {
+		this.capacidade = capacidade;
 	}
 
 	public Boolean getStatus() {
@@ -68,6 +67,14 @@ public class TanqueRede implements Serializable {
 		this.status = status;
 	}
 
+	public Tanque getTanqueId() {
+		return tanqueId;
+	}
+	
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,7 +91,7 @@ public class TanqueRede implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TanqueRede other = (TanqueRede) obj;
+		Passarela other = (Passarela) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,12 +100,5 @@ public class TanqueRede implements Serializable {
 		return true;
 	}
 
-	public Tanque getTanque() {
-		return tanque;
-	}
-
-	public void setTanque(Tanque tanque) {
-		this.tanque = tanque;
-	}
 
 }
