@@ -17,7 +17,7 @@ public class TanqueDAO extends HibernateConnection implements TanqueUtils{
 	}
 
 	@Override
-	public Tanque buscar(String nome) {
+	public Tanque buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

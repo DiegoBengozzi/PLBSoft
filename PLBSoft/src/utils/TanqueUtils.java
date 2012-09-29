@@ -2,6 +2,6 @@ package utils;
 
 import modelo.Tanque;
 
-public interface TanqueUtils extends PeixeUtils<Tanque>{
+public interface TanqueUtils extends PadraoUtils<Tanque>{
 
 }

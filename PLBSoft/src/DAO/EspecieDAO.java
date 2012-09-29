@@ -17,7 +17,7 @@ public class EspecieDAO extends HibernateConnection implements EspecieUtils{
 	}
 
 	@Override
-	public Especie buscar(String nome) {
+	public Especie buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

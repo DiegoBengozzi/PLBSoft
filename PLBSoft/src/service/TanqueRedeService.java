@@ -13,12 +13,16 @@ public class TanqueRedeService {
 		dao.salvar(entidade);
 	}
 
-	public TanqueRede buscar(String nome) {
-		return dao.buscar(nome);
+	public TanqueRede buscar(Long id) {
+		return dao.buscar(id);
 	}
 
 	public List<TanqueRede> buscarTodos() {
 		return dao.buscarTodos();
+	}
+	
+	public List<TanqueRede> buscaTodosTanqueRedeAtivo(){
+		return dao.buscarTodosPorStatus(true);
 	}
 
 }

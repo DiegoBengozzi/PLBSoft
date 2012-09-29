@@ -17,10 +17,10 @@ public class TipoTanqueDAO extends HibernateConnection implements TipoTanqueUtil
 	}
 
 	@Override
-	public TipoTanque buscar(String nome) {
+	public TipoTanque buscar(Long id) {
 		Query q = getSession().createQuery(
-				"select t from TipoTanque t where t.nome=:nome");
-		q.setParameter("nome", nome);		
+				"select t from TipoTanque t where t.nome=:id");
+		q.setParameter("id", id);		
 		return (TipoTanque) q.uniqueResult();
 	}
 

@@ -8,6 +8,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 public class StatusHelper {
 	public static Text txtStatus;
+	
 	public static Text getStatusAtivo(Composite compositeStatus) {
 		if (txtStatus == null) {
 			txtStatus = new Text(compositeStatus, SWT.BORDER);

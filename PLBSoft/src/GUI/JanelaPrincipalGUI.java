@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class JanelaPrincipalGUI {
 
-	protected Shell shlPlbsoft;
+	protected Shell shellPlbsoft;
 	private ScrolledComposite scrolledComposite;
 	@SuppressWarnings("unused")
 	private Text txtStatus;
@@ -32,9 +32,9 @@ public class JanelaPrincipalGUI {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlPlbsoft.open();
-		shlPlbsoft.layout();
-		while (!shlPlbsoft.isDisposed()) {
+		shellPlbsoft.open();
+		shellPlbsoft.layout();
+		while (!shellPlbsoft.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -46,15 +46,16 @@ public class JanelaPrincipalGUI {
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
-		shlPlbsoft = new Shell();
-		shlPlbsoft.setMinimumSize(new Point(600, 400));
-		// shlPlbsoft = ShellHelper.getShellAtivo();
-		shlPlbsoft.setSize(453, 317);
-		shlPlbsoft.setText("PLBSoft");
-		shlPlbsoft.setLayout(new GridLayout(2, false));
+		shellPlbsoft = new Shell();
+		shellPlbsoft.setMinimumSize(new Point(600, 400));
+		//shellPlbsoft = LayoutHelper.getShellAtivo();
+	    //shellPlbsoft = ShellHelper.getShellAtivo();
+		shellPlbsoft.setSize(453, 317);
+		shellPlbsoft.setText("PLBSoft");
+		shellPlbsoft.setLayout(new GridLayout(2, false));
 
-		Menu menu = new Menu(shlPlbsoft, SWT.BAR);
-		shlPlbsoft.setMenuBar(menu);
+		Menu menu = new Menu(shellPlbsoft, SWT.BAR);
+		shellPlbsoft.setMenuBar(menu);
 
 		MenuItem mntmCadastros = new MenuItem(menu, SWT.CASCADE);
 		mntmCadastros.setText("Cadastros");
@@ -103,7 +104,7 @@ public class JanelaPrincipalGUI {
 		});
 		mntmRelatoriosNok.setText("Relatorios NOK");
 
-		Composite compositeLateral = new Composite(shlPlbsoft, SWT.NONE);
+		Composite compositeLateral = new Composite(shellPlbsoft, SWT.NONE);
 		GridData gd_compositeLateral = new GridData(SWT.LEFT, SWT.FILL, false,
 				true, 1, 1);
 		gd_compositeLateral.heightHint = 167;
@@ -160,14 +161,14 @@ public class JanelaPrincipalGUI {
 				1, 1));
 		button_4.setText("Teste2");
 
-		scrolledComposite = new ScrolledComposite(shlPlbsoft, SWT.BORDER
+		scrolledComposite = new ScrolledComposite(shellPlbsoft, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1));
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 
-		Composite compositeStatus = new Composite(shlPlbsoft, SWT.NONE);
+		Composite compositeStatus = new Composite(shellPlbsoft, SWT.NONE);
 		compositeStatus.setLayout(new GridLayout(1, false));
 		compositeStatus.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true,
 				false, 2, 1));

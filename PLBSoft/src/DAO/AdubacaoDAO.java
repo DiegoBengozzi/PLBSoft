@@ -17,7 +17,7 @@ public class AdubacaoDAO extends HibernateConnection implements AdubacaoUtils{
 	}
 
 	@Override
-	public Adubacao buscar(String nome) {
+	public Adubacao buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

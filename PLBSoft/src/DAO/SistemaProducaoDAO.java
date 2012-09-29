@@ -17,7 +17,7 @@ public class SistemaProducaoDAO extends HibernateConnection implements SistemaPr
 	}
 
 	@Override
-	public SistemaProducao buscar(String nome) {
+	public SistemaProducao buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

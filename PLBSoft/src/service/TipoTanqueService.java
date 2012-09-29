@@ -14,8 +14,8 @@ public class TipoTanqueService {
 
 	}
 
-	public TipoTanque buscar(String nome) {
-		return dao.buscar(nome);
+	public TipoTanque buscar(Long id) {
+		return dao.buscar(id);
 	}
 
 	public List<TipoTanque> buscarTodos() {

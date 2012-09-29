@@ -17,7 +17,7 @@ public class PassarelaDAO extends HibernateConnection implements PassarelaUtils{
 	}
 
 	@Override
-	public Passarela buscar(String nome) {
+	public Passarela buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

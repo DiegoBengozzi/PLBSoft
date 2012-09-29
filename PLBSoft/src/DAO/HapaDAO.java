@@ -17,7 +17,7 @@ public class HapaDAO extends HibernateConnection implements HapaUtils{
 	}
 
 	@Override
-	public Hapa buscar(String nome) {
+	public Hapa buscar(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

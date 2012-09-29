@@ -1,11 +1,13 @@
 package GUI;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
+import static helper.StatusHelper.mensagemError;
+
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 public class SistemaProducaoGUI extends TelaEdicaoGUI{
 	private Text tSistemaCultivo;
@@ -20,6 +22,7 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI{
 
 	@Override
 	public void excluir() {
+		mensagemError("puta ki pariu de rodinhaaa!!");
 		// TODO Auto-generated method stub
 		
 	}
