@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import service.TanqueRedeService;
+import conexao.HibernateConnection;
 import filtro.TanqueRedeFiltro;
 
 public class TanqueRedeGUI extends TelaEdicaoGUI {
@@ -48,15 +49,15 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void excluir() {
-//		try {
-//			entidade.setStatus(false);
-//			tanqueRede.salvar(entidade);
-//			tNome.setText("");
-//			tTamanho.setText("");
-//			StatusHelper.mensagemInfo("Itens excluido");
-//		} catch (Exception e) {
-//			StatusHelper.mensagemError("Erro ao excluir!");
-//		}
+		// try {
+		// entidade.setStatus(false);
+		// tanqueRede.salvar(entidade);
+		// tNome.setText("");
+		// tTamanho.setText("");
+		// StatusHelper.mensagemInfo("Itens excluido");
+		// } catch (Exception e) {
+		// StatusHelper.mensagemError("Erro ao excluir!");
+		// }
 	}
 
 	@Override
@@ -67,25 +68,27 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void salvar() {
-		if (tNome.getText() == null || tTamanho.getText() == null
-				|| tNome.getText().equalsIgnoreCase("")
-				|| tTamanho.getText().equalsIgnoreCase("")) {
+//		if (tNome.getText() == null || tTamanho.getText() == null
+//				|| tNome.getText().equalsIgnoreCase("")
+//				|| tTamanho.getText().equalsIgnoreCase("")) {
 			try {
 				entidade.setNome(tNome.getText());
 				entidade.setTamanho(new BigDecimal(tTamanho.getText()));
 				entidade.setStatus(true);
 				tanqueRede.salvar(entidade);
+				HibernateConnection.commit();
 				mensagemInfo("Cadastro Realizado!");
 			} catch (Exception e) {
 				mensagemWarning("Erro de cadastro");
 			}
-		}else mensagemWarning("Informe todos os dados pra o cadastro!");
+//		} else
+//			mensagemWarning("Informe todos os dados pra o cadastro!");
 	}
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueRedeFiltro();
-		
+
 		composite.setLayout(new GridLayout(2, false));
 
 		Label lblNome = new Label(composite, SWT.NONE);
@@ -113,13 +116,15 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		combo = new Combo(composite, SWT.NONE);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
 				1));
-		
+
 		lblFiltro = new Label(composite, SWT.NONE);
-		lblFiltro.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblFiltro.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblFiltro.setText("Filtro...");
-		
+
 		tFiltro = new Text(composite, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
 		tFiltro.setMessage("Filtro de Buscar!!!");
 
 		tvTanqueRede = new TableViewer(composite, SWT.BORDER
@@ -130,18 +135,17 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		tvTanqueRede.addFilter(filtro);
 		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance());
-		
+
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnNome = tvcNome.getColumn();
 		tblclmnNome.setWidth(100);
 		tblclmnNome.setText("Nome");
-		
 
 		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
 		tblclmnTamanho = tvcTamanho.getColumn();
 		tblclmnTamanho.setWidth(100);
 		tblclmnTamanho.setText("Tamanho m\u00B3");
-		
+
 	}
 
 }
