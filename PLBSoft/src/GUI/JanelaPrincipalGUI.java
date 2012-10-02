@@ -47,7 +47,7 @@ public class JanelaPrincipalGUI {
 	 */
 	protected void createContents() {
 		shellPlbsoft = new Shell();
-		shellPlbsoft.setMinimumSize(new Point(600, 400));
+		shellPlbsoft.setMinimumSize(new Point(840, 620));
 		//shellPlbsoft = LayoutHelper.getShellAtivo();
 	    //shellPlbsoft = ShellHelper.getShellAtivo();
 		shellPlbsoft.setSize(453, 317);
@@ -69,9 +69,7 @@ public class JanelaPrincipalGUI {
 			public void widgetSelected(SelectionEvent e) {
 				TanqueRedeGUI tanqueRede = new TanqueRedeGUI(scrolledComposite,
 						SWT.BORDER);
-				scrolledComposite.setContent(tanqueRede);
-				scrolledComposite.setMinSize(tanqueRede.computeSize(
-						SWT.DEFAULT, SWT.DEFAULT));
+				carregarValores(tanqueRede);
 			}
 		});
 		mntmTanqueRede.setText("Tanque Rede");
@@ -88,6 +86,18 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmTipoDeTanque.setText("Tipo de Tanque");
+		
+		MenuItem mntmCadastroDeTanque = new MenuItem(menu_1, SWT.NONE);
+		mntmCadastroDeTanque.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TanqueGUI tanque = new TanqueGUI(scrolledComposite, SWT.BORDER);
+				scrolledComposite.setContent(tanque);
+				scrolledComposite.setMinSize(tanque.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+			}
+		});
+		mntmCadastroDeTanque.setText("Cadastro de Tanque");
+		
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
@@ -183,5 +193,12 @@ public class JanelaPrincipalGUI {
 
 	public void setDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
+	}
+	
+	public void carregarValores(TelaEdicaoGUI tela){
+		scrolledComposite.setContent(tela);
+		scrolledComposite.setMinSize(tela.computeSize(
+				SWT.DEFAULT, SWT.DEFAULT));
+		tela.carregar();
 	}
 }

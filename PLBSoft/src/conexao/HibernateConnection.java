@@ -23,7 +23,6 @@ public class HibernateConnection {
 	public static Session getSession() {
 		if (session == null)
 			openConnection();
-
 		return session;
 	}
 
@@ -33,9 +32,7 @@ public class HibernateConnection {
 	}
 
 	public static void openConnection() {
-
 		session = sf.openSession();
-
 		tx = session.beginTransaction();
 
 	}
@@ -51,5 +48,13 @@ public class HibernateConnection {
 		tx.commit();
 		tx = session.beginTransaction();
 	}
+	
+	public static void commit(){
+		tx.commit();
+		session.clear();
+		tx = session.beginTransaction();
+	}
+
+	
 
 }

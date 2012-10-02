@@ -23,6 +23,8 @@ public abstract class TelaEdicaoGUI extends Composite {
 	public abstract void salvar();
 
 	public abstract void adicionarComponentes(Composite composite);
+	
+	public abstract void carregar();
 
 	public TelaEdicaoGUI(Composite parent, int style) {
 		super(parent, style);

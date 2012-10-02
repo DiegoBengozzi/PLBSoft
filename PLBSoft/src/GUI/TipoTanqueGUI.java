@@ -75,4 +75,10 @@ public class TipoTanqueGUI extends TelaEdicaoGUI {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
 }

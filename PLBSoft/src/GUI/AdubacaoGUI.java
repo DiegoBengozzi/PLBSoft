@@ -61,4 +61,10 @@ public class AdubacaoGUI extends TelaEdicaoGUI {
 	public void setDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
 	}
+
+	@Override
+	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
 }
