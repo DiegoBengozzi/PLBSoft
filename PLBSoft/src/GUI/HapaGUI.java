@@ -63,4 +63,10 @@ public class HapaGUI extends TelaEdicaoGUI{
 		
 	}
 
+	@Override
+	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

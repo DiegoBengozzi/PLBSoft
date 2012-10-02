@@ -3,11 +3,14 @@ package GUI;
 import static helper.StatusHelper.mensagemInfo;
 import static helper.StatusHelper.mensagemWarning;
 
+import helper.FormatoHelper;
+
 import java.math.BigDecimal;
 
 import modelo.TanqueRede;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -28,7 +31,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Text tNome;
 	private Text tTamanho;
 
-	TanqueRedeService tanqueRede = new TanqueRedeService();
+	private TanqueRedeService tanqueRedeService = new TanqueRedeService();
 	private TanqueRede entidade;
 	private Label lblTanque;
 	private Combo combo;
@@ -45,6 +48,11 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
 		entidade = new TanqueRede();
+	}
+	@Override
+	public void carregar(){
+		tvTanqueRede.setInput(tanqueRedeService.buscarTodos());
+		tvTanqueRede.refresh();
 	}
 
 	@Override
@@ -75,9 +83,10 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 				entidade.setNome(tNome.getText());
 				entidade.setTamanho(new BigDecimal(tTamanho.getText()));
 				entidade.setStatus(true);
-				tanqueRede.salvar(entidade);
+				tanqueRedeService.salvar(entidade);
 				HibernateConnection.commit();
 				mensagemInfo("Cadastro Realizado!");
+				carregar();
 			} catch (Exception e) {
 				mensagemWarning("Erro de cadastro");
 			}
@@ -137,15 +146,27 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance());
 
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tvcNome.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((TanqueRede)element).getNome();
+			}
+		});
 		tblclmnNome = tvcNome.getColumn();
 		tblclmnNome.setWidth(100);
 		tblclmnNome.setText("Nome");
 
 		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tvcTamanho.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(((TanqueRede)element).getTamanho());
+			}
+		});
 		tblclmnTamanho = tvcTamanho.getColumn();
 		tblclmnTamanho.setWidth(100);
 		tblclmnTamanho.setText("Tamanho m\u00B3");
 
 	}
-
+	
 }

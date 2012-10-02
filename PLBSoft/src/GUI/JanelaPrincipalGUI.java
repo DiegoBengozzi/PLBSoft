@@ -69,9 +69,7 @@ public class JanelaPrincipalGUI {
 			public void widgetSelected(SelectionEvent e) {
 				TanqueRedeGUI tanqueRede = new TanqueRedeGUI(scrolledComposite,
 						SWT.BORDER);
-				scrolledComposite.setContent(tanqueRede);
-				scrolledComposite.setMinSize(tanqueRede.computeSize(
-						SWT.DEFAULT, SWT.DEFAULT));
+				carregarValores(tanqueRede);
 			}
 		});
 		mntmTanqueRede.setText("Tanque Rede");
@@ -183,5 +181,12 @@ public class JanelaPrincipalGUI {
 
 	public void setDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
+	}
+	
+	public void carregarValores(TelaEdicaoGUI tela){
+		scrolledComposite.setContent(tela);
+		scrolledComposite.setMinSize(tela.computeSize(
+				SWT.DEFAULT, SWT.DEFAULT));
+		tela.carregar();
 	}
 }
