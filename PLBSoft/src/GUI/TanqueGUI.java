@@ -2,26 +2,29 @@ package GUI;
 
 import static helper.StatusHelper.mensagemInfo;
 import static helper.StatusHelper.mensagemWarning;
+import helper.FormatoHelper;
 
 import java.math.BigDecimal;
 
 import modelo.Tanque;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
-
-import conexao.HibernateConnection;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.Text;
 
 import service.TanqueService;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.jface.viewers.TableViewerColumn;
+import conexao.HibernateConnection;
+import filtro.TanqueFiltro;
 
 public class TanqueGUI extends TelaEdicaoGUI {
 	private Text tNome;
@@ -31,8 +34,9 @@ public class TanqueGUI extends TelaEdicaoGUI {
 	private Text tDescricao;
 	private Text tFiltro;
 	private TableViewer tvTanque;
+	private TanqueFiltro filtro;
 
-	private TanqueService tanqueService;
+	private TanqueService tanqueService = new TanqueService();
 	private Tanque entidade;
 
 	private Table table;
@@ -50,8 +54,8 @@ public class TanqueGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void buscar() {
-		// TODO Auto-generated method stub
-
+		filtro.setFiltro(tFiltro.getText());
+		tvTanque.refresh();
 	}
 
 	@Override
@@ -67,7 +71,7 @@ public class TanqueGUI extends TelaEdicaoGUI {
 			mensagemInfo("Cadastro Realizado!");
 			HibernateConnection.commit();
 		} catch (Exception e) {
-			mensagemWarning("Erro de cadastro!");
+			mensagemWarning("Erro de cadastro!" + e.getMessage());
 		}
 
 	}
@@ -125,9 +129,11 @@ public class TanqueGUI extends TelaEdicaoGUI {
 				false, 1, 1));
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
 
-		tDescricao = new Text(composite, SWT.BORDER);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		tDescricao = new Text(composite, SWT.BORDER | SWT.MULTI);
+		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1);
+		gd_tDescricao.heightHint = 44;
+		tDescricao.setLayoutData(gd_tDescricao);
 
 		Label lblTipoDeTanque = new Label(composite, SWT.NONE);
 		lblTipoDeTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
@@ -146,6 +152,8 @@ public class TanqueGUI extends TelaEdicaoGUI {
 		tFiltro = new Text(composite, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		tFiltro.setMessage("filtro de Busca!!");
+		new Label(composite, SWT.NONE);
+		new Label(composite, SWT.NONE);
 
 		tvTanque = new TableViewer(composite, SWT.BORDER
 				| SWT.FULL_SELECTION);
@@ -153,14 +161,27 @@ public class TanqueGUI extends TelaEdicaoGUI {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-
+		tvTanque.addFilter(filtro);
+		tvTanque.setContentProvider(ArrayContentProvider.getInstance());
+		
 		TableViewerColumn tvcNome = new TableViewerColumn(tvTanque, SWT.NONE);
+		tvcNome.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((Tanque)element).getNome();
+			}
+		});
 		TableColumn tblclmnNome = tvcNome.getColumn();
 		tblclmnNome.setWidth(45);
 		tblclmnNome.setText("Nome");
 
-		TableViewerColumn tvcLaminaAgua = new TableViewerColumn(tvTanque,
-				SWT.NONE);
+		TableViewerColumn tvcLaminaAgua = new TableViewerColumn(tvTanque,SWT.NONE);
+		tvcLaminaAgua.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(((Tanque)element).getLaminaAgua());
+			}
+		});
 		TableColumn tblclmnLaminaDeAgua = tvcLaminaAgua.getColumn();
 		tblclmnLaminaDeAgua.setWidth(95);
 		tblclmnLaminaDeAgua.setText("Lamina de Agua");
@@ -171,14 +192,25 @@ public class TanqueGUI extends TelaEdicaoGUI {
 		tblclmnProfundidade.setWidth(85);
 		tblclmnProfundidade.setText("Profundidade");
 
-		TableViewerColumn tvcAcessibilidade = new TableViewerColumn(tvTanque,
-				SWT.NONE);
+		TableViewerColumn tvcAcessibilidade = new TableViewerColumn(tvTanque, SWT.NONE);
+		tvcAcessibilidade.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(((Tanque)element).getAcessibilidade());
+			}
+		});
 		TableColumn tblclmnAcessibilidade = tvcAcessibilidade.getColumn();
 		tblclmnAcessibilidade.setWidth(85);
 		tblclmnAcessibilidade.setText("Acessibilidade");
 
 		TableViewerColumn tvcDescricao = new TableViewerColumn(tvTanque,
 				SWT.NONE);
+		tvcDescricao.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((Tanque)element).getDescricao();
+			}
+		});
 		TableColumn tblclmnDescricao = tvcDescricao.getColumn();
 		tblclmnDescricao.setWidth(61);
 		tblclmnDescricao.setText("Descricao");

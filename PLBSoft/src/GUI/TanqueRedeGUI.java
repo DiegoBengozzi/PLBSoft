@@ -2,7 +2,6 @@ package GUI;
 
 import static helper.StatusHelper.mensagemInfo;
 import static helper.StatusHelper.mensagemWarning;
-
 import helper.FormatoHelper;
 
 import java.math.BigDecimal;
