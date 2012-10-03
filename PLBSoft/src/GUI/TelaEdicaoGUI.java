@@ -7,6 +7,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public abstract class TelaEdicaoGUI extends Composite {
 
@@ -38,50 +39,54 @@ public abstract class TelaEdicaoGUI extends Composite {
 		compositeSecundario.setLayout(new GridLayout(1, false));
 		compositeSecundario.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				false, false, 1, 1));
-		
-				Button btnBuscar = new Button(compositeSecundario, SWT.NONE);
-				btnBuscar.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						buscar();
-					}
-				});
-				btnBuscar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
-						1, 1));
-				btnBuscar.setText("Buscar");
-		
-				Button btnSalvar = new Button(compositeSecundario, SWT.NONE);
-				btnSalvar.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						salvar();
-					}
-				});
-				btnSalvar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
-						1, 1));
-				btnSalvar.setText("Salvar");
 				
-						Button btnExcluir = new Button(compositeSecundario, SWT.NONE);
-						btnExcluir.addSelectionListener(new SelectionAdapter() {
+						Button btnSalvar = new Button(compositeSecundario, SWT.NONE);
+						btnSalvar.setImage(SWTResourceManager.getImage(TelaEdicaoGUI.class, "/Icone/water--plus.png"));
+						btnSalvar.addSelectionListener(new SelectionAdapter() {
 							@Override
 							public void widgetSelected(SelectionEvent e) {
-								excluir();
+								salvar();
 							}
 						});
-						btnExcluir.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1,
-								1));
-						btnExcluir.setText("Excluir");
-		
-				Button btnVoltar = new Button(compositeSecundario, SWT.NONE);
-				btnVoltar.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						voltar();
-					}
-				});
-				btnVoltar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
-						1, 1));
-				btnVoltar.setText("Voltar");
+						btnSalvar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
+								1, 1));
+						btnSalvar.setText("Salvar");
+						
+								Button btnExcluir = new Button(compositeSecundario, SWT.NONE);
+								btnExcluir.setImage(SWTResourceManager.getImage(TelaEdicaoGUI.class, "/Icone/water--minus.png"));
+								btnExcluir.addSelectionListener(new SelectionAdapter() {
+									@Override
+									public void widgetSelected(SelectionEvent e) {
+										excluir();
+									}
+								});
+								btnExcluir.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1,
+										1));
+								btnExcluir.setText("Excluir");
+						
+								Button btnBuscar = new Button(compositeSecundario, SWT.NONE);
+								btnBuscar.setImage(SWTResourceManager.getImage(TelaEdicaoGUI.class, "/Icone/water--arrow.png"));
+								btnBuscar.addSelectionListener(new SelectionAdapter() {
+									@Override
+									public void widgetSelected(SelectionEvent e) {
+										buscar();
+									}
+								});
+								btnBuscar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
+										1, 1));
+								btnBuscar.setText("Buscar");
+				
+						Button btnVoltar = new Button(compositeSecundario, SWT.NONE);
+						btnVoltar.setImage(SWTResourceManager.getImage(TelaEdicaoGUI.class, "/Icone/voltar2.png"));
+						btnVoltar.addSelectionListener(new SelectionAdapter() {
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								voltar();
+							}
+						});
+						btnVoltar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
+								1, 1));
+						btnVoltar.setText("Voltar");
 
 		adicionarComponentes(compositePrincipal);
 

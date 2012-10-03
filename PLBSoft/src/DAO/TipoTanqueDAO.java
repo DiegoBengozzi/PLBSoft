@@ -31,4 +31,14 @@ public class TipoTanqueDAO extends HibernateConnection implements TipoTanqueUtil
 		return q.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoTanque> buscarTodosPorStatus(Boolean b) {
+		Query q = getSession().createQuery("select t from TipoTanque t where t.status is : aux");
+		q.setParameter("aux", b);
+		return q.list();
+	}
+	
+	
+
 }

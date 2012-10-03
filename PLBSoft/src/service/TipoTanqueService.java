@@ -21,4 +21,8 @@ public class TipoTanqueService {
 	public List<TipoTanque> buscarTodos() {
 		return dao.buscarTodos();
 	}
+	
+	public List<TipoTanque> buscarTodosTipoTanqueAtivo(){
+		return dao.buscarTodosPorStatus(true);
+	}
 }

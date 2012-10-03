@@ -9,5 +9,4 @@ public interface PadraoUtils<T> {
 	T buscar(Long id);
 
 	List<T> buscarTodos();
-
 }
