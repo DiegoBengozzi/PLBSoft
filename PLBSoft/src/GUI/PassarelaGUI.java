@@ -68,4 +68,16 @@ public class PassarelaGUI extends TelaEdicaoGUI{
 		
 	}
 
+	@Override
+	public void limparDados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void carregarComponentes() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

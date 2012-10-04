@@ -1,5 +1,6 @@
 package GUI;
 
+import static helper.StatusHelper.*;
 import helper.StatusHelper;
 
 import org.eclipse.swt.SWT;
@@ -46,14 +47,14 @@ public class JanelaPrincipalGUI {
 
 	/**
 	 * Create contents of the window.
+	 * 
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shellPlbsoft = new Shell();
 		shellPlbsoft.setMinimumSize(new Point(800, 600));
-		shellPlbsoft.setImage(SWTResourceManager.getImage(JanelaPrincipalGUI.class, "/Icone/LOGO_bluefish_pequena.png"));
-		//shellPlbsoft = LayoutHelper.getShellAtivo();
-	    //shellPlbsoft = ShellHelper.getShellAtivo();
+		shellPlbsoft.setImage(SWTResourceManager.getImage(
+				JanelaPrincipalGUI.class, "/Icone/LOGO_bluefish_pequena.png"));
 		shellPlbsoft.setSize(453, 317);
 		shellPlbsoft.setText("PLBSoft");
 		shellPlbsoft.setLayout(new GridLayout(2, false));
@@ -77,7 +78,7 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmTanqueRede.setText("Tanque Rede");
-		
+
 		MenuItem mntmTipoDeTanque = new MenuItem(menu_1, SWT.NONE);
 		mntmTipoDeTanque.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -88,24 +89,22 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmTipoDeTanque.setText("Tipo de Tanque");
-		
+
 		MenuItem mntmCadastroDeTanque = new MenuItem(menu_1, SWT.NONE);
 		mntmCadastroDeTanque.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				TanqueGUI tanque = new TanqueGUI(scrolledComposite, SWT.BORDER);
-				carregarValores(tanque);	
+				carregarValores(tanque);
 			}
 		});
 		mntmCadastroDeTanque.setText("Tanque");
-		
-
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
 
 		Menu menu_2 = new Menu(mntmRelatorios);
 		mntmRelatorios.setMenu(menu_2);
-		
+
 		MenuItem mntmRelatoriosNok = new MenuItem(menu_2, SWT.NONE);
 		mntmRelatoriosNok.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -121,16 +120,18 @@ public class JanelaPrincipalGUI {
 				true, 1, 1);
 		gd_compositeLateral.heightHint = 167;
 		compositeLateral.setLayoutData(gd_compositeLateral);
-		
+
 		Group groupMenuRapido = new Group(compositeLateral, SWT.NONE);
 		groupMenuRapido.setText("Menu R\u00E1pido");
 		groupMenuRapido.setLayout(new GridLayout(1, false));
-		groupMenuRapido.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true, true, 1, 1));
-		
+		groupMenuRapido.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, true,
+				true, 1, 1));
+
 		setDateTime(new DateTime(groupMenuRapido, SWT.BORDER | SWT.DROP_DOWN));
 
 		Button btInicio = new Button(groupMenuRapido, SWT.NONE);
-		btInicio.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		btInicio.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		btInicio.setSize(95, 25);
 		btInicio.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -140,34 +141,38 @@ public class JanelaPrincipalGUI {
 		btInicio.setText("Inicio");
 
 		Button btTanque = new Button(groupMenuRapido, SWT.NONE);
-		btTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		btTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		btTanque.setSize(95, 25);
 		btTanque.setText("Tanques");
 
 		Button btAgenda = new Button(groupMenuRapido, SWT.NONE);
-		btAgenda.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		btAgenda.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		btAgenda.setSize(95, 25);
 		btAgenda.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				StatusHelper.mensagemError("mensagem de erro");	
+				mensagemInfo("Agenda nao implementada!!");
 			}
 		});
 		btAgenda.setText("Test");
 
 		Button button_3 = new Button(groupMenuRapido, SWT.NONE);
-		button_3.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		button_3.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		button_3.setSize(95, 25);
 		button_3.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				StatusHelper.mensagemWarning("mensagem de alerta amarela");
+				mensagemWarning("mensagem de alerta amarela");
 			}
 		});
 		button_3.setText("Teste");
 
 		Button button_4 = new Button(groupMenuRapido, SWT.NONE);
-		button_4.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		button_4.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		button_4.setSize(95, 25);
 		button_4.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -183,21 +188,21 @@ public class JanelaPrincipalGUI {
 				true, 1, 1));
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
-		
+
 		Group grpBarraDeStatus = new Group(shellPlbsoft, SWT.NONE);
-		GridData gd_grpBarraDeStatus = new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1);
+		GridData gd_grpBarraDeStatus = new GridData(SWT.FILL, SWT.FILL, true,
+				false, 2, 1);
 		gd_grpBarraDeStatus.widthHint = 811;
 		grpBarraDeStatus.setLayoutData(gd_grpBarraDeStatus);
 		grpBarraDeStatus.setText("Barra de Status");
 		grpBarraDeStatus.setLayout(new GridLayout(2, false));
-						new Label(grpBarraDeStatus, SWT.NONE);
-						
-								Composite compositeStatus = new Composite(grpBarraDeStatus, SWT.NONE);
-								compositeStatus.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-								compositeStatus.setLayout(new GridLayout(1, false));
-								
-										txtStatus = StatusHelper.getStatusAtivo(compositeStatus);
+		new Label(grpBarraDeStatus, SWT.NONE);
 
+		Composite compositeStatus = new Composite(grpBarraDeStatus, SWT.NONE);
+		compositeStatus.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 1, 1));
+		compositeStatus.setLayout(new GridLayout(1, false));
+		txtStatus = StatusHelper.getStatusAtivo(compositeStatus);
 	}
 
 	public DateTime getDateTime() {
@@ -206,14 +211,14 @@ public class JanelaPrincipalGUI {
 
 	public void setDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
-		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
 		dateTime.setSize(95, 24);
 	}
-	
-	public void carregarValores(TelaEdicaoGUI tela){
+
+	public void carregarValores(TelaEdicaoGUI tela) {
 		scrolledComposite.setContent(tela);
-		scrolledComposite.setMinSize(tela.computeSize(
-				SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		tela.carregar();
 	}
 }
