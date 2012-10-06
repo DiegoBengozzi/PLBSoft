@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "TANQUE")
@@ -41,8 +42,8 @@ public class Tanque implements Serializable {
 	@Column
 	private Boolean status;
 
-//	@ManyToOne
-//	private TipoTanque tipoTanqueId;
+	@ManyToOne
+	private TipoTanque tipoTanqueId;
 
 	public Long getId() {
 		return id;
@@ -99,14 +100,14 @@ public class Tanque implements Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-//
-//	public TipoTanque getTipoTanqueId() {
-//		return tipoTanqueId;
-//	}
-//	
-//	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
-//		this.tipoTanqueId = tipoTanqueId;
-//	}
+
+	public TipoTanque getTipoTanqueId() {
+		return tipoTanqueId;
+	}
+	
+	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
+		this.tipoTanqueId = tipoTanqueId;
+	}
 	
 	@Override
 	public int hashCode() {

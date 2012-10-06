@@ -16,13 +16,12 @@ import conexao.HibernateConnection;
 
 public abstract class TelaEdicaoGUI<T> extends Composite {
 	protected T entidade;
-
 	/**
 	 * Create the composite.
 	 * 
 	 * @param parent
 	 * @param style
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public abstract void excluir() throws Exception;
 
@@ -35,7 +34,7 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	public abstract void carregar();
 
 	public abstract void limparDados();
-	
+
 	public abstract void carregarComponentes();
 
 	public TelaEdicaoGUI(Composite parent, int style) {
@@ -81,16 +80,16 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					
-					if(entidade == null)
+
+					if (entidade == null)
 						return;
-					
+
 					excluir();
 					HibernateConnection.commit();
 					carregar();
 					limparDados();
 					mensagemInfo("Exclusao realizada!!");
-					
+
 				} catch (Exception e2) {
 					mensagemError("cadastro nao excluido");
 					e2.printStackTrace();
@@ -133,11 +132,8 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 
 	public void voltar() {
 		dispose();
-
 	}
 
 	@Override
-	protected void checkSubclass() {
-		// Disable the check that prevents subclassing of SWT components
-	}
+	protected void checkSubclass() {}
 }

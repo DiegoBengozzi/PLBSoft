@@ -8,6 +8,7 @@ import modelo.Tanque;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,6 +26,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import service.TanqueService;
+import service.TipoTanqueService;
 import filtro.TanqueFiltro;
 
 public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
@@ -36,20 +38,21 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 	private Text tDescricao;
 	private Text tFiltro;
 	private TableViewer tvTanque;
+	private ComboViewer cvTipoTanque;
 	private TableViewerColumn tvcNome, tvcLaminaAgua, tvcProfundidade,
 			tvcAcessibilidade, tvcDescricao, tvcTipoTanque, tvcId;
 	private TanqueService tanqueService = new TanqueService();
 	private TanqueFiltro filtro;
+	private TipoTanqueService tipoTanqueService = new TipoTanqueService();	
 
 	public TanqueGUI(Composite parent, int style) {
 		super(parent, style);
 	}
 
 	@Override
-	public void excluir() throws Exception{			
-		
+	public void excluir() throws Exception {
 		entidade.setStatus(false);
-		
+
 	}
 
 	@Override
@@ -60,16 +63,18 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 
 	@Override
 	public void salvar() throws Exception {
-		if(entidade == null) 
+		if (entidade == null)
 			entidade = new Tanque();
-		
+
 		entidade.setNome(tNome.getText());
-		entidade.setLaminaAgua(new BigDecimal(tLaminaAgua.getText().replaceAll(",", ".")));
-		entidade.setProfundidade(new BigDecimal(tProfundidade.getText().replaceAll(",", ".")));
+		entidade.setLaminaAgua(new BigDecimal(tLaminaAgua.getText().replaceAll(
+				",", ".")));
+		entidade.setProfundidade(new BigDecimal(tProfundidade.getText()
+				.replaceAll(",", ".")));
 		entidade.setAcessibilidade(new Integer(tAcessibilidade.getText()));
 		entidade.setDescricao(tDescricao.getText());
 		entidade.setStatus(true);
-		
+		//entidade.setTipoTanqueId(cvTipoTanque.getSorter());
 		tanqueService.salvar(entidade);
 	}
 
@@ -80,6 +85,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tProfundidade.setText("");
 		tAcessibilidade.setText("");
 		tDescricao.setText("");
+		entidade = null;
 	}
 
 	@Override
@@ -91,10 +97,15 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 	@Override
 	public void carregarComponentes() {
 		tNome.setText(entidade.getNome());
-		tLaminaAgua.setText(FormatoHelper.getDecimalFormato().format(entidade.getLaminaAgua()));
-		tProfundidade.setText(FormatoHelper.getDecimalFormato().format(entidade.getProfundidade()));
+		tLaminaAgua.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getLaminaAgua()));
+		tProfundidade.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getProfundidade()));
 		tAcessibilidade.setText(entidade.getAcessibilidade().toString());
 		tDescricao.setText(entidade.getDescricao());
+		//cvTipoTanque.add(entidade.getNome());
+		
+		
 	}
 
 	@Override
@@ -104,7 +115,8 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 
 		Group grpTanque = new Group(composite, SWT.NONE);
 		grpTanque.setLayout(new GridLayout(2, false));
-		grpTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2,	1));
+		grpTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2,
+				1));
 		grpTanque.setText("Tanque");
 		Label lblNome = new Label(grpTanque, SWT.NONE);
 		lblNome.setSize(36, 15);
@@ -154,13 +166,22 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tDescricao.setSize(439, 50);
 
 		Label lblTipoDeTanque = new Label(grpTanque, SWT.NONE);
+		lblTipoDeTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblTipoDeTanque.setSize(86, 15);
 		lblTipoDeTanque.setText("Tipo de Tanque:");
+		
+		cvTipoTanque = new ComboViewer(grpTanque, SWT.NONE);
+		Combo comboTipoTanque = cvTipoTanque.getCombo();
+		comboTipoTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		cvTipoTanque.setContentProvider(ArrayContentProvider.getInstance());
+		cvTipoTanque.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((Tanque)element).getTipoTanqueId().getNome();
+			}
+		});
+		cvTipoTanque.setInput(tipoTanqueService.buscarTodosTipoTanqueAtivo());
 
-		Combo cTipoTanque = new Combo(grpTanque, SWT.NONE);
-		cTipoTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
-				1, 1));
-		cTipoTanque.setSize(439, 23);
 
 		Label lblFiltro = new Label(grpTanque, SWT.NONE);
 		lblFiltro.setSize(36, 15);
@@ -263,13 +284,12 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tvcTipoTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return "Nok"; // falta implementar
+				return ((Tanque) element).getTipoTanqueId().getNome();
 			}
 		});
 		TableColumn tblclmnTipoDeTanque = tvcTipoTanque.getColumn();
 		tblclmnTipoDeTanque.setWidth(95);
 		tblclmnTipoDeTanque.setText("Tipo de Tanque");
-		// TODO Auto-generated method stub
 
 	}
 

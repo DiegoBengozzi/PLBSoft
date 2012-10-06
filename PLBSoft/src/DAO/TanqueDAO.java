@@ -9,14 +9,14 @@ import org.hibernate.Query;
 import utils.TanqueUtils;
 import conexao.HibernateConnection;
 
-public class TanqueDAO extends HibernateConnection implements TanqueUtils{
+public class TanqueDAO extends HibernateConnection implements TanqueUtils {
 
 	@Override
 	public void salvar(Tanque entidade) {
 		if (entidade.getId() != null)
 			merge(entidade);
 		else
-			persist(entidade);		
+			persist(entidade);
 	}
 
 	@Override
@@ -33,11 +33,12 @@ public class TanqueDAO extends HibernateConnection implements TanqueUtils{
 		Query q = getSession().createQuery("select t from Tanque t");
 		return q.list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tanque> buscarTodosPorStatus(Boolean b) {
-		Query q = getSession().createQuery("select t from Tanque t  where t.status is :aux");
+		Query q = getSession().createQuery(
+				"select t from Tanque t  where t.status is :aux");
 		q.setParameter("aux", b);
 		return q.list();
 	}
