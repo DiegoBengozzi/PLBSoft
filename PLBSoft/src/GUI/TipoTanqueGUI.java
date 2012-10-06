@@ -23,7 +23,7 @@ import service.TipoTanqueService;
 import conexao.HibernateConnection;
 import filtro.TipoTanqueFiltro;
 
-public class TipoTanqueGUI extends TelaEdicaoGUI {
+public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 
 	private TipoTanqueService tipoTanqueService = new TipoTanqueService();
 	private TipoTanque entidade;
@@ -78,7 +78,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void carregar() {
-		tvTipoTanque.setInput(tipoTanqueService.buscarTodos());
+		tvTipoTanque.setInput(tipoTanqueService.buscarTodosTipoTanqueAtivo());
 		tvTipoTanque.refresh();
 		
 	}

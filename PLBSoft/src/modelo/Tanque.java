@@ -30,7 +30,7 @@ public class Tanque implements Serializable {
 	private String descricao;
 
 	@Column
-	private int acessibilidade;
+	private Integer acessibilidade;
 
 	@Column
 	private BigDecimal laminaAgua;
@@ -68,11 +68,11 @@ public class Tanque implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public int getAcessibilidade() {
+	public Integer getAcessibilidade() {
 		return acessibilidade;
 	}
 
-	public void setAcessibilidade(int acessibilidade) {
+	public void setAcessibilidade(Integer acessibilidade) {
 		this.acessibilidade = acessibilidade;
 	}
 

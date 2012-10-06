@@ -28,7 +28,7 @@ import conexao.HibernateConnection;
 import filtro.TanqueRedeFiltro;
 import org.eclipse.swt.widgets.Group;
 
-public class TanqueRedeGUI extends TelaEdicaoGUI {
+public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	private Text tNome;
 	private Text tTamanho;
 
@@ -57,7 +57,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void carregar() {
-		tvTanqueRede.setInput(tanqueRedeService.buscarTodos());
+		tvTanqueRede.setInput(tanqueRedeService.buscarTodosTanqueRedeAtivo());
 		tvTanqueRede.refresh();
 	}
 

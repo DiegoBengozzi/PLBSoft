@@ -1,8 +1,10 @@
 package GUI;
 
+import modelo.Especie;
+
 import org.eclipse.swt.widgets.Composite;
 
-public class EspecieGUI extends TelaEdicaoGUI {
+public class EspecieGUI extends TelaEdicaoGUI<Especie>{
 
 	public EspecieGUI(Composite parent, int style) {
 		super(parent, style);

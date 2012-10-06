@@ -28,4 +28,10 @@ public class SistemaProducaoDAO extends HibernateConnection implements SistemaPr
 		return null;
 	}
 
+	@Override
+	public List<SistemaProducao> buscarTodosPorStatus(Boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

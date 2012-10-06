@@ -28,4 +28,10 @@ public class HapaDAO extends HibernateConnection implements HapaUtils{
 		return null;
 	}
 
+	@Override
+	public List<Hapa> buscarTodosPorStatus(Boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

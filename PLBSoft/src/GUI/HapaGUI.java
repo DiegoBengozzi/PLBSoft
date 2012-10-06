@@ -1,5 +1,7 @@
 package GUI;
 
+import modelo.Hapa;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
@@ -8,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 
-public class HapaGUI extends TelaEdicaoGUI{
+public class HapaGUI extends TelaEdicaoGUI<Hapa>{
 	private Text tNome;
 	private Text tTamanho;
 

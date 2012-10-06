@@ -28,4 +28,10 @@ public class EspecieDAO extends HibernateConnection implements EspecieUtils{
 		return null;
 	}
 
+	@Override
+	public List<Especie> buscarTodosPorStatus(Boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

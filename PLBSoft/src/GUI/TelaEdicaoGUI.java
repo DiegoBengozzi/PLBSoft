@@ -14,15 +14,17 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import conexao.HibernateConnection;
 
-public abstract class TelaEdicaoGUI extends Composite {
+public abstract class TelaEdicaoGUI<T> extends Composite {
+	protected T entidade;
 
 	/**
 	 * Create the composite.
 	 * 
 	 * @param parent
 	 * @param style
+	 * @throws Exception 
 	 */
-	public abstract void excluir();
+	public abstract void excluir() throws Exception;
 
 	public abstract void buscar();
 
@@ -38,6 +40,7 @@ public abstract class TelaEdicaoGUI extends Composite {
 
 	public TelaEdicaoGUI(Composite parent, int style) {
 		super(parent, style);
+		entidade = null;
 		setLayout(new GridLayout(2, false));
 
 		Composite compositePrincipal = new Composite(this, SWT.NONE);
@@ -62,7 +65,8 @@ public abstract class TelaEdicaoGUI extends Composite {
 					limparDados();
 					mensagemInfo("Cadastro Realizado!");
 				} catch (Exception e1) {
-					mensagemError("Erro de cadastro!!!");
+					mensagemError("Erro de cadastro!!! ");
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -76,7 +80,21 @@ public abstract class TelaEdicaoGUI extends Composite {
 		btnExcluir.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				excluir();
+				try {
+					
+					if(entidade == null)
+						return;
+					
+					excluir();
+					HibernateConnection.commit();
+					carregar();
+					limparDados();
+					mensagemInfo("Exclusao realizada!!");
+					
+				} catch (Exception e2) {
+					mensagemError("cadastro nao excluido");
+					e2.printStackTrace();
+				}
 			}
 		});
 		btnExcluir.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,

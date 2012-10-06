@@ -28,4 +28,10 @@ public class AdubacaoDAO extends HibernateConnection implements AdubacaoUtils{
 		return null;
 	}
 
+	@Override
+	public List<Adubacao> buscarTodosPorStatus(Boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

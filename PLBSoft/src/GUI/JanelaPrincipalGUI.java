@@ -1,6 +1,8 @@
 package GUI;
 
-import static helper.StatusHelper.*;
+import static helper.StatusHelper.mensagemInfo;
+import static helper.StatusHelper.mensagemWarning;
+import static helper.StatusHelper.txtStatus;
 import helper.StatusHelper;
 
 import org.eclipse.swt.SWT;
@@ -14,20 +16,17 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 
 public class JanelaPrincipalGUI {
 
 	protected Shell shellPlbsoft;
 	private ScrolledComposite scrolledComposite;
-	@SuppressWarnings("unused")
-	private Text txtStatus;
 	private DateTime dateTime;
 
 	/**
@@ -45,6 +44,12 @@ public class JanelaPrincipalGUI {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
+	public void carregarValores(TelaEdicaoGUI tela) {
+		scrolledComposite.setContent(tela);
+		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		tela.carregar();
+	}
 	/**
 	 * Create contents of the window.
 	 * 
@@ -129,23 +134,6 @@ public class JanelaPrincipalGUI {
 
 		setDateTime(new DateTime(groupMenuRapido, SWT.BORDER | SWT.DROP_DOWN));
 
-		Button btInicio = new Button(groupMenuRapido, SWT.NONE);
-		btInicio.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
-				1));
-		btInicio.setSize(95, 25);
-		btInicio.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btInicio.setText("Inicio");
-
-		Button btTanque = new Button(groupMenuRapido, SWT.NONE);
-		btTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
-				1));
-		btTanque.setSize(95, 25);
-		btTanque.setText("Tanques");
-
 		Button btAgenda = new Button(groupMenuRapido, SWT.NONE);
 		btAgenda.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
 				1));
@@ -216,9 +204,4 @@ public class JanelaPrincipalGUI {
 		dateTime.setSize(95, 24);
 	}
 
-	public void carregarValores(TelaEdicaoGUI tela) {
-		scrolledComposite.setContent(tela);
-		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-		tela.carregar();
-	}
 }

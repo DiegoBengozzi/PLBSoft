@@ -28,4 +28,10 @@ public class PassarelaDAO extends HibernateConnection implements PassarelaUtils{
 		return null;
 	}
 
+	@Override
+	public List<Passarela> buscarTodosPorStatus(Boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
