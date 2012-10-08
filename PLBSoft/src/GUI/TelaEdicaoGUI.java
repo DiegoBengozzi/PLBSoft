@@ -16,6 +16,7 @@ import conexao.HibernateConnection;
 
 public abstract class TelaEdicaoGUI<T> extends Composite {
 	protected T entidade;
+
 	/**
 	 * Create the composite.
 	 * 
@@ -80,16 +81,13 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-
-					if (entidade == null)
-						return;
-
+					if (entidade == null) return;
 					excluir();
+					mensagemError("teste de exclusao001");
 					HibernateConnection.commit();
 					carregar();
 					limparDados();
 					mensagemInfo("Exclusao realizada!!");
-
 				} catch (Exception e2) {
 					mensagemError("cadastro nao excluido");
 					e2.printStackTrace();
@@ -135,5 +133,6 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	}
 
 	@Override
-	protected void checkSubclass() {}
+	protected void checkSubclass() {
+	}
 }

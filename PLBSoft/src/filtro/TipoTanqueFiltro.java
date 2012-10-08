@@ -13,6 +13,9 @@ public class TipoTanqueFiltro extends TabelaFiltro {
 			return true;
 
 		TipoTanque tipoTanque = (TipoTanque) element;
+		
+		if (tipoTanque.getId().toString().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
 
 		if (tipoTanque.getNome().toLowerCase().matches(filtro.toLowerCase()))
 			return true;

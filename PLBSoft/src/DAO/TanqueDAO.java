@@ -22,7 +22,7 @@ public class TanqueDAO extends HibernateConnection implements TanqueUtils {
 	@Override
 	public Tanque buscar(Long id) {
 		Query q = getSession().createQuery(
-				"select t from Tanque t where t.id =:id");
+				"select t from Tanque t where t.id=:id");
 		q.setParameter("id", id);
 		return (Tanque) q.uniqueResult();
 	}

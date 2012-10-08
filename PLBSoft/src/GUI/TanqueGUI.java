@@ -5,6 +5,7 @@ import helper.FormatoHelper;
 import java.math.BigDecimal;
 
 import modelo.Tanque;
+import modelo.TipoTanque;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -43,7 +44,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 			tvcAcessibilidade, tvcDescricao, tvcTipoTanque, tvcId;
 	private TanqueService tanqueService = new TanqueService();
 	private TanqueFiltro filtro;
-	private TipoTanqueService tipoTanqueService = new TipoTanqueService();	
+	private TipoTanqueService tipoTanqueSer;
 
 	public TanqueGUI(Composite parent, int style) {
 		super(parent, style);
@@ -74,7 +75,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		entidade.setAcessibilidade(new Integer(tAcessibilidade.getText()));
 		entidade.setDescricao(tDescricao.getText());
 		entidade.setStatus(true);
-		//entidade.setTipoTanqueId(cvTipoTanque.getSorter());
+		//entidade.setTipoTanqueId();
 		tanqueService.salvar(entidade);
 	}
 
@@ -103,7 +104,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 				entidade.getProfundidade()));
 		tAcessibilidade.setText(entidade.getAcessibilidade().toString());
 		tDescricao.setText(entidade.getDescricao());
-		//cvTipoTanque.add(entidade.getNome());
+		//cvTipoTanque.setInput(entidade.getTipoTanqueId().getNome());
 		
 		
 	}
@@ -111,6 +112,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueFiltro();
+		tipoTanqueSer = new TipoTanqueService();
 		composite.setLayout(new GridLayout(2, false));
 
 		Group grpTanque = new Group(composite, SWT.NONE);
@@ -177,10 +179,10 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		cvTipoTanque.setLabelProvider(new ColumnLabelProvider(){
 			@Override
 			public String getText(Object element) {
-				return ((Tanque)element).getTipoTanqueId().getNome();
+				return ((TipoTanque)element).getNome();
 			}
 		});
-		cvTipoTanque.setInput(tipoTanqueService.buscarTodosTipoTanqueAtivo());
+		cvTipoTanque.setInput(tipoTanqueSer.buscarTodosTipoTanqueAtivo());
 
 
 		Label lblFiltro = new Label(grpTanque, SWT.NONE);

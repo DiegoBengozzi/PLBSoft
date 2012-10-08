@@ -11,7 +11,6 @@ public class TipoTanqueService {
 	
 	public void salvar(TipoTanque entidade) {
 		dao.salvar(entidade);
-
 	}
 
 	public TipoTanque buscar(Long id) {

@@ -25,7 +25,6 @@ import filtro.TipoTanqueFiltro;
 public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 
 	private TipoTanqueService tipoTanqueService = new TipoTanqueService();
-	private TipoTanque entidade;
 	private Text tNome;
 	private Text tRevestimento;
 	private Group grpTipoDeTanque;
@@ -40,10 +39,11 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 	private TableColumn tblclmnId;
 	private TableViewerColumn tvcId;
 	private TipoTanqueFiltro filtro;
+	private TipoTanque entidade;
 
 	public TipoTanqueGUI(Composite parent, int style) {
 		super(parent, style);
-
+		entidade = new TipoTanque();
 	}
 
 	@Override
@@ -128,10 +128,8 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 				| SWT.FULL_SELECTION);
 		tvTipoTanque.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent arg0) {
-				IStructuredSelection itemSelecao = (IStructuredSelection) tvTipoTanque
-						.getSelection();
-				if (itemSelecao.isEmpty())
-					return;
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvTipoTanque.getSelection();
+				if (itemSelecao.isEmpty()) return;
 				entidade = (TipoTanque) itemSelecao.getFirstElement();
 				carregarComponentes();
 			}
