@@ -13,4 +13,5 @@ public class FormatoHelper {
 		decimalFormato.setMinimumFractionDigits(2);
 		return decimalFormato;
 	}
+
 }

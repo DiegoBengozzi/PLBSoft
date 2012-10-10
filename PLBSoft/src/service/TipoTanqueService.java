@@ -11,7 +11,6 @@ public class TipoTanqueService {
 	
 	public void salvar(TipoTanque entidade) {
 		dao.salvar(entidade);
-
 	}
 
 	public TipoTanque buscar(Long id) {
@@ -20,5 +19,9 @@ public class TipoTanqueService {
 
 	public List<TipoTanque> buscarTodos() {
 		return dao.buscarTodos();
+	}
+	
+	public List<TipoTanque> buscarTodosTipoTanqueAtivo(){
+		return dao.buscarTodosPorStatus(true);
 	}
 }

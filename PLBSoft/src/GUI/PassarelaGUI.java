@@ -1,5 +1,7 @@
 package GUI;
 
+import modelo.Passarela;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
@@ -8,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 
-public class PassarelaGUI extends TelaEdicaoGUI{
+public class PassarelaGUI extends TelaEdicaoGUI<Passarela>{
 	private Text tNome;
 	private Text tCapacidade;
 
@@ -64,6 +66,18 @@ public class PassarelaGUI extends TelaEdicaoGUI{
 
 	@Override
 	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void limparDados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void carregarComponentes() {
 		// TODO Auto-generated method stub
 		
 	}

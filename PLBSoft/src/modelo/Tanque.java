@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "TANQUE")
@@ -30,7 +31,7 @@ public class Tanque implements Serializable {
 	private String descricao;
 
 	@Column
-	private int acessibilidade;
+	private Integer acessibilidade;
 
 	@Column
 	private BigDecimal laminaAgua;
@@ -41,8 +42,8 @@ public class Tanque implements Serializable {
 	@Column
 	private Boolean status;
 
-//	@ManyToOne
-//	private TipoTanque tipoTanqueId;
+	@ManyToOne
+	private TipoTanque tipoTanqueId;
 
 	public Long getId() {
 		return id;
@@ -68,11 +69,11 @@ public class Tanque implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public int getAcessibilidade() {
+	public Integer getAcessibilidade() {
 		return acessibilidade;
 	}
 
-	public void setAcessibilidade(int acessibilidade) {
+	public void setAcessibilidade(Integer acessibilidade) {
 		this.acessibilidade = acessibilidade;
 	}
 
@@ -99,14 +100,14 @@ public class Tanque implements Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-//
-//	public TipoTanque getTipoTanqueId() {
-//		return tipoTanqueId;
-//	}
-//	
-//	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
-//		this.tipoTanqueId = tipoTanqueId;
-//	}
+
+	public TipoTanque getTipoTanqueId() {
+		return tipoTanqueId;
+	}
+	
+	public void setTipoTanqueId(TipoTanque tipoTanqueId) {
+		this.tipoTanqueId = tipoTanqueId;
+	}
 	
 	@Override
 	public int hashCode() {

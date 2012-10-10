@@ -19,7 +19,7 @@ public class TipoTanqueDAO extends HibernateConnection implements TipoTanqueUtil
 	@Override
 	public TipoTanque buscar(Long id) {
 		Query q = getSession().createQuery(
-				"select t from TipoTanque t where t.nome=:id");
+				"select t from TipoTanque t where t.id =:id");
 		q.setParameter("id", id);		
 		return (TipoTanque) q.uniqueResult();
 	}
@@ -30,5 +30,15 @@ public class TipoTanqueDAO extends HibernateConnection implements TipoTanqueUtil
 		Query q = getSession().createQuery("select t from TipoTanque t");
 		return q.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TipoTanque> buscarTodosPorStatus(Boolean b) {
+		Query q = getSession().createQuery("select t from TipoTanque t where t.status is :aux");
+		q.setParameter("aux", b);
+		return q.list();
+	}
+	
+	
 
 }

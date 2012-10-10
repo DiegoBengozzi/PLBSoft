@@ -1,5 +1,7 @@
 package GUI;
 
+import modelo.Adubacao;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -8,7 +10,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class AdubacaoGUI extends TelaEdicaoGUI {
+public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	private Text tDescricao;
 	private DateTime dateTime;
 
@@ -64,6 +66,18 @@ public class AdubacaoGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void limparDados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void carregarComponentes() {
 		// TODO Auto-generated method stub
 		
 	}

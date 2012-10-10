@@ -2,6 +2,8 @@ package GUI;
 
 import static helper.StatusHelper.mensagemError;
 
+import modelo.SistemaProducao;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -9,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class SistemaProducaoGUI extends TelaEdicaoGUI{
+public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 	private Text tSistemaCultivo;
 	private Text tBiomassaEconomica;
 	private Text tBiomassaCritica;
@@ -76,6 +78,18 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI{
 
 	@Override
 	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void limparDados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void carregarComponentes() {
 		// TODO Auto-generated method stub
 		
 	}

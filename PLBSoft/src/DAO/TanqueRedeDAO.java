@@ -34,11 +34,12 @@ public class TanqueRedeDAO extends HibernateConnection implements TanqueRedeUtil
 		return q.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TanqueRede> buscarTodosPorStatus(Boolean b) {
 		Query q = getSession().createQuery("select t from TanqueRede t  where t.status is :aux");
 		q.setParameter("aux", b);
-		return null;
+		return  q.list();
 	}
 
 

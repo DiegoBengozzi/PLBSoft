@@ -1,8 +1,5 @@
 package GUI;
 
-import static helper.StatusHelper.mensagemInfo;
-import static helper.StatusHelper.mensagemWarning;
-
 import helper.FormatoHelper;
 
 import java.math.BigDecimal;
@@ -11,6 +8,9 @@ import modelo.TanqueRede;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -18,23 +18,21 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import service.TanqueRedeService;
-import conexao.HibernateConnection;
 import filtro.TanqueRedeFiltro;
+import org.eclipse.jface.viewers.ComboViewer;
 
-public class TanqueRedeGUI extends TelaEdicaoGUI {
+public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	private Text tNome;
 	private Text tTamanho;
 
-	private TanqueRedeService tanqueRedeService = new TanqueRedeService();
-	private TanqueRede entidade;
 	private Label lblTanque;
-	private Combo combo;
 	private Table table;
 	private TableViewer tvTanqueRede;
 	private TableColumn tblclmnNome;
@@ -45,27 +43,22 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	private Label lblFiltro;
 	private Text tFiltro;
 
+	private TanqueRedeService tanqueRedeService = new TanqueRedeService();
+	private TanqueRede entidade;
+	private Group grpTanqueRede;
+	private TableColumn tblclmnId;
+	private TableViewerColumn tvcId;
+	private Combo combo;
+	private ComboViewer cvTanque;
+
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
-		entidade = new TanqueRede();
-	}
-	@Override
-	public void carregar(){
-		tvTanqueRede.setInput(tanqueRedeService.buscarTodos());
-		tvTanqueRede.refresh();
+
 	}
 
 	@Override
-	public void excluir() {
-		// try {
-		// entidade.setStatus(false);
-		// tanqueRede.salvar(entidade);
-		// tNome.setText("");
-		// tTamanho.setText("");
-		// StatusHelper.mensagemInfo("Itens excluido");
-		// } catch (Exception e) {
-		// StatusHelper.mensagemError("Erro ao excluir!");
-		// }
+	public void excluir() throws Exception {
+		entidade.setStatus(false);
 	}
 
 	@Override
@@ -75,98 +68,141 @@ public class TanqueRedeGUI extends TelaEdicaoGUI {
 	}
 
 	@Override
-	public void salvar() {
-//		if (tNome.getText() == null || tTamanho.getText() == null
-//				|| tNome.getText().equalsIgnoreCase("")
-//				|| tTamanho.getText().equalsIgnoreCase("")) {
-			try {
-				entidade.setNome(tNome.getText());
-				entidade.setTamanho(new BigDecimal(tTamanho.getText()));
-				entidade.setStatus(true);
-				tanqueRedeService.salvar(entidade);
-				HibernateConnection.commit();
-				mensagemInfo("Cadastro Realizado!");
-				carregar();
-			} catch (Exception e) {
-				mensagemWarning("Erro de cadastro");
-			}
-//		} else
-//			mensagemWarning("Informe todos os dados pra o cadastro!");
+	public void salvar() throws Exception {
+		if (entidade == null)
+			entidade = new TanqueRede();
+
+		entidade.setNome(tNome.getText());
+		entidade.setTamanho(new BigDecimal(tTamanho.getText()));
+		entidade.setStatus(true);
+
+		tanqueRedeService.salvar(entidade);
+
+	}
+
+	@Override
+	public void limparDados() {
+
+		tNome.setText("");
+		tTamanho.setText("");
+		entidade = null;
+
+	}
+
+	@Override
+	public void carregar() {
+		tvTanqueRede.setInput(tanqueRedeService.buscarTodosTanqueRedeAtivo());
+		tvTanqueRede.refresh();
+	}
+
+	@Override
+	public void carregarComponentes() {
+		tNome.setText(entidade.getNome());
+		tTamanho.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getTamanho()));
 	}
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueRedeFiltro();
 
-		composite.setLayout(new GridLayout(2, false));
+		composite.setLayout(new GridLayout(3, false));
 
-		Label lblNome = new Label(composite, SWT.NONE);
-		lblNome.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
-				1, 1));
+		grpTanqueRede = new Group(composite, SWT.NONE);
+		grpTanqueRede.setText("Tanque Rede");
+		grpTanqueRede.setLayout(new GridLayout(2, false));
+		grpTanqueRede.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 3, 1));
+		Label lblNome = new Label(grpTanqueRede, SWT.NONE);
+		lblNome.setSize(36, 15);
 		lblNome.setText("Nome:");
 
-		tNome = new Text(composite, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+		tNome = new Text(grpTanqueRede, SWT.BORDER);
+		tNome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+				1));
+		tNome.setSize(196, 21);
 
-		Label lblTamanho = new Label(composite, SWT.NONE);
-		lblTamanho.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
-				false, 1, 1));
+		Label lblTamanho = new Label(grpTanqueRede, SWT.NONE);
+		lblTamanho.setSize(71, 15);
 		lblTamanho.setText("Tamanha m\u00B3:");
 
-		tTamanho = new Text(composite, SWT.BORDER);
+		tTamanho = new Text(grpTanqueRede, SWT.BORDER);
 		tTamanho.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
+		tTamanho.setSize(196, 21);
 
-		lblTanque = new Label(composite, SWT.NONE);
-		lblTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
-				false, 1, 1));
+		lblTanque = new Label(grpTanqueRede, SWT.NONE);
+		lblTanque.setSize(43, 15);
 		lblTanque.setText("Tanque:");
+		
+		cvTanque = new ComboViewer(grpTanqueRede, SWT.NONE);
+		combo = cvTanque.getCombo();
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		combo = new Combo(composite, SWT.NONE);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
-
-		lblFiltro = new Label(composite, SWT.NONE);
-		lblFiltro.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
-				false, 1, 1));
+		lblFiltro = new Label(grpTanqueRede, SWT.NONE);
+		lblFiltro.setSize(36, 15);
 		lblFiltro.setText("Filtro...");
 
-		tFiltro = new Text(composite, SWT.BORDER);
+		tFiltro = new Text(grpTanqueRede, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
+		tFiltro.setSize(196, 21);
 		tFiltro.setMessage("Filtro de Buscar!!!");
 
-		tvTanqueRede = new TableViewer(composite, SWT.BORDER
+		tvTanqueRede = new TableViewer(grpTanqueRede, SWT.BORDER
 				| SWT.FULL_SELECTION);
+		tvTanqueRede.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent arg0) {
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvTanqueRede
+						.getSelection();
+				if (itemSelecao.isEmpty())
+					return;
+				entidade = (TanqueRede) itemSelecao.getFirstElement();
+				carregarComponentes();
+			}
+		});
 		table = tvTanqueRede.getTable();
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setSize(272, 77);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		tvTanqueRede.addFilter(filtro);
 		tvTanqueRede.setContentProvider(ArrayContentProvider.getInstance());
 
-		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
-		tvcNome.setLabelProvider(new ColumnLabelProvider(){
+		tvcId = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tvcId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((TanqueRede)element).getNome();
+				return ((TanqueRede) element).getId().toString();
+			}
+		});
+		tblclmnId = tvcId.getColumn();
+		tblclmnId.setWidth(100);
+		tblclmnId.setText("Id");
+
+		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tvcNome.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((TanqueRede) element).getNome();
 			}
 		});
 		tblclmnNome = tvcNome.getColumn();
-		tblclmnNome.setWidth(100);
+		tblclmnNome.setWidth(107);
 		tblclmnNome.setText("Nome");
 
 		tvcTamanho = new TableViewerColumn(tvTanqueRede, SWT.NONE);
-		tvcTamanho.setLabelProvider(new ColumnLabelProvider(){
+		tvcTamanho.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.getDecimalFormato().format(((TanqueRede)element).getTamanho());
+				return FormatoHelper.getDecimalFormato().format(
+						((TanqueRede) element).getTamanho());
 			}
 		});
 		tblclmnTamanho = tvcTamanho.getColumn();
-		tblclmnTamanho.setWidth(100);
+		tblclmnTamanho.setWidth(192);
 		tblclmnTamanho.setText("Tamanho m\u00B3");
 
 	}
-	
+
 }

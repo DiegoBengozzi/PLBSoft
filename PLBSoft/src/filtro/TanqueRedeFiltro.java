@@ -11,6 +11,9 @@ public class TanqueRedeFiltro extends TabelaFiltro {
 			return true;
 		TanqueRede tanqueRede = (TanqueRede) element;
 		
+		if (tanqueRede.getId().toString().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+		
 		if (tanqueRede.getNome().toLowerCase().matches(filtro.toLowerCase()))
 			return true;
 		

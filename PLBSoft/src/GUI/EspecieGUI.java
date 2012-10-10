@@ -1,8 +1,10 @@
 package GUI;
 
+import modelo.Especie;
+
 import org.eclipse.swt.widgets.Composite;
 
-public class EspecieGUI extends TelaEdicaoGUI {
+public class EspecieGUI extends TelaEdicaoGUI<Especie>{
 
 	public EspecieGUI(Composite parent, int style) {
 		super(parent, style);
@@ -35,6 +37,18 @@ public class EspecieGUI extends TelaEdicaoGUI {
 
 	@Override
 	public void carregar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void limparDados() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void carregarComponentes() {
 		// TODO Auto-generated method stub
 		
 	}
