@@ -131,6 +131,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 				IStructuredSelection itemSelecao = (IStructuredSelection) tvTipoTanque.getSelection();
 				if (itemSelecao.isEmpty()) return;
 				entidade = (TipoTanque) itemSelecao.getFirstElement();
+				entidade = (TipoTanque) itemSelecao.getFirstElement();
 				carregarComponentes();
 			}
 		});
@@ -174,6 +175,11 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 		tblclmnRevestimento.setWidth(100);
 		tblclmnRevestimento.setText("Revestimento");
 
+	}
+
+	@Override
+	public boolean isEntidadeNula() {
+		return entidade == null;
 	}
 
 }

@@ -205,4 +205,9 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 
 	}
 
+	@Override
+	public boolean isEntidadeNula() {
+		return entidade==null;
+	}
+
 }

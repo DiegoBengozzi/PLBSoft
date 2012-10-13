@@ -58,8 +58,7 @@ public class JanelaPrincipalGUI {
 	protected void createContents() {
 		shellPlbsoft = new Shell();
 		shellPlbsoft.setMinimumSize(new Point(800, 600));
-		shellPlbsoft.setImage(SWTResourceManager.getImage(
-				JanelaPrincipalGUI.class, "/Icone/LOGO_bluefish_pequena.png"));
+		shellPlbsoft.setImage(SWTResourceManager.getImage(JanelaPrincipalGUI.class, "/Icone/Logo3-32x32.png"));
 		shellPlbsoft.setSize(453, 317);
 		shellPlbsoft.setText("PLBSoft");
 		shellPlbsoft.setLayout(new GridLayout(2, false));

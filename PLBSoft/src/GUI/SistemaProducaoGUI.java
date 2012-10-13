@@ -93,6 +93,12 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isEntidadeNula() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }
