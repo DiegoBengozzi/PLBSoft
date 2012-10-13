@@ -17,13 +17,6 @@ import conexao.HibernateConnection;
 public abstract class TelaEdicaoGUI<T> extends Composite {
 	protected T entidade;
 
-	/**
-	 * Create the composite.
-	 * 
-	 * @param parent
-	 * @param style
-	 * @throws Exception
-	 */
 	public abstract void excluir() throws Exception;
 
 	public abstract void buscar();
@@ -37,6 +30,8 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	public abstract void limparDados();
 
 	public abstract void carregarComponentes();
+	
+	public abstract boolean isEntidadeNula();
 
 	public TelaEdicaoGUI(Composite parent, int style) {
 		super(parent, style);
@@ -81,7 +76,9 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					if (entidade == null) return;
+					if (isEntidadeNula())
+						return;
+					
 					excluir();
 					mensagemError("teste de exclusao001");
 					HibernateConnection.commit();

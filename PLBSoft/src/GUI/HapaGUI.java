@@ -83,4 +83,10 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa>{
 		
 	}
 
+	@Override
+	public boolean isEntidadeNula() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

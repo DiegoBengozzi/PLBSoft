@@ -53,4 +53,10 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie>{
 		
 	}
 
+	@Override
+	public boolean isEntidadeNula() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -81,4 +81,10 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isEntidadeNula() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

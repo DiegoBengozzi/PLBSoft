@@ -82,4 +82,10 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela>{
 		
 	}
 
+	@Override
+	public boolean isEntidadeNula() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
