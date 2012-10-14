@@ -12,18 +12,18 @@ public class StatusHelper {
 	public static Text getStatusAtivo(Composite compositeStatus) {
 		if (txtStatus == null) {
 			txtStatus = new Text(compositeStatus, SWT.BORDER);
-			txtStatus.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-					false, 1, 1));
+			txtStatus.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 			txtStatus.setEditable(false);
-			txtStatus.setMessage("Barra de Status");
+			txtStatus.setText("Barra de Status!");
+			//txtStatus.setMessage("Barra de Status");
 		}
 		return txtStatus;
 
 	}
 	
 	public static void mensagemInfo(String message){
-		txtStatus.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		txtStatus.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLACK));
+		txtStatus.setBackground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+		txtStatus.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		txtStatus.setText(message);
 	}
 	public static void mensagemWarning(String message){
@@ -35,6 +35,11 @@ public class StatusHelper {
 		txtStatus.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		txtStatus.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		txtStatus.setText(message);
+	}
+	public static void mensagemLimpar(){
+		txtStatus.setBackground(null);
+		txtStatus.setForeground(null);
+		txtStatus.setText("Barra de Status!");
 	}
 
 }

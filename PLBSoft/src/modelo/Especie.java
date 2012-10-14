@@ -29,16 +29,16 @@ public class Especie implements Serializable{
 	private String linhegem;
 
 	@Column
-	private String hidrido;
+	private String hibrido;
 
 	@Column
 	private String genero;
 
 	@Column
-	private Long toleranciaSalinidade;
+	private String toleranciaSalinidade;
 
 	@Column
-	private Long toleranciaFrio;
+	private String toleranciaFrio;
 
 	@Column
 	private Long maturacaoSexual;
@@ -68,11 +68,11 @@ public class Especie implements Serializable{
 	}
 
 	public String getHidrido() {
-		return hidrido;
+		return hibrido;
 	}
 
 	public void setHidrido(String hidrido) {
-		this.hidrido = hidrido;
+		this.hibrido = hidrido;
 	}
 
 	public String getGenero() {
@@ -83,19 +83,19 @@ public class Especie implements Serializable{
 		this.genero = genero;
 	}
 
-	public Long getToleranciaSalinidade() {
+	public String getToleranciaSalinidade() {
 		return toleranciaSalinidade;
 	}
 
-	public void setToleranciaSalinidade(Long toleranciaSalinidade) {
+	public void setToleranciaSalinidade(String toleranciaSalinidade) {
 		this.toleranciaSalinidade = toleranciaSalinidade;
 	}
 
-	public Long getToleranciaFrio() {
+	public String getToleranciaFrio() {
 		return toleranciaFrio;
 	}
 
-	public void setToleranciaFrio(Long toleranciaFrio) {
+	public void setToleranciaFrio(String toleranciaFrio) {
 		this.toleranciaFrio = toleranciaFrio;
 	}
 

@@ -61,15 +61,17 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 	public void salvar() throws Exception {
 		if (entidade == null)
 			entidade = new TipoTanque();
-
-		entidade.setNome(tNome.getText());
-		entidade.setRevestimento(tRevestimento.getText());
+		entidade.setNome(tNome.getText().trim());
+		entidade.setRevestimento(tRevestimento.getText().trim());
 		entidade.setStatus(true);
-
 		tipoTanqueService.salvar(entidade);
+	}
+	
+	@Override
+	public void validar() throws Exception {
 
 	}
-
+	
 	@Override
 	public void limparDados() {
 		tNome.setText("");
@@ -181,5 +183,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 	public boolean isEntidadeNula() {
 		return entidade == null;
 	}
+
+
 
 }

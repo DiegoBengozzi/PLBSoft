@@ -4,10 +4,12 @@ import helper.FormatoHelper;
 
 import java.math.BigDecimal;
 
+import modelo.Tanque;
 import modelo.TanqueRede;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -25,8 +27,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import service.TanqueRedeService;
+import service.TanqueService;
 import filtro.TanqueRedeFiltro;
-import org.eclipse.jface.viewers.ComboViewer;
 
 public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	private Text tNome;
@@ -50,6 +52,9 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	private TableViewerColumn tvcId;
 	private Combo combo;
 	private ComboViewer cvTanque;
+	private TanqueService tanqueSerice;
+	private TableColumn tblclmnTanque;
+	private TableViewerColumn tvcTanque;
 
 	public TanqueRedeGUI(Composite parent, int style) {
 		super(parent, style);
@@ -72,11 +77,18 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		if (entidade == null)
 			entidade = new TanqueRede();
 
-		entidade.setNome(tNome.getText());
-		entidade.setTamanho(new BigDecimal(tTamanho.getText()));
+		entidade.setNome(tNome.getText().trim());
+		entidade.setTamanho(new BigDecimal(tTamanho.getText().trim()));
 		entidade.setStatus(true);
+		IStructuredSelection valorCombo = (IStructuredSelection) cvTanque.getSelection();
+		entidade.setTanqueId((Tanque)valorCombo.getFirstElement());
 
 		tanqueRedeService.salvar(entidade);
+
+	}
+	
+	@Override
+	public void validar() throws Exception {
 
 	}
 
@@ -103,11 +115,16 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	}
 
 	@Override
+	public boolean isEntidadeNula() {
+		return entidade == null;
+	}
+
+	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueRedeFiltro();
-
+		tanqueSerice = new TanqueService();
+		
 		composite.setLayout(new GridLayout(3, false));
-
 		grpTanqueRede = new Group(composite, SWT.NONE);
 		grpTanqueRede.setText("Tanque Rede");
 		grpTanqueRede.setLayout(new GridLayout(2, false));
@@ -134,10 +151,19 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		lblTanque = new Label(grpTanqueRede, SWT.NONE);
 		lblTanque.setSize(43, 15);
 		lblTanque.setText("Tanque:");
-		
+
 		cvTanque = new ComboViewer(grpTanqueRede, SWT.NONE);
 		combo = cvTanque.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+				1));
+		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
+		cvTanque.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Tanque) element).getNome();
+			}
+		});
+		cvTanque.setInput(tanqueSerice.buscarTodosTanqueAtivo());
 
 		lblFiltro = new Label(grpTanqueRede, SWT.NONE);
 		lblFiltro.setSize(36, 15);
@@ -177,7 +203,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 			}
 		});
 		tblclmnId = tvcId.getColumn();
-		tblclmnId.setWidth(100);
+		tblclmnId.setWidth(39);
 		tblclmnId.setText("Id");
 
 		tvcNome = new TableViewerColumn(tvTanqueRede, SWT.NONE);
@@ -200,14 +226,21 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 			}
 		});
 		tblclmnTamanho = tvcTamanho.getColumn();
-		tblclmnTamanho.setWidth(192);
+		tblclmnTamanho.setWidth(127);
 		tblclmnTamanho.setText("Tamanho m\u00B3");
 
-	}
+		tvcTanque = new TableViewerColumn(tvTanqueRede, SWT.NONE);
+		tvcTanque.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				TanqueRede t = (TanqueRede) element;
+				return t.getTanqueId() == null ? "" : t.getTanqueId().getNome();
+			}
+		});
+		tblclmnTanque = tvcTanque.getColumn();
+		tblclmnTanque.setWidth(100);
+		tblclmnTanque.setText("Tanque");
 
-	@Override
-	public boolean isEntidadeNula() {
-		return entidade==null;
 	}
 
 }

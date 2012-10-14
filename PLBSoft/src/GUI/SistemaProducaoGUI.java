@@ -1,7 +1,6 @@
 package GUI;
 
 import static helper.StatusHelper.mensagemError;
-
 import modelo.SistemaProducao;
 
 import org.eclipse.swt.SWT;
@@ -10,12 +9,19 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.widgets.Group;
 
 public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 	private Text tSistemaCultivo;
 	private Text tBiomassaEconomica;
 	private Text tBiomassaCritica;
 	private Text tCapacidadeSuporte;
+	private Text tFiltro;
+	private Table table;
 
 	public SistemaProducaoGUI(Composite parent, int style) {
 		super(parent, style);
@@ -40,42 +46,12 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void adicionarComponentes(Composite composite) {
-		composite.setLayout(new GridLayout(2, false));
-		
-		Label lblSistemaDeProduo = new Label(composite, SWT.NONE);
-		lblSistemaDeProduo.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblSistemaDeProduo.setText("Sistema de Cultivo:");
-		
-		tSistemaCultivo = new Text(composite, SWT.BORDER);
-		tSistemaCultivo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblBiomassaEconomica = new Label(composite, SWT.NONE);
-		lblBiomassaEconomica.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblBiomassaEconomica.setText("Biomassa Economica:");
-		
-		tBiomassaEconomica = new Text(composite, SWT.BORDER);
-		tBiomassaEconomica.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblBiomassaCritica = new Label(composite, SWT.NONE);
-		lblBiomassaCritica.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblBiomassaCritica.setText("Biomassa Critica:");
-		
-		tBiomassaCritica = new Text(composite, SWT.BORDER);
-		tBiomassaCritica.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblCapacidadeDeSuporte = new Label(composite, SWT.NONE);
-		lblCapacidadeDeSuporte.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCapacidadeDeSuporte.setText("Capacidade de Suporte:");
-		
-		tCapacidadeSuporte = new Text(composite, SWT.BORDER);
-		tCapacidadeSuporte.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		// TODO Auto-generated method stub
-		
-	}
+	public void validar() throws Exception {
 
+	}
+	
 	@Override
 	public void carregar() {
 		// TODO Auto-generated method stub
@@ -100,5 +76,77 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 		return false;
 	}
 	
+	@Override
+	public void adicionarComponentes(Composite composite) {
+		composite.setLayout(new GridLayout(2, false));
+		
+		Group grpSistemaDeProduo = new Group(composite, SWT.NONE);
+		grpSistemaDeProduo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		grpSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
+		grpSistemaDeProduo.setLayout(new GridLayout(2, false));
+		
+		Label lblSistemaDeProduo = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblSistemaDeProduo.setText("Sistema de Cultivo:");
+		
+		tSistemaCultivo = new Text(grpSistemaDeProduo, SWT.BORDER);
+		tSistemaCultivo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		Label lblBiomassaEconomica = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblBiomassaEconomica.setText("Biomassa Economica:");
+		
+		tBiomassaEconomica = new Text(grpSistemaDeProduo, SWT.BORDER);
+		tBiomassaEconomica.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		Label lblBiomassaCritica = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblBiomassaCritica.setText("Biomassa Critica:");
+		
+		tBiomassaCritica = new Text(grpSistemaDeProduo, SWT.BORDER);
+		tBiomassaCritica.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		Label lblCapacidadeDeSuporte = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblCapacidadeDeSuporte.setText("Capacidade de Suporte:");
+		
+		tCapacidadeSuporte = new Text(grpSistemaDeProduo, SWT.BORDER);
+		tCapacidadeSuporte.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		Label lblFiltro = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblFiltro.setText("Filtro:");
+		
+		tFiltro = new Text(grpSistemaDeProduo, SWT.BORDER);
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		TableViewer tvSistemaProducao = new TableViewer(grpSistemaDeProduo, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tvSistemaProducao.getTable();
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		
+		TableViewerColumn tvcId = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
+		TableColumn tblclmnId = tvcId.getColumn();
+		tblclmnId.setWidth(41);
+		tblclmnId.setText("Id");
+		
+		TableViewerColumn tvcSistemaCultivo = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
+		TableColumn tblclmnSistemaDeCultivo = tvcSistemaCultivo.getColumn();
+		tblclmnSistemaDeCultivo.setWidth(116);
+		tblclmnSistemaDeCultivo.setText("Sistema de Cultivo");
+		
+		TableViewerColumn tvcBiomassaEconomica = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
+		TableColumn tblclmnBiomassaEconomica = tvcBiomassaEconomica.getColumn();
+		tblclmnBiomassaEconomica.setWidth(126);
+		tblclmnBiomassaEconomica.setText("Biomassa Economica");
+		
+		TableViewerColumn tvcBiomassaCritica = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
+		TableColumn tblclmnBiomassaCritica = tvcBiomassaCritica.getColumn();
+		tblclmnBiomassaCritica.setWidth(100);
+		tblclmnBiomassaCritica.setText("Biomassa Critica");
+		
+		TableViewerColumn tvcCapacidadeSuporte = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
+		TableColumn tblclmnCapacidadeDeSuporte = tvcCapacidadeSuporte.getColumn();
+		tblclmnCapacidadeDeSuporte.setWidth(138);
+		tblclmnCapacidadeDeSuporte.setText("Capacidade de Suporte");
+		// TODO Auto-generated method stub
+		
+	}
 
 }

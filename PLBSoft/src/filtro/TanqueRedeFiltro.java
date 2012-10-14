@@ -2,6 +2,7 @@ package filtro;
 
 import helper.FormatoHelper;
 import modelo.TanqueRede;
+
 import org.eclipse.jface.viewers.Viewer;
 
 public class TanqueRedeFiltro extends TabelaFiltro {
