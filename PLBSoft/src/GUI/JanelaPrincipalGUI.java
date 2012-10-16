@@ -134,6 +134,28 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmAdubao.setText("Aduba\u00E7\u00E3o");
+		
+		MenuItem mntmEspcie = new MenuItem(menu_1, SWT.NONE);
+		mntmEspcie.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				EspecieGUI especie = new EspecieGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(especie);
+			}
+		});
+		mntmEspcie.setText("Esp\u00E9cie");
+		
+		MenuItem mntmPassarela = new MenuItem(menu_1, SWT.NONE);
+		mntmPassarela.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				PassarelaGUI passarela = new PassarelaGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(passarela);
+			}
+		});
+		mntmPassarela.setText("Passarela");
+		
+		
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
 

@@ -47,6 +47,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 	private TanqueFiltro filtro;
 	private TipoTanqueService tipoTanqueService;
 	private Button rbBaixo, rbMedio, rbAlto;
+	private IStructuredSelection valorCombo;
 
 	public TanqueGUI(Composite parent, int style) {
 		super(parent, style);
@@ -60,7 +61,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 
 	@Override
 	public void buscar() {
-		filtro.setFiltro(tFiltro.getText());
+		filtro.setFiltro(tFiltro.getText().trim());
 		tvTanque.refresh();
 	}
 
@@ -70,17 +71,18 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 			entidade = new Tanque();
 
 		entidade.setNome(tNome.getText().trim());
-		entidade.setLaminaAgua(new BigDecimal(tLaminaAgua.getText().trim().replaceAll(
-				",", ".")));
+		entidade.setLaminaAgua(new BigDecimal(tLaminaAgua.getText().trim()
+				.replaceAll(",", ".")));
 		entidade.setProfundidade(new BigDecimal(tProfundidade.getText().trim()
 				.replaceAll(",", ".")));
 		entidade.setAcessibilidade(getValorRadio().trim());
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
-		IStructuredSelection valorCombo = (IStructuredSelection) cvTipoTanque.getSelection();
-		entidade.setTipoTanqueId((TipoTanque)valorCombo.getFirstElement());
+		valorCombo = (IStructuredSelection) cvTipoTanque.getSelection();
+		entidade.setTipoTanqueId((TipoTanque) valorCombo.getFirstElement());
 		tanqueService.salvar(entidade);
 	}
+
 	@Override
 	public void validar() throws Exception {
 
@@ -111,45 +113,44 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 				entidade.getProfundidade()));
 		setValorRadio(entidade.getAcessibilidade());
 		tDescricao.setText(entidade.getDescricao());
-//		cvTipoTanque.setInput(entidade.getTipoTanqueId().getNome());
-		
+		// cvTipoTanque.setInput(entidade.getTipoTanqueId().getNome());
 
 	}
-	
+
 	@Override
 	public boolean isEntidadeNula() {
-		return entidade==null;
+		return entidade == null;
 	}
 
-	private void setValorRadio(String radio){
-		if(radio.equalsIgnoreCase("ALTO")){
+	private void setValorRadio(String radio) {
+		if (radio.equalsIgnoreCase("ALTO")) {
 			rbAlto.setSelection(true);
-		}else if(radio.equalsIgnoreCase("MEDIO")){
+		} else if (radio.equalsIgnoreCase("MEDIO")) {
 			rbMedio.setSelection(true);
-		}else if(radio.equalsIgnoreCase("BAIXO")){
+		} else if (radio.equalsIgnoreCase("BAIXO")) {
 			rbBaixo.setSelection(true);
-		}else{
+		} else {
 			rbAlto.setSelection(false);
 			rbMedio.setSelection(false);
 			rbBaixo.setSelection(false);
 		}
 	}
-	
-	private String getValorRadio(){
-		if(rbAlto.getSelection()){
+
+	private String getValorRadio() {
+		if (rbAlto.getSelection()) {
 			return "ALTO";
-		}else if(rbMedio.getSelection()){
+		} else if (rbMedio.getSelection()) {
 			return "MEDIO";
-		}else {
+		} else {
 			return "BAIXO";
 		}
 	}
-	
+
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueFiltro();
 		tipoTanqueService = new TipoTanqueService();
-		
+
 		composite.setLayout(new GridLayout(2, false));
 		grpTanque = new Group(composite, SWT.NONE);
 		grpTanque.setLayout(new GridLayout(4, false));
@@ -195,7 +196,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 
 		rbAlto = new Button(grpTanque, SWT.RADIO);
 		rbAlto.setText("Alto");
-		
+
 		Label lblDescrio = new Label(grpTanque, SWT.NONE);
 		lblDescrio.setSize(54, 15);
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
@@ -225,7 +226,6 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 			}
 		});
 		cvTipoTanque.setInput(tipoTanqueService.buscarTodosTipoTanqueAtivo());
-		
 
 		Label lblFiltro = new Label(grpTanque, SWT.NONE);
 		lblFiltro.setSize(36, 15);
@@ -254,6 +254,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		table.setSize(531, 91);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
+		
 		tvTanque.addFilter(filtro);
 		tvTanque.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -307,7 +308,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tvcAcessibilidade.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Tanque) element).getAcessibilidade().toString();
+				return ((Tanque) element).getAcessibilidade();
 			}
 		});
 		TableColumn tblclmnAcessibilidade = tvcAcessibilidade.getColumn();

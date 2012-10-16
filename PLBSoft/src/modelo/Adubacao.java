@@ -33,7 +33,7 @@ public class Adubacao implements Serializable {
 	private Boolean status;
 	
 	@ManyToOne
-	private Adubacao tanqueId;
+	private Tanque tanqueId;
 
 
 	public Long getId() {
@@ -68,11 +68,11 @@ public class Adubacao implements Serializable {
 		this.status = satatus;
 	}
 	
-	public Adubacao getTanqueId() {
+	public Tanque getTanqueId() {
 		return tanqueId;
 	}
 	
-	public void setTanqueId(Adubacao tanqueId) {
+	public void setTanqueId(Tanque tanqueId) {
 		this.tanqueId = tanqueId;
 	}
 

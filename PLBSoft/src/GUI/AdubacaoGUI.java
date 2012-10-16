@@ -1,11 +1,15 @@
 package GUI;
 
+import java.sql.Date;
+
 import modelo.Adubacao;
 import modelo.Tanque;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -24,12 +28,9 @@ import org.eclipse.swt.widgets.Text;
 import service.AdubacaoService;
 import service.TanqueService;
 import filtro.AdubacaoFiltro;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.DoubleClickEvent;
 
 public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	private Text tDescricao;
-	private DateTime dateTime;
 	private Text tFiltro;
 	private Table table;
 	private AdubacaoFiltro filtro;
@@ -38,6 +39,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	private ComboViewer cvTanque;
 	private TanqueService tanqueService;
 	private TableViewerColumn tvcId, tvcDescricao, tvcTanque, tvcData;
+	private IStructuredSelection valorCombo;
+	private DateTime calendario;
 	
 	
 	public AdubacaoGUI(Composite parent, int style) {
@@ -60,11 +63,13 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		if(entidade == null)
 			entidade = new Adubacao();
 		
-		IStructuredSelection valorCombo = (IStructuredSelection) cvTanque.getSelection();
-		entidade.setTanqueId((Adubacao)valorCombo.getFirstElement());
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
-//		entidade.setData(getDateTime());
+		
+		valorCombo = (IStructuredSelection) cvTanque.getSelection();
+		entidade.setTanqueId((Tanque)valorCombo.getFirstElement());
+		
+		entidade.setData((Date) calendario.getData());
 		
 		adubacaoService.salvar(entidade);
 	}
@@ -88,7 +93,9 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 
 	@Override
 	public void carregarComponentes() {
+		calendario.setData(entidade.getData());
 		tDescricao.setText(entidade.getDescricao());
+		
 //		setDateTime(entidade.getData());
 		
 	}
@@ -97,6 +104,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	public boolean isEntidadeNula() {
 		return entidade==null;
 	}
+	
+	
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
@@ -137,8 +146,13 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 
 		Label lblData = new Label(grpAdubao, SWT.NONE);
 		lblData.setText("Data:");
-
-		setDateTime(new DateTime(grpAdubao, SWT.BORDER));
+		/**
+		 * calendario!!
+		 * 
+		 */
+		calendario = new DateTime(grpAdubao, SWT.NONE);
+		calendario.setEnabled(false);
+		
 
 		Label lblFiltro = new Label(grpAdubao, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -178,12 +192,14 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tblclmnId.setWidth(40);
 		tblclmnId.setText("Id");
 
-		tvcTanque = new TableViewerColumn(tvAdubacao,
-				SWT.NONE);
+		tvcTanque = new TableViewerColumn(tvAdubacao, SWT.NONE);
 		tvcTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Adubacao) element).getTanqueId().toString();
+				Adubacao t = (Adubacao) element;
+
+				return t.getTanqueId() == null ? "" : t.getTanqueId()
+						.getNome();
 			}
 		});
 		TableColumn tblclmnTanque = tvcTanque.getColumn();
@@ -214,16 +230,6 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tblclmnData.setWidth(81);
 		tblclmnData.setText("Data");
 
-	}
-
-	public DateTime getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(DateTime dateTime) {
-		this.dateTime = dateTime;
-		dateTime.setLayoutData(new GridData(SWT.LEFT, SWT.FILL, false, false,
-				1, 1));
 	}
 
 }

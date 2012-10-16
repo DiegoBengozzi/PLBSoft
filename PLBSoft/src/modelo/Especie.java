@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +42,10 @@ public class Especie implements Serializable{
 	private String toleranciaFrio;
 
 	@Column
-	private Long maturacaoSexual;
+	private BigDecimal maturacaoSexual;
+	
+	@Column
+	private Boolean status;
 
 	public Long getId() {
 		return id;
@@ -67,12 +71,12 @@ public class Especie implements Serializable{
 		this.linhegem = linhegem;
 	}
 
-	public String getHidrido() {
+	public String getHibrido() {
 		return hibrido;
 	}
 
-	public void setHidrido(String hidrido) {
-		this.hibrido = hidrido;
+	public void setHibrido(String hibrido) {
+		this.hibrido = hibrido;
 	}
 
 	public String getGenero() {
@@ -99,12 +103,20 @@ public class Especie implements Serializable{
 		this.toleranciaFrio = toleranciaFrio;
 	}
 
-	public Long getMaturacaoSexual() {
+	public BigDecimal getMaturacaoSexual() {
 		return maturacaoSexual;
 	}
 
-	public void setMaturacaoSexual(Long maturacaoSexual) {
+	public void setMaturacaoSexual(BigDecimal maturacaoSexual) {
 		this.maturacaoSexual = maturacaoSexual;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override
@@ -131,5 +143,6 @@ public class Especie implements Serializable{
 			return false;
 		return true;
 	}
+
 
 }
