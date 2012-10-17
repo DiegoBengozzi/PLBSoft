@@ -48,5 +48,8 @@
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.forms_3.5.100.v20110425.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.workbench_3.7.0.I20110519-0100.jar"/>
 	<classpathentry kind="lib" path="swing2swt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/joda-time-hibernate-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/joda-time-hibernate-1.3/joda-time-hibernate-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/joda-time-hibernate-1.3/joda-time-hibernate-1.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,7 +1,6 @@
 package GUI;
 
-import java.sql.Date;
-
+import helper.CalendarioHelper;
 import modelo.Adubacao;
 import modelo.Tanque;
 
@@ -18,7 +17,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
@@ -40,9 +38,9 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	private TanqueService tanqueService;
 	private TableViewerColumn tvcId, tvcDescricao, tvcTanque, tvcData;
 	private IStructuredSelection valorCombo;
-	private DateTime calendario;
-	
-	
+	private Combo comboTanque;
+	private Text textData;
+
 	public AdubacaoGUI(Composite parent, int style) {
 		super(parent, style);
 	}
@@ -60,17 +58,16 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 
 	@Override
 	public void salvar() {
-		if(entidade == null)
+		if (entidade == null)
 			entidade = new Adubacao();
-		
+
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
-		
+
 		valorCombo = (IStructuredSelection) cvTanque.getSelection();
-		entidade.setTanqueId((Tanque)valorCombo.getFirstElement());
-		
-		entidade.setData((Date) calendario.getData());
-		
+		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
+		entidade.setData(CalendarioHelper.retornaData());
+
 		adubacaoService.salvar(entidade);
 	}
 
@@ -88,30 +85,30 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	@Override
 	public void limparDados() {
 		tDescricao.setText("");
+		comboTanque.deselectAll();
+		textData.setText("");
 		entidade = null;
 	}
 
 	@Override
 	public void carregarComponentes() {
-		calendario.setData(entidade.getData());
+		
+		comboTanque.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
+				entidade.getTanqueId()));
 		tDescricao.setText(entidade.getDescricao());
-		
-//		setDateTime(entidade.getData());
-		
+		textData.setText(""+entidade.getData());
 	}
 
 	@Override
 	public boolean isEntidadeNula() {
-		return entidade==null;
+		return entidade == null;
 	}
-	
-	
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new AdubacaoFiltro();
 		tanqueService = new TanqueService();
-		
+
 		composite.setLayout(new GridLayout(2, false));
 
 		Group grpAdubao = new Group(composite, SWT.NONE);
@@ -123,15 +120,15 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		Label lblTanque = new Label(grpAdubao, SWT.NONE);
 		lblTanque.setText("Tanque:");
 
-		cvTanque = new ComboViewer(grpAdubao, SWT.NONE);
-		Combo combo = cvTanque.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
+		cvTanque = new ComboViewer(grpAdubao, SWT.READ_ONLY);
+		comboTanque = cvTanque.getCombo();
+		comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
 		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
-		cvTanque.setLabelProvider(new ColumnLabelProvider(){
+		cvTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Tanque)element).getNome();
+				return ((Tanque) element).getNome();
 			}
 		});
 		cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());
@@ -140,19 +137,19 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		lblDescrioDaAdubao
 				.setText("Descri\u00E7\u00E3o \r\n      da \r\naduba\u00E7\u00E3o:");
 
-		tDescricao = new Text(grpAdubao, SWT.BORDER);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
-				1, 1));
-
-		Label lblData = new Label(grpAdubao, SWT.NONE);
-		lblData.setText("Data:");
+		tDescricao = new Text(grpAdubao, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		/**
 		 * calendario!!
 		 * 
 		 */
-		calendario = new DateTime(grpAdubao, SWT.NONE);
-		calendario.setEnabled(false);
-		
+		Label lblData = new Label(grpAdubao, SWT.NONE);
+		lblData.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
+		lblData.setText("Data:");
+		textData = new Text(grpAdubao, SWT.BORDER | SWT.READ_ONLY);
+		textData.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
 
 		Label lblFiltro = new Label(grpAdubao, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -160,13 +157,14 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tFiltro = new Text(grpAdubao, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1,
 				1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
-		tvAdubacao = new TableViewer(grpAdubao, SWT.BORDER
-				| SWT.FULL_SELECTION);
+		tvAdubacao = new TableViewer(grpAdubao, SWT.BORDER | SWT.FULL_SELECTION);
 		tvAdubacao.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent arg0) {
-				IStructuredSelection itemSelecao = (IStructuredSelection) tvAdubacao.getSelection();
-				if (itemSelecao.isEmpty()) 
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvAdubacao
+						.getSelection();
+				if (itemSelecao.isEmpty())
 					return;
 				limparDados();
 				entidade = (Adubacao) itemSelecao.getFirstElement();
@@ -177,7 +175,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		
+
 		tvAdubacao.addFilter(filtro);
 		tvAdubacao.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -198,8 +196,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 			public String getText(Object element) {
 				Adubacao t = (Adubacao) element;
 
-				return t.getTanqueId() == null ? "" : t.getTanqueId()
-						.getNome();
+				return t.getTanqueId() == null ? "" : t.getTanqueId().getNome();
 			}
 		});
 		TableColumn tblclmnTanque = tvcTanque.getColumn();
@@ -207,23 +204,23 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tblclmnTanque.setText("Tanque");
 
 		tvcDescricao = new TableViewerColumn(tvAdubacao, SWT.NONE);
-		tvcDescricao.setLabelProvider(new ColumnLabelProvider(){
+		tvcDescricao.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Adubacao)element).getDescricao(); 
+				return ((Adubacao) element).getDescricao();
 
 			}
 		});
-		
+
 		TableColumn tblclmnDescricao = tvcDescricao.getColumn();
 		tblclmnDescricao.setWidth(127);
 		tblclmnDescricao.setText("Descri\u00E7\u00E3o");
 
 		tvcData = new TableViewerColumn(tvAdubacao, SWT.NONE);
-		tvcData.setLabelProvider(new ColumnLabelProvider(){
+		tvcData.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return((Adubacao)element).getData().toString();
+				return ((Adubacao) element).getData().toString();
 			}
 		});
 		TableColumn tblclmnData = tvcData.getColumn();

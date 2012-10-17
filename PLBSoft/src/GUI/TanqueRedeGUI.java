@@ -50,9 +50,9 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	private Group grpTanqueRede;
 	private TableColumn tblclmnId;
 	private TableViewerColumn tvcId;
-	private Combo combo;
+	private Combo comboTanque;
 	private ComboViewer cvTanque;
-	private TanqueService tanqueSerice;
+	private TanqueService tanqueService;
 	private TableColumn tblclmnTanque;
 	private TableViewerColumn tvcTanque;
 
@@ -97,6 +97,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 
 		tNome.setText("");
 		tTamanho.setText("");
+		comboTanque.deselectAll();
 		entidade = null;
 
 	}
@@ -112,6 +113,8 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		tNome.setText(entidade.getNome());
 		tTamanho.setText(FormatoHelper.getDecimalFormato().format(
 				entidade.getTamanho()));
+		comboTanque.select(tanqueService.buscarTodosTanqueAtivo()
+				.indexOf(entidade.getTanqueId()));
 	}
 
 	@Override
@@ -122,7 +125,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new TanqueRedeFiltro();
-		tanqueSerice = new TanqueService();
+		tanqueService = new TanqueService();
 		
 		composite.setLayout(new GridLayout(3, false));
 		grpTanqueRede = new Group(composite, SWT.NONE);
@@ -152,9 +155,9 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		lblTanque.setSize(43, 15);
 		lblTanque.setText("Tanque:");
 
-		cvTanque = new ComboViewer(grpTanqueRede, SWT.NONE);
-		combo = cvTanque.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+		cvTanque = new ComboViewer(grpTanqueRede, SWT.READ_ONLY);
+		comboTanque = cvTanque.getCombo();
+		comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
 				1));
 		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
 		cvTanque.setLabelProvider(new ColumnLabelProvider() {
@@ -163,17 +166,17 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 				return ((Tanque) element).getNome();
 			}
 		});
-		cvTanque.setInput(tanqueSerice.buscarTodosTanqueAtivo());
+		cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());
 
 		lblFiltro = new Label(grpTanqueRede, SWT.NONE);
 		lblFiltro.setSize(36, 15);
-		lblFiltro.setText("Filtro...");
+		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpTanqueRede, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
 		tFiltro.setSize(196, 21);
-		tFiltro.setMessage("Filtro de Buscar!!!");
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvTanqueRede = new TableViewer(grpTanqueRede, SWT.BORDER
 				| SWT.FULL_SELECTION);

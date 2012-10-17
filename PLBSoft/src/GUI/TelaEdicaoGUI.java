@@ -94,8 +94,10 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					if (isEntidadeNula())
+					if (isEntidadeNula()){
+						limparDados();
 						return;
+					}
 					excluir();
 					HibernateConnection.commit();
 					carregar();

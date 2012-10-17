@@ -1,7 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Table(name = "ADUBACAO")
 @Entity
@@ -26,7 +27,8 @@ public class Adubacao implements Serializable {
 	@Column
 	private String descricao;
 	
-	@Column
+	@Column 
+//	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	private Date data;
 
 	@Column

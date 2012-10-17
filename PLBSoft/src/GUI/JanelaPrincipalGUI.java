@@ -5,6 +5,7 @@ import static helper.StatusHelper.mensagemInfo;
 import static helper.StatusHelper.mensagemLimpar;
 import static helper.StatusHelper.mensagemWarning;
 import static helper.StatusHelper.txtStatus;
+import helper.CalendarioHelper;
 import helper.StatusHelper;
 
 import org.eclipse.swt.SWT;
@@ -28,7 +29,8 @@ public class JanelaPrincipalGUI {
 
 	protected Shell shellPlbsoft;
 	private ScrolledComposite scrolledComposite;
-	private DateTime dateTime;
+
+	// private static DateTime calendarioSistema;
 
 	/**
 	 * Open the window. Janela Principal do Sistema.
@@ -44,27 +46,30 @@ public class JanelaPrincipalGUI {
 			}
 		}
 	}
+
 	/**
 	 * É utilizado para carregar os componentes nos Eventos dos Botoes.
+	 * 
 	 * @param tela
 	 */
 	@SuppressWarnings("rawtypes")
 	public void carregarValores(TelaEdicaoGUI tela) {
 		scrolledComposite.setContent(tela);
-		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite
+				.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		tela.carregar();
 	}
 
-	public DateTime getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(DateTime dateTime) {
-		this.dateTime = dateTime;
-		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
-				1));
-		dateTime.setSize(95, 24);
-	}
+	// public static DateTime getDateTime() {
+	// return calendarioSistema;
+	// }
+	//
+	// public static void setDateTime(DateTime dateTime) {
+	// calendarioSistema = dateTime;
+	// calendarioSistema.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+	// true, 1, 1));
+	// dateTime.setSize(95, 24);
+	// }
 
 	/**
 	 * Create contents of the window.
@@ -77,7 +82,6 @@ public class JanelaPrincipalGUI {
 		shellPlbsoft.setMaximized(true);
 		shellPlbsoft.setImage(SWTResourceManager.getImage(
 				JanelaPrincipalGUI.class, "/Icone/Logo3-32x32.png"));
-		// shellPlbsoft.setSize(453, 317);
 		shellPlbsoft.setText("PLBSoft");
 		shellPlbsoft.setLayout(new GridLayout(2, false));
 
@@ -124,38 +128,40 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmCadastroDeTanque.setText("Tanque");
-		
+
 		MenuItem mntmAdubao = new MenuItem(menu_1, SWT.NONE);
 		mntmAdubao.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				AdubacaoGUI adubacao = new AdubacaoGUI(scrolledComposite, SWT.BORDER);
+				AdubacaoGUI adubacao = new AdubacaoGUI(scrolledComposite,
+						SWT.BORDER);
 				carregarValores(adubacao);
 			}
 		});
 		mntmAdubao.setText("Aduba\u00E7\u00E3o");
-		
+
 		MenuItem mntmEspcie = new MenuItem(menu_1, SWT.NONE);
 		mntmEspcie.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				EspecieGUI especie = new EspecieGUI(scrolledComposite, SWT.BORDER);
+				EspecieGUI especie = new EspecieGUI(scrolledComposite,
+						SWT.BORDER);
 				carregarValores(especie);
 			}
 		});
 		mntmEspcie.setText("Esp\u00E9cie");
-		
+
 		MenuItem mntmPassarela = new MenuItem(menu_1, SWT.NONE);
 		mntmPassarela.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				PassarelaGUI passarela = new PassarelaGUI(scrolledComposite, SWT.BORDER);
+				PassarelaGUI passarela = new PassarelaGUI(scrolledComposite,
+						SWT.BORDER);
 				carregarValores(passarela);
 			}
 		});
 		mntmPassarela.setText("Passarela");
-		
-		
+
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
 
@@ -167,13 +173,12 @@ public class JanelaPrincipalGUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				StatusHelper.mensagemError("Relatórios não disponiveis");
+				// CalendarioHelper.getCalendario();
 			}
 		});
 		mntmRelatoriosNok.setText("Relatorios NOK");
 		/**
-		 * Fim da barra de munu superior 
-		 * e 
-		 * inicio da barra de menus lateral
+		 * Fim da barra de munu superior e inicio da barra de menus lateral
 		 */
 		Composite compositeLateral = new Composite(shellPlbsoft, SWT.NONE);
 		compositeLateral.setLayout(new GridLayout(1, false));
@@ -182,15 +187,25 @@ public class JanelaPrincipalGUI {
 		gd_compositeLateral.heightHint = 167;
 		compositeLateral.setLayoutData(gd_compositeLateral);
 
+		Group grpCalendrio = new Group(compositeLateral, SWT.NONE);
+		grpCalendrio.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 1, 1));
+		grpCalendrio.setText("Calend\u00E1rio");
+		grpCalendrio.setLayout(new GridLayout(1, false));
+
+		CalendarioHelper.setDateTime(new DateTime(grpCalendrio, SWT.BORDER | SWT.DROP_DOWN));
+		//CalendarioHelper.c.set(CalendarioHelper.getDateTime().getYear(), CalendarioHelper.getDateTime().getMonth(), CalendarioHelper.getDateTime().getDay());
+		// CalendarioHelper.setInicioCalendario(new DateTime(grpCalendrio,
+		// SWT.BORDER
+		// | SWT.DROP_DOWN));
+
 		Group groupMenuRapido = new Group(compositeLateral, SWT.NONE);
 		groupMenuRapido.setText("Menu R\u00E1pido");
 		groupMenuRapido.setLayout(new GridLayout(1, false));
-		GridData gd_groupMenuRapido = new GridData(SWT.LEFT, SWT.FILL, true,
+		GridData gd_groupMenuRapido = new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1);
 		gd_groupMenuRapido.heightHint = 549;
 		groupMenuRapido.setLayoutData(gd_groupMenuRapido);
-
-		setDateTime(new DateTime(groupMenuRapido, SWT.BORDER | SWT.DROP_DOWN));
 
 		Button btTest = new Button(groupMenuRapido, SWT.NONE);
 		btTest.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
@@ -198,7 +213,8 @@ public class JanelaPrincipalGUI {
 		btTest.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				mensagemInfo("Botao de Teste!! Mensagem de Informacao!!");
+
+				mensagemInfo(""+CalendarioHelper.c.getTime());
 			}
 		});
 		btTest.setText("Test");
@@ -210,7 +226,7 @@ public class JanelaPrincipalGUI {
 		btTeste.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				mensagemWarning("Botao de Teste!! Mensagem de Alerta!!");
+				mensagemWarning("Botao de Teste!! Mensagem de Alerta!! >>");
 			}
 		});
 		btTeste.setText("Teste");
@@ -245,9 +261,7 @@ public class JanelaPrincipalGUI {
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 		/**
-		 * Fim da barra de menu lateral 
-		 * e 
-		 * inicio da Barra de Menu Inferior
+		 * Fim da barra de menu lateral e inicio da Barra de Menu Inferior
 		 */
 		Group grpBarraDeStatus = new Group(shellPlbsoft, SWT.NONE);
 		GridData gd_grpBarraDeStatus = new GridData(SWT.FILL, SWT.FILL, true,
@@ -257,14 +271,14 @@ public class JanelaPrincipalGUI {
 		grpBarraDeStatus.setLayoutData(gd_grpBarraDeStatus);
 		grpBarraDeStatus.setText("Barra de Status");
 		grpBarraDeStatus.setLayout(new GridLayout(2, false));
-		
-				Composite compositeStatus = new Composite(grpBarraDeStatus,  SWT.BORDER);
-				GridData gd_compositeStatus = new GridData(SWT.FILL, SWT.FILL, true,
-						false, 2, 1);
-				gd_compositeStatus.heightHint = 25;
-				gd_compositeStatus.widthHint = 737;
-				compositeStatus.setLayoutData(gd_compositeStatus);
-				compositeStatus.setLayout(new GridLayout(1, false));
-				txtStatus = StatusHelper.getStatusAtivo(compositeStatus);
+
+		Composite compositeStatus = new Composite(grpBarraDeStatus, SWT.BORDER);
+		GridData gd_compositeStatus = new GridData(SWT.FILL, SWT.FILL, true,
+				false, 2, 1);
+		gd_compositeStatus.heightHint = 25;
+		gd_compositeStatus.widthHint = 737;
+		compositeStatus.setLayoutData(gd_compositeStatus);
+		compositeStatus.setLayout(new GridLayout(1, false));
+		txtStatus = StatusHelper.getStatusAtivo(compositeStatus);
 	}
 }

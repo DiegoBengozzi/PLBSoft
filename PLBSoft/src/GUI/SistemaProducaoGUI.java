@@ -114,6 +114,7 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao>{
 		
 		tFiltro = new Text(grpSistemaDeProduo, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 		
 		TableViewer tvSistemaProducao = new TableViewer(grpSistemaDeProduo, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tvSistemaProducao.getTable();

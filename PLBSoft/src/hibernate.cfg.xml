@@ -14,9 +14,9 @@
 		<mapping class="modelo.TanqueRede"/>
 		<mapping class="modelo.Especie"/>
 		<mapping class="modelo.Adubacao"/>
+		<mapping class="modelo.Passarela"/>
 <!--  
 		<mapping class="modelo.Hapa"/>
-		<mapping class="modelo.Passarela"/>
 		<mapping class="modelo.SistemaProducao"/>
 -->
  		

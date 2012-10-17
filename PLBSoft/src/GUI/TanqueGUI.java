@@ -48,6 +48,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 	private TipoTanqueService tipoTanqueService;
 	private Button rbBaixo, rbMedio, rbAlto;
 	private IStructuredSelection valorCombo;
+	private Combo comboTipoTanque;
 
 	public TanqueGUI(Composite parent, int style) {
 		super(parent, style);
@@ -95,6 +96,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tProfundidade.setText("");
 		setValorRadio("");
 		tDescricao.setText("");
+		comboTipoTanque.deselectAll();
 		entidade = null;
 	}
 
@@ -113,8 +115,9 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 				entidade.getProfundidade()));
 		setValorRadio(entidade.getAcessibilidade());
 		tDescricao.setText(entidade.getDescricao());
-		// cvTipoTanque.setInput(entidade.getTipoTanqueId().getNome());
 
+		comboTipoTanque.select(tipoTanqueService.buscarTodosTipoTanqueAtivo()
+				.indexOf(entidade.getTipoTanqueId()));
 	}
 
 	@Override
@@ -201,7 +204,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		lblDescrio.setSize(54, 15);
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
 
-		tDescricao = new Text(grpTanque, SWT.BORDER | SWT.MULTI);
+		tDescricao = new Text(grpTanque, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.FILL, true, false,
 				3, 1);
 		gd_tDescricao.heightHint = 30;
@@ -215,7 +218,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		lblTipoDeTanque.setText("Tipo de Tanque:");
 
 		cvTipoTanque = new ComboViewer(grpTanque, SWT.READ_ONLY);
-		Combo comboTipoTanque = cvTipoTanque.getCombo();
+		comboTipoTanque = cvTipoTanque.getCombo();
 		comboTipoTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 3, 1));
 		cvTipoTanque.setContentProvider(ArrayContentProvider.getInstance());
@@ -229,13 +232,13 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 
 		Label lblFiltro = new Label(grpTanque, SWT.NONE);
 		lblFiltro.setSize(36, 15);
-		lblFiltro.setText("Filtro...");
+		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpTanque, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3,
 				1));
 		tFiltro.setSize(439, 21);
-		tFiltro.setMessage("filtro de Busca!!");
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvTanque = new TableViewer(grpTanque, SWT.BORDER | SWT.FULL_SELECTION);
 		tvTanque.addDoubleClickListener(new IDoubleClickListener() {
@@ -254,7 +257,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		table.setSize(531, 91);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
+
 		tvTanque.addFilter(filtro);
 		tvTanque.setContentProvider(ArrayContentProvider.getInstance());
 

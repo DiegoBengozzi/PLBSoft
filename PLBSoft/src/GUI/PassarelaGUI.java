@@ -147,6 +147,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		tFiltro = new Text(grpPassarela, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
 				1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvPassarela = new TableViewer(grpPassarela, SWT.BORDER
 				| SWT.FULL_SELECTION);

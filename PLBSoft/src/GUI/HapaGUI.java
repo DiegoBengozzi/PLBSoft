@@ -84,6 +84,7 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa>{
 		
 		tFiltro = new Text(grpHapa, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 		
 		TableViewer tableViewer = new TableViewer(grpHapa, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();

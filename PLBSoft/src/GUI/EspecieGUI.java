@@ -245,6 +245,7 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 
 		tFiltro = new Text(grpEspcie, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvEspecie = new TableViewer(grpEspcie, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tvEspecie.getTable();
