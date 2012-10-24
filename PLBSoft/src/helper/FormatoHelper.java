@@ -1,6 +1,7 @@
 package helper;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class FormatoHelper {
@@ -13,5 +14,7 @@ public class FormatoHelper {
 		decimalFormato.setMinimumFractionDigits(2);
 		return decimalFormato;
 	}
+	
+	public static SimpleDateFormat dataFormato = new SimpleDateFormat("dd/MM/yyyy");
 
 }

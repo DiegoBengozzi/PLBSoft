@@ -44,6 +44,9 @@ import javax.persistence.Table;
 
 		@ManyToOne
 		private TipoTanque tipoTanqueId;
+		
+		@ManyToOne
+		private SistemaProducao sistemaProducaoId;
 
 		public Long getId() {
 			return id;
@@ -108,6 +111,14 @@ import javax.persistence.Table;
 		public void setTipoTanqueId(TipoTanque tipoTanqueId) {
 			this.tipoTanqueId = tipoTanqueId;
 		}
+		
+		public SistemaProducao getSistemaProducaoId() {
+			return sistemaProducaoId;
+		}
+
+		public void setSistemaProducaoId(SistemaProducao sistemaProducaoId) {
+			this.sistemaProducaoId = sistemaProducaoId;
+		}
 
 		@Override
 		public int hashCode() {
@@ -133,5 +144,4 @@ import javax.persistence.Table;
 				return false;
 			return true;
 		}
-		
 }

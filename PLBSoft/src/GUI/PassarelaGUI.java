@@ -37,8 +37,9 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	private PassarelaFiltro filtro;
 	private PassarelaService passarelaService;
 	private IStructuredSelection valorCombo;
-	private ComboViewer cvTanque;
+	private ComboViewer cvPassarela;
 	private TanqueService tanqueService;
+	private Combo comboPassarela;
 	
 
 	public PassarelaGUI(Composite parent, int style) {
@@ -52,7 +53,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 
 	@Override
 	public void buscar() {
-		filtro.setFiltro(tFiltro.getText().trim());
+		filtro.setFiltro(tFiltro.getText());
 		tvPassarela.refresh();
 	}
 
@@ -64,7 +65,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		entidade.setNome(tNome.getText().trim());
 		entidade.setCapacidade(new Long(tCapacidade.getText().trim()));
 		entidade.setStatus(true);
-		valorCombo = (IStructuredSelection) cvTanque.getSelection();
+		valorCombo = (IStructuredSelection) cvPassarela.getSelection();
 		entidade.setTanqueId((Tanque)valorCombo.getFirstElement());
 		passarelaService.salvar(entidade);
 	}
@@ -91,6 +92,8 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	public void carregarComponentes() {
 		tNome.setText(entidade.getNome());
 		tCapacidade.setText(FormatoHelper.getDecimalFormato().format(entidade.getCapacidade()));
+		comboPassarela.select(tanqueService.buscarTodosTanqueAtivo().indexOf(entidade.getTanqueId()));
+		
 	}
 
 	@Override
@@ -128,18 +131,18 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		Label lblTanque = new Label(grpPassarela, SWT.NONE);
 		lblTanque.setText("Tanque:");
 
-		cvTanque = new ComboViewer(grpPassarela, SWT.NONE);
-		Combo combo = cvTanque.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+		cvPassarela = new ComboViewer(grpPassarela, SWT.READ_ONLY);
+		comboPassarela = cvPassarela.getCombo();
+		comboPassarela.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
 				1));
-		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
-		cvTanque.setLabelProvider(new ColumnLabelProvider(){
+		cvPassarela.setContentProvider(ArrayContentProvider.getInstance());
+		cvPassarela.setLabelProvider(new ColumnLabelProvider(){
 			@Override
 			public String getText(Object element) {
 				return ((Tanque)element).getNome();
 			}
 		});
-		cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());
+		cvPassarela.setInput(tanqueService.buscarTodosTanqueAtivo());
 
 		Label lblFiltro = new Label(grpPassarela, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -147,6 +150,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		tFiltro = new Text(grpPassarela, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
 				1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvPassarela = new TableViewer(grpPassarela, SWT.BORDER
 				| SWT.FULL_SELECTION);
@@ -165,6 +169,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		
 		tvPassarela.addFilter(filtro);
 		tvPassarela.setContentProvider(ArrayContentProvider.getInstance());
 

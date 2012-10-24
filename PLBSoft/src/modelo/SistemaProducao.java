@@ -23,7 +23,7 @@ public class SistemaProducao implements Serializable{
 	private Long id;
 	
 	@Column
-	private String nomeCapacidadeSuporte;
+	private String sistemaProducao;
 	
 	@Column
 	private BigDecimal biomassaEconomica;
@@ -45,12 +45,12 @@ public class SistemaProducao implements Serializable{
 		this.id = id;
 	}
 
-	public String getNomeCapacidadeSuporte() {
-		return nomeCapacidadeSuporte;
+	public String getSistemaProducao() {
+		return sistemaProducao;
 	}
 
-	public void setNomeCapacidadeSuporte(String nomeCapacidadeSuporte) {
-		this.nomeCapacidadeSuporte = nomeCapacidadeSuporte;
+	public void setSistemaProducao(String nomeCapacidadeSuporte) {
+		this.sistemaProducao = nomeCapacidadeSuporte;
 	}
 
 	public BigDecimal getBiomassaEconomica() {

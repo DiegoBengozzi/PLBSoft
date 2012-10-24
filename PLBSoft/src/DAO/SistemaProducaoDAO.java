@@ -3,6 +3,9 @@ package DAO;
 import java.util.List;
 
 import modelo.SistemaProducao;
+
+import org.hibernate.Query;
+
 import utils.SistemaProducaoUtils;
 import conexao.HibernateConnection;
 
@@ -18,20 +21,26 @@ public class SistemaProducaoDAO extends HibernateConnection implements SistemaPr
 
 	@Override
 	public SistemaProducao buscar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = getSession().createQuery(
+				"select t from SistemaProducao t where t.id=:id");
+		q.setParameter("id", id);
+		return (SistemaProducao) q.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<SistemaProducao> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = getSession().createQuery("select t from SistemaProducao t");
+		return q.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<SistemaProducao> buscarTodosPorStatus(Boolean b) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = getSession().createQuery(
+				"select t from SistemaProducao t where t.status is :aux");
+		q.setParameter("aux", b);
+		return q.list();
 	}
 
 }

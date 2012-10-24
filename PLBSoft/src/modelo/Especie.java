@@ -10,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table
-@Entity(name = "ESPECIE")
+@Table(name = "ESPECIE")
+@Entity
 public class Especie implements Serializable{
 
 	/**

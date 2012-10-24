@@ -125,6 +125,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 		tFiltro = new Text(grpTipoDeTanque, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvTipoTanque = new TableViewer(grpTipoDeTanque, SWT.BORDER
 				| SWT.FULL_SELECTION);
