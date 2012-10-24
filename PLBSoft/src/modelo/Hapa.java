@@ -35,8 +35,7 @@ public class Hapa implements Serializable {
 	private Boolean status;
 
 	@ManyToOne
-	@NotNull
-	private Passarela passarela;
+	private Passarela passarelaId;
 
 	public Long getId() {
 		return id;
@@ -70,12 +69,12 @@ public class Hapa implements Serializable {
 		this.status = status;
 	}
 
-	public Passarela getPassarela() {
-		return passarela;
+	public Passarela getPassarelaId() {
+		return passarelaId;
 	}
 
-	public void setPassarela(Passarela passarela) {
-		this.passarela = passarela;
+	public void setPassarelaId(Passarela passarela) {
+		this.passarelaId = passarela;
 	}
 
 	@Override

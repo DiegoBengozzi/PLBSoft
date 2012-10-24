@@ -1,6 +1,7 @@
 package GUI;
 
 import helper.CalendarioHelper;
+import helper.FormatoHelper;
 import modelo.Adubacao;
 import modelo.Tanque;
 
@@ -33,7 +34,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	private Table table;
 	private AdubacaoFiltro filtro;
 	private TableViewer tvAdubacao;
-	private AdubacaoService adubacaoService = new AdubacaoService();
+	private AdubacaoService adubacaoService;
 	private ComboViewer cvTanque;
 	private TanqueService tanqueService;
 	private TableViewerColumn tvcId, tvcDescricao, tvcTanque, tvcData;
@@ -63,11 +64,10 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
-
 		valorCombo = (IStructuredSelection) cvTanque.getSelection();
 		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
+//		entidade.setData(FormatoHelper.dataFormato().format());
 		entidade.setData(CalendarioHelper.retornaData());
-
 		adubacaoService.salvar(entidade);
 	}
 
@@ -84,6 +84,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 
 	@Override
 	public void limparDados() {
+		CalendarioHelper.limparData();
 		tDescricao.setText("");
 		comboTanque.deselectAll();
 		textData.setText("");
@@ -96,7 +97,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		comboTanque.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
 				entidade.getTanqueId()));
 		tDescricao.setText(entidade.getDescricao());
-		textData.setText(""+entidade.getData());
+		textData.setText(FormatoHelper.dataFormato.format(entidade.getData()));
+		CalendarioHelper.escreveData(entidade.getData());
 	}
 
 	@Override
@@ -107,6 +109,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	@Override
 	public void adicionarComponentes(Composite composite) {
 		filtro = new AdubacaoFiltro();
+		adubacaoService = new AdubacaoService();
 		tanqueService = new TanqueService();
 
 		composite.setLayout(new GridLayout(2, false));
@@ -220,7 +223,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tvcData.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Adubacao) element).getData().toString();
+				return FormatoHelper.dataFormato.format(((Adubacao) element).getData());
 			}
 		});
 		TableColumn tblclmnData = tvcData.getColumn();

@@ -1,6 +1,9 @@
 package service;
 
+import java.util.List;
+
 import modelo.SistemaProducao;
+import modelo.Tanque;
 import DAO.SistemaProducaoDAO;
 
 public class SistemaProducaoService {
@@ -9,5 +12,16 @@ public class SistemaProducaoService {
 
 	public void salvar(SistemaProducao entidade) {
 		dao.salvar(entidade);
+	}
+	public SistemaProducao buscar(Long id) {
+		return dao.buscar(id);
+	}
+
+	public List<SistemaProducao> buscarTodos() {
+		return dao.buscarTodos();
+	}
+	
+	public List<SistemaProducao> buscarTodosSistemaProducaoAtivo(){
+		return dao.buscarTodosPorStatus(true);
 	}
 }

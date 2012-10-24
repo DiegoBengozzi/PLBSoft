@@ -9,16 +9,15 @@
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">admin</property>
 		
+		<mapping class="modelo.Especie"/>
 		<mapping class="modelo.TipoTanque"/>
+		<mapping class="modelo.SistemaProducao"/>
 		<mapping class="modelo.Tanque"/>
 		<mapping class="modelo.TanqueRede"/>
-		<mapping class="modelo.Especie"/>
 		<mapping class="modelo.Adubacao"/>
 		<mapping class="modelo.Passarela"/>
-<!--  
 		<mapping class="modelo.Hapa"/>
-		<mapping class="modelo.SistemaProducao"/>
--->
+
  		
 	</session-factory>
 </hibernate-configuration>

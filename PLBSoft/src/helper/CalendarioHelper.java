@@ -12,13 +12,28 @@ public class CalendarioHelper {
 	private static DateTime calendarioSistema;
 
 	public static Calendar c = Calendar.getInstance();
-		
+
 	public static Date retornaData() {
-		if(c==null){
+		if (c == null) {
 			c = Calendar.getInstance();
-			c.set(getDateTime().getYear(), getDateTime().getMonth(), getDateTime().getDay());
+			c.set(getDateTime().getYear(), getDateTime().getMonth(),
+					getDateTime().getDay());
 		}
 		return c.getTime();
+	}
+
+	public static void escreveData(Date date) {
+		c = Calendar.getInstance();
+		c.setTime(date);
+/*
+ *		calendarioSistema.setCursor(setDateTime(calendarioSistema));
+ * 		Aqui deve ser atualizado a data no Calendario, o que eu naum sei como fazer HELP.
+ */
+	}
+	
+	public static void limparData(){
+		c = null;
+		retornaData();
 	}
 
 	public static DateTime getDateTime() {

@@ -1,6 +1,7 @@
 package GUI;
 
 import static helper.StatusHelper.*;
+import helper.CalendarioHelper;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -44,6 +45,7 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	public void voltar() {
 		dispose();
 		mensagemLimpar();
+		CalendarioHelper.limparData();
 	}
 
 	@Override
@@ -133,6 +135,7 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				voltar();
+				CalendarioHelper.limparData();
 			}
 		});
 		btnVoltar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,

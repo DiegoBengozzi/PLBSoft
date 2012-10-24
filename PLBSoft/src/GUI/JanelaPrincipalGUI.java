@@ -55,8 +55,7 @@ public class JanelaPrincipalGUI {
 	@SuppressWarnings("rawtypes")
 	public void carregarValores(TelaEdicaoGUI tela) {
 		scrolledComposite.setContent(tela);
-		scrolledComposite
-				.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		tela.carregar();
 	}
 
@@ -161,6 +160,16 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmPassarela.setText("Passarela");
+		
+		MenuItem mntmSistemaDeProduo = new MenuItem(menu_1, SWT.NONE);
+		mntmSistemaDeProduo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				SistemaProducaoGUI sistemaProducaoGUI = new SistemaProducaoGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(sistemaProducaoGUI);
+			}
+		});
+		mntmSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
@@ -274,8 +283,8 @@ public class JanelaPrincipalGUI {
 
 		Composite compositeStatus = new Composite(grpBarraDeStatus, SWT.BORDER);
 		GridData gd_compositeStatus = new GridData(SWT.FILL, SWT.FILL, true,
-				false, 2, 1);
-		gd_compositeStatus.heightHint = 25;
+				true, 2, 1);
+		gd_compositeStatus.heightHint = 39;
 		gd_compositeStatus.widthHint = 737;
 		compositeStatus.setLayoutData(gd_compositeStatus);
 		compositeStatus.setLayout(new GridLayout(1, false));
