@@ -3,7 +3,6 @@ package service;
 import java.util.List;
 
 import modelo.SistemaProducao;
-import modelo.Tanque;
 import DAO.SistemaProducaoDAO;
 
 public class SistemaProducaoService {
