@@ -17,6 +17,8 @@
 		<mapping class="modelo.Adubacao"/>
 		<mapping class="modelo.Passarela"/>
 		<mapping class="modelo.Hapa"/>
+		<mapping class="modelo.Safra"/>
+		
 
 	</session-factory>
 </hibernate-configuration>

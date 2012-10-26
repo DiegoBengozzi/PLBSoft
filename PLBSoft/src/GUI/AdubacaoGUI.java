@@ -97,7 +97,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		comboTanque.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
 				entidade.getTanqueId()));
 		tDescricao.setText(entidade.getDescricao());
-		textData.setText(FormatoHelper.dataFormato.format(entidade.getData()));
+		textData.setText(FormatoHelper.dataFormat.format(entidade.getData()));
 		CalendarioHelper.escreveData(entidade.getData());
 	}
 
@@ -223,7 +223,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tvcData.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.dataFormato.format(((Adubacao) element).getData());
+				return FormatoHelper.dataFormat.format(((Adubacao) element).getData());
 			}
 		});
 		TableColumn tblclmnData = tvcData.getColumn();

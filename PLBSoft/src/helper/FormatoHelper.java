@@ -15,6 +15,6 @@ public class FormatoHelper {
 		return decimalFormato;
 	}
 	
-	public static SimpleDateFormat dataFormato = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 }

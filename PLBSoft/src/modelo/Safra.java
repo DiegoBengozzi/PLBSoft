@@ -8,35 +8,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 
-@Table(name = "ADUBACAO")
+@Table(name="SAFRA")
 @Entity
-public class Adubacao implements Serializable {
+public class Safra implements Serializable {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -9093680731355126195L;
-
+	private static final long serialVersionUID = 400567784876812348L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
 	@Column
 	private String descricao;
 	
-	@Column 
-	private Date data;
-
+	@Column
+	private Date dataInicio;
+	
+	@Column
+	private Date dataFim;
+	
 	@Column
 	private Boolean status;
-	
-	@ManyToOne
-	private Tanque tanqueId;
-
 
 	public Long getId() {
 		return id;
@@ -54,30 +51,29 @@ public class Adubacao implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
 	}
 
 	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean satatus) {
-		this.status = satatus;
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
-	
-	public Tanque getTanqueId() {
-		return tanqueId;
-	}
-	
-	public void setTanqueId(Tanque tanqueId) {
-		this.tanqueId = tanqueId;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -95,7 +91,7 @@ public class Adubacao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Adubacao other = (Adubacao) obj;
+		Safra other = (Safra) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -103,6 +99,5 @@ public class Adubacao implements Serializable {
 			return false;
 		return true;
 	}
-
-
+	
 }

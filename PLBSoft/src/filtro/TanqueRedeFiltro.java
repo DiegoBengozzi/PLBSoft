@@ -19,7 +19,10 @@ public class TanqueRedeFiltro extends TabelaFiltro {
 			return true;
 		
 		if (FormatoHelper.getDecimalFormato().format(tanqueRede.getTamanho()).matches(filtro.toLowerCase()))
-			return true;	
+			return true;
+		
+		if (tanqueRede.getTanqueId().getNome().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
 			
 		return false;
 	}

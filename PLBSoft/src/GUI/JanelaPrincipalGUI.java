@@ -170,6 +170,26 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
+		
+		MenuItem mntmHapa = new MenuItem(menu_1, SWT.NONE);
+		mntmHapa.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				HapaGUI hapaGUI = new HapaGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(hapaGUI);
+			}
+		});
+		mntmHapa.setText("Hapa");
+		
+		MenuItem mntmSafra = new MenuItem(menu_1, SWT.NONE);
+		mntmSafra.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				SafraGUI safraGUI = new SafraGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(safraGUI);
+			}
+		});
+		mntmSafra.setText("Safra");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");

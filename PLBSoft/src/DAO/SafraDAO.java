@@ -1,18 +1,15 @@
 package DAO;
 
 import java.util.List;
-
-import modelo.Hapa;
-
+import modelo.Safra;
 import org.hibernate.Query;
-
-import utils.HapaUtils;
+import utils.SafraUtils;
 import conexao.HibernateConnection;
 
-public class HapaDAO extends HibernateConnection implements HapaUtils{
+public class SafraDAO extends HibernateConnection implements SafraUtils {
 
 	@Override
-	public void salvar(Hapa entidade) {
+	public void salvar(Safra entidade) {
 		if (entidade.getId() != null)
 			merge(entidade);
 		else
@@ -20,25 +17,25 @@ public class HapaDAO extends HibernateConnection implements HapaUtils{
 	}
 
 	@Override
-	public Hapa buscar(Long id) {
+	public Safra buscar(Long id) {
 		Query q = getSession().createQuery(
-				"select t from Hapa t where t.id=:id");
+				"select t from Safra t where t.id=:id");
 		q.setParameter("id", id);
-		return (Hapa) q.uniqueResult();
+		return (Safra) q.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Hapa> buscarTodos() {
-		Query q = getSession().createQuery("select t from Hapa t");
+	public List<Safra> buscarTodos() {
+		Query q = getSession().createQuery("select t from Safra t");
 		return q.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Hapa> buscarTodosPorStatus(Boolean b) {
+	public List<Safra> buscarTodosPorStatus(Boolean b) {
 		Query q = getSession().createQuery(
-				"select t from Hapa t where t.status is :aux");
+				"select t from Safra t where t.status is :aux");
 		q.setParameter("aux", b);
 		return q.list();
 	}
