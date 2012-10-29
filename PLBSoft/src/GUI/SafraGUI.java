@@ -57,7 +57,7 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		if (entidade == null)
 			entidade = new Safra();
 
-		entidade.setDataInicio(CalendarioHelper.retornaData());
+		entidade.setDataInicio(FormatoHelper.dataFormat.parse(tInicioSafra.getText()));
 		entidade.setDataFim(FormatoHelper.dataFormat.parse(tFimSafra.getText()));
 		entidade.setDescricao(tDescricao.getText());
 		entidade.setStatus(true);
@@ -85,6 +85,7 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tFimSafra.setText("");
 		tDescricao.setText("");
 		CalendarioHelper.limparData();
+		tInicioSafra.setText(FormatoHelper.dataFormat.format(CalendarioHelper.retornaData()));
 		entidade = null;
 	}
 

@@ -55,7 +55,8 @@ public class JanelaPrincipalGUI {
 	@SuppressWarnings("rawtypes")
 	public void carregarValores(TelaEdicaoGUI tela) {
 		scrolledComposite.setContent(tela);
-		scrolledComposite.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		scrolledComposite
+				.setMinSize(tela.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		tela.carregar();
 	}
 
@@ -160,17 +161,18 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmPassarela.setText("Passarela");
-		
+
 		MenuItem mntmSistemaDeProduo = new MenuItem(menu_1, SWT.NONE);
 		mntmSistemaDeProduo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				SistemaProducaoGUI sistemaProducaoGUI = new SistemaProducaoGUI(scrolledComposite, SWT.BORDER);
+				SistemaProducaoGUI sistemaProducaoGUI = new SistemaProducaoGUI(
+						scrolledComposite, SWT.BORDER);
 				carregarValores(sistemaProducaoGUI);
 			}
 		});
 		mntmSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
-		
+
 		MenuItem mntmHapa = new MenuItem(menu_1, SWT.NONE);
 		mntmHapa.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -180,7 +182,7 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmHapa.setText("Hapa");
-		
+
 		MenuItem mntmSafra = new MenuItem(menu_1, SWT.NONE);
 		mntmSafra.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -190,6 +192,16 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmSafra.setText("Safra");
+
+		MenuItem mntmLote = new MenuItem(menu_1, SWT.NONE);
+		mntmLote.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				LoteGUI loteGUI = new LoteGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(loteGUI);
+			}
+		});
+		mntmLote.setText("Lote");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");
@@ -222,8 +234,11 @@ public class JanelaPrincipalGUI {
 		grpCalendrio.setText("Calend\u00E1rio");
 		grpCalendrio.setLayout(new GridLayout(1, false));
 
-		CalendarioHelper.setDateTime(new DateTime(grpCalendrio, SWT.BORDER | SWT.DROP_DOWN));
-		//CalendarioHelper.c.set(CalendarioHelper.getDateTime().getYear(), CalendarioHelper.getDateTime().getMonth(), CalendarioHelper.getDateTime().getDay());
+		CalendarioHelper.setDateTime(new DateTime(grpCalendrio, SWT.BORDER
+				| SWT.DROP_DOWN));
+		// CalendarioHelper.c.set(CalendarioHelper.getDateTime().getYear(),
+		// CalendarioHelper.getDateTime().getMonth(),
+		// CalendarioHelper.getDateTime().getDay());
 		// CalendarioHelper.setInicioCalendario(new DateTime(grpCalendrio,
 		// SWT.BORDER
 		// | SWT.DROP_DOWN));
@@ -243,7 +258,7 @@ public class JanelaPrincipalGUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				mensagemInfo(""+CalendarioHelper.c.getTime());
+				mensagemInfo("" + CalendarioHelper.c.getTime());
 			}
 		});
 		btTest.setText("Test");
@@ -282,6 +297,43 @@ public class JanelaPrincipalGUI {
 		btnLimpar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
 				1, 1));
 		btnLimpar.setText("Limpar");
+
+		Button btnLote = new Button(groupMenuRapido, SWT.NONE);
+		btnLote.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				LoteGUI loteGUI = new LoteGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(loteGUI);
+			}
+		});
+		btnLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+				1));
+		btnLote.setText("Lote");
+
+		Button btnTanque = new Button(groupMenuRapido, SWT.NONE);
+		btnTanque.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TanqueGUI tanqueGUI = new TanqueGUI(scrolledComposite,
+						SWT.BORDER);
+				carregarValores(tanqueGUI);
+			}
+		});
+		btnTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
+				1, 1));
+		btnTanque.setText("Tanque");
+
+		Button btnManejoDeLote = new Button(groupMenuRapido, SWT.NONE);
+		btnManejoDeLote.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ManejoLoteGUI manejoLoteGUI = new ManejoLoteGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(manejoLoteGUI);
+			}
+		});
+		btnManejoDeLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 1, 1));
+		btnManejoDeLote.setText("Manejo de Lote");
 
 		scrolledComposite = new ScrolledComposite(shellPlbsoft, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
