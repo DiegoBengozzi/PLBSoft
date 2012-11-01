@@ -1,10 +1,13 @@
 package GUI;
 
+import java.math.BigDecimal;
+
 import helper.CalendarioHelper;
 import helper.FormatoHelper;
 import modelo.Especie;
 import modelo.Lote;
 import modelo.Safra;
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -16,6 +19,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
@@ -23,11 +27,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+
 import service.EspecieService;
 import service.LoteService;
 import service.SafraService;
 import filtro.LoteFiltro;
-import org.eclipse.swt.widgets.Button;
 
 public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private Text tDataInicio;
@@ -39,15 +43,19 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private Text tFiltro;
 	private ComboViewer cvSafra, cvEspecie;
 	private Combo comboEspecie, comboSafra;
-	private TableViewer tvLote;
-	private TableViewerColumn tvcFiltroId, tvcFiltroSafra, tvcFiltroNome, tvcFiltroInicio, tvcFiltroFinal,
-			tvcFiltroQuantidade, tvcFiltroEspecie, tvcFiltroDescricao;
+	private TableViewer tvLote, tvOrigemLote;
+	private TableViewerColumn tvcFiltroId, tvcFiltroSafra, tvcFiltroNome,
+			tvcFiltroInicio, tvcFiltroFinal, tvcFiltroQuantidade,
+			tvcFiltroEspecie, tvcFiltroDescricao, tvcOrigemId, tvcOrigemSafra,
+			tvcOrigemNome, tvcOrigemInicio, tvcOrigemFinal,
+			tvcOrigemQuantidade, tvcOrigemEspecie, tvcOrigemDescricao;
 	private LoteService loteService;
 	private SafraService safraService;
 	private EspecieService especieService;
 	private LoteFiltro filtro;
 	private IStructuredSelection valorComboSafra, valorComboEspecie;
 	private Table tableOrigemLote;
+	private Button btnDividirLotes , btnAdicionarLotes;
 
 	public LoteGUI(Composite parent, int style) {
 		super(parent, style);
@@ -76,9 +84,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				.getText().trim()));
 
 		entidade.setDataFimLote(FormatoHelper.dataFormat.parse(tDataFim
-					.getText().trim()));
-		
-		entidade.setQuantidadePeixe(new Long(tQuantidade.getText().trim()));
+				.getText().trim()));
+
+		entidade.setQuantidadePeixe(new BigDecimal(tQuantidade.getText().trim().replaceAll(",", ".")));
 		valorComboEspecie = (IStructuredSelection) cvEspecie.getSelection();
 		entidade.setEspecieId((Especie) valorComboEspecie.getFirstElement());
 		entidade.setDescricao(tDescricao.getText().trim());
@@ -220,61 +228,125 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tDescricao = new Text(grpLote, SWT.BORDER);
 		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		
+
 		Group grpOrigemDoLote = new Group(grpLote, SWT.NONE);
 		grpOrigemDoLote.setText("Origem do Lote");
 		grpOrigemDoLote.setLayout(new GridLayout(2, false));
-		grpOrigemDoLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		
-		TableViewer tableViewer = new TableViewer(grpOrigemDoLote, SWT.BORDER | SWT.FULL_SELECTION);
-		tableOrigemLote = tableViewer.getTable();
-		tableOrigemLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		grpOrigemDoLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 2, 1));
+
+		tvOrigemLote = new TableViewer(grpOrigemDoLote, SWT.BORDER
+				| SWT.FULL_SELECTION);
+		tvOrigemLote.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent arg0) {
+			}
+		});
+		tableOrigemLote = tvOrigemLote.getTable();
+		tableOrigemLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 1, 2));
 		tableOrigemLote.setLinesVisible(true);
 		tableOrigemLote.setHeaderVisible(true);
-		
-		TableViewerColumn tvcOrigemId = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn = tvcOrigemId.getColumn();
-		tableColumn.setWidth(40);
-		tableColumn.setText("Id");
-		
-		TableViewerColumn tvcOrigemSafra = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_1 = tvcOrigemSafra.getColumn();
-		tableColumn_1.setWidth(60);
-		tableColumn_1.setText("Safra");
-		
-		TableViewerColumn tvcOrigemNome = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_2 = tvcOrigemNome.getColumn();
-		tableColumn_2.setWidth(80);
-		tableColumn_2.setText("Nome");
-		
-		TableViewerColumn tvcOrigemInicio = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_3 = tvcOrigemInicio.getColumn();
-		tableColumn_3.setWidth(80);
-		tableColumn_3.setText("Inicio");
-		
-		TableViewerColumn tvcOrigemFinal = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_4 = tvcOrigemFinal.getColumn();
-		tableColumn_4.setWidth(80);
-		tableColumn_4.setText("Final");
-		
-		TableViewerColumn tvcOrigemQuantidade = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_5 = tvcOrigemQuantidade.getColumn();
-		tableColumn_5.setWidth(80);
-		tableColumn_5.setText("Quantidade");
-		
-		TableViewerColumn tvcOrigemEspecie = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_6 = tvcOrigemEspecie.getColumn();
-		tableColumn_6.setWidth(80);
-		tableColumn_6.setText("Especie");
-		
-		TableViewerColumn tvcOrigemDescricao = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tableColumn_7 = tvcOrigemDescricao.getColumn();
-		tableColumn_7.setWidth(117);
-		tableColumn_7.setText("Descri\u00E7\u00E3o");
-		
-		Button btnAdicionar = new Button(grpOrigemDoLote, SWT.NONE);
-		btnAdicionar.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, false, 1, 1));
-		btnAdicionar.setText("+");
+
+		tvcOrigemId = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemId.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Lote) element).getId().toString();
+			}
+		});
+		TableColumn tvctextextId = tvcOrigemId.getColumn();
+		tvctextextId.setWidth(40);
+		tvctextextId.setText("Id");
+
+		tvcOrigemSafra = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemSafra.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.dataFormat.format(((Lote) element)
+						.getSafraId().getDataInicio());
+			}
+		});
+		TableColumn tvcTextSafra = tvcOrigemSafra.getColumn();
+		tvcTextSafra.setWidth(60);
+		tvcTextSafra.setText("Safra");
+
+		tvcOrigemNome = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemNome.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Lote) element).getNome();
+			}
+		});
+		TableColumn tvcTextNome = tvcOrigemNome.getColumn();
+		tvcTextNome.setWidth(80);
+		tvcTextNome.setText("Nome");
+
+		tvcOrigemInicio = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemInicio.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.dataFormat.format(((Lote) element)
+						.getDataInicioLote());
+			}
+		});
+		TableColumn tvcTextInicio = tvcOrigemInicio.getColumn();
+		tvcTextInicio.setWidth(80);
+		tvcTextInicio.setText("Inicio");
+
+		tvcOrigemFinal = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemFinal.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.dataFormat.format(((Lote) element)
+						.getDataFimLote());
+			}
+		});
+		TableColumn tvcTextFinal = tvcOrigemFinal.getColumn();
+		tvcTextFinal.setWidth(80);
+		tvcTextFinal.setText("Final");
+
+		tvcOrigemQuantidade = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemQuantidade.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Lote) element).getQuantidadePeixe().toString();
+			}
+		});
+		TableColumn tvcTextQuantidade = tvcOrigemQuantidade.getColumn();
+		tvcTextQuantidade.setWidth(80);
+		tvcTextQuantidade.setText("Quantidade");
+
+		tvcOrigemEspecie = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemEspecie.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Lote) element).getEspecieId().getEspecie();
+			}
+		});
+		TableColumn tvcTextEspecie = tvcOrigemEspecie.getColumn();
+		tvcTextEspecie.setWidth(80);
+		tvcTextEspecie.setText("Especie");
+
+		tvcOrigemDescricao = new TableViewerColumn(tvOrigemLote, SWT.NONE);
+		tvcOrigemDescricao.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Lote) element).getDescricao();
+			}
+		});
+		TableColumn tvcTextDescricao = tvcOrigemDescricao.getColumn();
+		tvcTextDescricao.setWidth(117);
+		tvcTextDescricao.setText("Descri\u00E7\u00E3o");
+
+		btnAdicionarLotes = new Button(grpOrigemDoLote, SWT.NONE);
+		btnAdicionarLotes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+				true, 1, 1));
+		btnAdicionarLotes.setText("Unir Lotes");
+
+		btnDividirLotes = new Button(grpOrigemDoLote, SWT.NONE);
+		btnDividirLotes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+				true, 1, 1));
+		btnDividirLotes.setText("Dividir Lotes");
 
 		Label lblFiltro = new Label(grpLote, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -325,9 +397,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 			}
 		});
-		TableColumn tblclmnNewColumn = tvcFiltroSafra.getColumn();
-		tblclmnNewColumn.setWidth(60);
-		tblclmnNewColumn.setText("Safra");
+		TableColumn tblclmnSafra = tvcFiltroSafra.getColumn();
+		tblclmnSafra.setWidth(60);
+		tblclmnSafra.setText("Safra");
 
 		tvcFiltroNome = new TableViewerColumn(tvLote, SWT.NONE);
 		tvcFiltroNome.setLabelProvider(new ColumnLabelProvider() {

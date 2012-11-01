@@ -1,5 +1,6 @@
 package filtro;
 
+import helper.FormatoHelper;
 import modelo.Lote;
 
 import org.eclipse.jface.viewers.Viewer;
@@ -13,8 +14,17 @@ public class LoteFiltro extends TabelaFiltro {
 			return true;
 
 		Lote lote = (Lote) element;
+		
 		if (lote.getId().toString().toLowerCase().matches(filtro.toLowerCase()))
 			return true;
+		
+		if (lote.getNome().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+
+		if (FormatoHelper.getDecimalFormato().format(lote.getQuantidadePeixe())
+				.matches(filtro.toLowerCase()))
+			return true;
+
 
 		return false;
 	}

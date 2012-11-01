@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +49,7 @@ public class Lote implements Serializable {
 	private String descricao;
 	
 	@Column
-	private Long quantidadePeixe;
+	private BigDecimal quantidadePeixe;
 	
 	@ManyToOne
 	private Safra safraId;
@@ -118,11 +119,11 @@ public class Lote implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Long getQuantidadePeixe() {
+	public BigDecimal getQuantidadePeixe() {
 		return quantidadePeixe;
 	}
 
-	public void setQuantidadePeixe(Long quantidadePeixe) {
+	public void setQuantidadePeixe(BigDecimal quantidadePeixe) {
 		this.quantidadePeixe = quantidadePeixe;
 	}
 
