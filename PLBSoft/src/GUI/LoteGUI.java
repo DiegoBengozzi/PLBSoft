@@ -27,6 +27,7 @@ import service.EspecieService;
 import service.LoteService;
 import service.SafraService;
 import filtro.LoteFiltro;
+import org.eclipse.swt.widgets.Button;
 
 public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private Text tDataInicio;
@@ -39,13 +40,14 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private ComboViewer cvSafra, cvEspecie;
 	private Combo comboEspecie, comboSafra;
 	private TableViewer tvLote;
-	private TableViewerColumn tvcId, tvcSafra, tvcNome, tvcInicio, tvcFinal,
-			tvcQuantidade, tvcEspecie, tvcDescricao;
+	private TableViewerColumn tvcFiltroId, tvcFiltroSafra, tvcFiltroNome, tvcFiltroInicio, tvcFiltroFinal,
+			tvcFiltroQuantidade, tvcFiltroEspecie, tvcFiltroDescricao;
 	private LoteService loteService;
 	private SafraService safraService;
 	private EspecieService especieService;
 	private LoteFiltro filtro;
 	private IStructuredSelection valorComboSafra, valorComboEspecie;
+	private Table tableOrigemLote;
 
 	public LoteGUI(Composite parent, int style) {
 		super(parent, style);
@@ -218,6 +220,61 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tDescricao = new Text(grpLote, SWT.BORDER);
 		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
+		
+		Group grpOrigemDoLote = new Group(grpLote, SWT.NONE);
+		grpOrigemDoLote.setText("Origem do Lote");
+		grpOrigemDoLote.setLayout(new GridLayout(2, false));
+		grpOrigemDoLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		
+		TableViewer tableViewer = new TableViewer(grpOrigemDoLote, SWT.BORDER | SWT.FULL_SELECTION);
+		tableOrigemLote = tableViewer.getTable();
+		tableOrigemLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tableOrigemLote.setLinesVisible(true);
+		tableOrigemLote.setHeaderVisible(true);
+		
+		TableViewerColumn tvcOrigemId = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn = tvcOrigemId.getColumn();
+		tableColumn.setWidth(40);
+		tableColumn.setText("Id");
+		
+		TableViewerColumn tvcOrigemSafra = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_1 = tvcOrigemSafra.getColumn();
+		tableColumn_1.setWidth(60);
+		tableColumn_1.setText("Safra");
+		
+		TableViewerColumn tvcOrigemNome = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_2 = tvcOrigemNome.getColumn();
+		tableColumn_2.setWidth(80);
+		tableColumn_2.setText("Nome");
+		
+		TableViewerColumn tvcOrigemInicio = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_3 = tvcOrigemInicio.getColumn();
+		tableColumn_3.setWidth(80);
+		tableColumn_3.setText("Inicio");
+		
+		TableViewerColumn tvcOrigemFinal = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_4 = tvcOrigemFinal.getColumn();
+		tableColumn_4.setWidth(80);
+		tableColumn_4.setText("Final");
+		
+		TableViewerColumn tvcOrigemQuantidade = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_5 = tvcOrigemQuantidade.getColumn();
+		tableColumn_5.setWidth(80);
+		tableColumn_5.setText("Quantidade");
+		
+		TableViewerColumn tvcOrigemEspecie = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_6 = tvcOrigemEspecie.getColumn();
+		tableColumn_6.setWidth(80);
+		tableColumn_6.setText("Especie");
+		
+		TableViewerColumn tvcOrigemDescricao = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tableColumn_7 = tvcOrigemDescricao.getColumn();
+		tableColumn_7.setWidth(117);
+		tableColumn_7.setText("Descri\u00E7\u00E3o");
+		
+		Button btnAdicionar = new Button(grpOrigemDoLote, SWT.NONE);
+		btnAdicionar.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, false, 1, 1));
+		btnAdicionar.setText("+");
 
 		Label lblFiltro = new Label(grpLote, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -248,19 +305,19 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvLote.addFilter(filtro);
 		tvLote.setContentProvider(ArrayContentProvider.getInstance());
 
-		tvcId = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcId.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroId = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return ((Lote) element).getId().toString();
 			}
 		});
-		TableColumn tblclmnId = tvcId.getColumn();
+		TableColumn tblclmnId = tvcFiltroId.getColumn();
 		tblclmnId.setWidth(40);
 		tblclmnId.setText("Id");
 
-		tvcSafra = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcSafra.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroSafra = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroSafra.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return FormatoHelper.dataFormat.format(((Lote) element)
@@ -268,76 +325,76 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 			}
 		});
-		TableColumn tblclmnNewColumn = tvcSafra.getColumn();
+		TableColumn tblclmnNewColumn = tvcFiltroSafra.getColumn();
 		tblclmnNewColumn.setWidth(60);
 		tblclmnNewColumn.setText("Safra");
 
-		tvcNome = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcNome.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroNome = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroNome.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return ((Lote) element).getNome();
 			}
 		});
-		TableColumn tblclmnNome = tvcNome.getColumn();
+		TableColumn tblclmnNome = tvcFiltroNome.getColumn();
 		tblclmnNome.setWidth(80);
 		tblclmnNome.setText("Nome");
 
-		tvcInicio = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcInicio.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroInicio = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroInicio.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return FormatoHelper.dataFormat.format(((Lote) element)
 						.getDataInicioLote());
 			}
 		});
-		TableColumn tblclmnInicio = tvcInicio.getColumn();
+		TableColumn tblclmnInicio = tvcFiltroInicio.getColumn();
 		tblclmnInicio.setWidth(80);
 		tblclmnInicio.setText("Inicio");
 
-		tvcFinal = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcFinal.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroFinal = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroFinal.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return FormatoHelper.dataFormat.format(((Lote) element)
 						.getDataFimLote());
 			}
 		});
-		TableColumn tblclmnFinal = tvcFinal.getColumn();
+		TableColumn tblclmnFinal = tvcFiltroFinal.getColumn();
 		tblclmnFinal.setWidth(80);
 		tblclmnFinal.setText("Final");
 
-		tvcQuantidade = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcQuantidade.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroQuantidade = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroQuantidade.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return ((Lote) element).getQuantidadePeixe().toString();
 			}
 		});
-		TableColumn tblclmnQuantidade = tvcQuantidade.getColumn();
+		TableColumn tblclmnQuantidade = tvcFiltroQuantidade.getColumn();
 		tblclmnQuantidade.setWidth(80);
 		tblclmnQuantidade.setText("Quantidade");
 
-		tvcEspecie = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcEspecie.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroEspecie = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroEspecie.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return ((Lote) element).getEspecieId().getEspecie();
 			}
 		});
-		TableColumn tblclmnEspecie = tvcEspecie.getColumn();
+		TableColumn tblclmnEspecie = tvcFiltroEspecie.getColumn();
 		tblclmnEspecie.setWidth(80);
 		tblclmnEspecie.setText("Especie");
 
-		tvcDescricao = new TableViewerColumn(tvLote, SWT.NONE);
-		tvcDescricao.setLabelProvider(new ColumnLabelProvider() {
+		tvcFiltroDescricao = new TableViewerColumn(tvLote, SWT.NONE);
+		tvcFiltroDescricao.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				return ((Lote) element).getDescricao();
 			}
 		});
-		TableColumn tblclmnDescrio = tvcDescricao.getColumn();
-		tblclmnDescrio.setWidth(200);
+		TableColumn tblclmnDescrio = tvcFiltroDescricao.getColumn();
+		tblclmnDescrio.setWidth(151);
 		tblclmnDescrio.setText("Descri\u00E7\u00E3o");
 
 	}
