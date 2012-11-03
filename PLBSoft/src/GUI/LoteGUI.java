@@ -120,6 +120,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tQuantidade.setText("");
 		comboEspecie.deselectAll();
 		tDescricao.setText("");
+		tFiltro.setText("");
 		entidade = null;
 	}
 

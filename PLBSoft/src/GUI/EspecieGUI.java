@@ -8,6 +8,9 @@ import modelo.Especie;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -59,12 +62,13 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 	public void salvar() {
 		if (entidade == null)
 			entidade = new Especie();
-		
+
 		entidade.setEspecie(tEspecie.getText().trim());
 		entidade.setGenero(tGenero.getText().trim());
 		entidade.setHibrido(tHibrido.getText().trim());
 		entidade.setLinhegem(tLinhagem.getText().trim());
-		entidade.setMaturacaoSexual(new BigDecimal(tMaturacaoSexual.getText().trim().replaceAll(",", ".")));
+		entidade.setMaturacaoSexual(new BigDecimal(tMaturacaoSexual.getText()
+				.trim().replaceAll(",", ".")));
 		entidade.setStatus(true);
 		entidade.setToleranciaFrio(getValorFrio().trim());
 		entidade.setToleranciaSalinidade(getValorSalinidade());
@@ -76,7 +80,6 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 
 	}
 
-
 	@Override
 	public void limparDados() {
 		tEspecie.setText("");
@@ -86,9 +89,10 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		tMaturacaoSexual.setText("");
 		setValorFrio("");
 		setValorSalinidade("");
+		tFiltro.setText("");
 		entidade = null;
 	}
-	
+
 	@Override
 	public void carregar() {
 		tvEspecie.setInput(especieService.buscarTodosEspecieAtivo());
@@ -101,16 +105,17 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		tGenero.setText(entidade.getGenero());
 		tHibrido.setText(entidade.getHibrido());
 		tLinhagem.setText(entidade.getLinhegem());
-		tMaturacaoSexual.setText(FormatoHelper.getDecimalFormato().format(entidade.getMaturacaoSexual()));
+		tMaturacaoSexual.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getMaturacaoSexual()));
 		setValorFrio(entidade.getToleranciaFrio());
 		setValorSalinidade(entidade.getToleranciaSalinidade());
 	}
 
 	@Override
-	public boolean isEntidadeNula(){
-		return entidade==null;
+	public boolean isEntidadeNula() {
+		return entidade == null;
 	}
-	
+
 	private void setValorFrio(String radio) {
 		if (radio.equalsIgnoreCase("ALTO")) {
 			rbAltoFrio.setSelection(true);
@@ -128,13 +133,13 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 	private String getValorFrio() {
 		if (rbAltoFrio.getSelection()) {
 			return "ALTO";
-		} else if (rbMedioFrio.getSelection()){
+		} else if (rbMedioFrio.getSelection()) {
 			return "MEDIO";
 		} else {
 			return "BAIXO";
 		}
 	}
-	
+
 	private void setValorSalinidade(String radio) {
 		if (radio.equalsIgnoreCase("ALTO")) {
 			rbAltoSalidade.setSelection(true);
@@ -206,7 +211,8 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		lblMaturaoSexual.setText("Matura\u00E7\u00E3o Sexual:");
 
 		tMaturacaoSexual = new Text(grpEspcie, SWT.BORDER);
-		tMaturacaoSexual.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 5, 1));
+		tMaturacaoSexual.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 5, 1));
 
 		Group groupSalinidade = new Group(grpEspcie, SWT.NONE);
 		groupSalinidade.setText("Tolerancia a Salinidade");
@@ -244,14 +250,27 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpEspcie, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6, 1));
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6,
+				1));
 		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvEspecie = new TableViewer(grpEspcie, SWT.BORDER | SWT.FULL_SELECTION);
+		tvEspecie.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent arg0) {
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvEspecie
+						.getSelection();
+				if (itemSelecao.isEmpty())
+					return;
+				limparDados();
+				entidade = (Especie) itemSelecao.getFirstElement();
+				carregarComponentes();
+			}
+		});
 		table = tvEspecie.getTable();
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 7, 1));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
+		
 		tvEspecie.addFilter(filtro);
 		tvEspecie.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -323,10 +342,10 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		tblclmnMaturacaoSexual.setText("Matura\u00E7\u00E3o Sexual");
 
 		tvcSalinidade = new TableViewerColumn(tvEspecie, SWT.NONE);
-		tvcSalinidade.setLabelProvider(new ColumnLabelProvider(){
+		tvcSalinidade.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Especie)element).getToleranciaSalinidade();
+				return ((Especie) element).getToleranciaSalinidade();
 			}
 		});
 		TableColumn tblclmnToleranciaASalinidade = tvcSalinidade.getColumn();
@@ -334,10 +353,10 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		tblclmnToleranciaASalinidade.setText("Tolerancia a Salinidade");
 
 		tvcFrio = new TableViewerColumn(tvEspecie, SWT.NONE);
-		tvcFrio.setLabelProvider(new ColumnLabelProvider(){
+		tvcFrio.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Especie)element).getToleranciaFrio();
+				return ((Especie) element).getToleranciaFrio();
 			}
 		});
 		TableColumn tblclmnToleranciaAFrio = tvcFrio.getColumn();

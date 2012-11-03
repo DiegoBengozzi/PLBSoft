@@ -95,6 +95,7 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 		tNome.setText("");
 		tTamanho.setText("");
 		comboPassarela.deselectAll();
+		tFiltro.setText("");
 		entidade = null;
 
 	}

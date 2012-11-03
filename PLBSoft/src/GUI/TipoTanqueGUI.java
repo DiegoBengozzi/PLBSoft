@@ -76,6 +76,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 	public void limparDados() {
 		tNome.setText("");
 		tRevestimento.setText("");
+		tFiltro.setText("");
 		entidade = null;
 	}
 

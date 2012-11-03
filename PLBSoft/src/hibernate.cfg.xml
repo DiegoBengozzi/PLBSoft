@@ -20,6 +20,8 @@
 		<mapping class="modelo.Hapa"/>
 		<mapping class="modelo.Safra"/>
 		<mapping class="modelo.Lote"/>
+		<mapping class="modelo.Doenca"/>
+		<mapping class="modelo.RegistroDoenca"/>
 		
 
 	</session-factory>

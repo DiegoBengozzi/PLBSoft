@@ -84,6 +84,7 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		tCapacidadeSuporte.setText("");
 		tBiomassaCritica.setText("");
 		tBiomassaEconomica.setText("");
+		tFiltro.setText("");
 		entidade=null;
 		
 

@@ -66,7 +66,7 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		entidade.setStatus(true);
 		valorCombo = (IStructuredSelection) cvTanque.getSelection();
 		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
-//		entidade.setData(FormatoHelper.dataFormato().format());
+		// entidade.setData(FormatoHelper.dataFormato().format());
 		entidade.setData(CalendarioHelper.retornaData());
 		adubacaoService.salvar(entidade);
 	}
@@ -88,12 +88,13 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tDescricao.setText("");
 		comboTanque.deselectAll();
 		textData.setText("");
+		tFiltro.setText("");
 		entidade = null;
 	}
 
 	@Override
 	public void carregarComponentes() {
-		
+
 		comboTanque.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
 				entidade.getTanqueId()));
 		tDescricao.setText(entidade.getDescricao());
@@ -141,7 +142,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 				.setText("Descri\u00E7\u00E3o \r\n      da \r\naduba\u00E7\u00E3o:");
 
 		tDescricao = new Text(grpAdubao, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
+				1, 1));
 		/**
 		 * calendario!!
 		 * 
@@ -223,7 +225,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		tvcData.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.dataFormat.format(((Adubacao) element).getData());
+				return FormatoHelper.dataFormat.format(((Adubacao) element)
+						.getData());
 			}
 		});
 		TableColumn tblclmnData = tvcData.getColumn();

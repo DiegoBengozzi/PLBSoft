@@ -108,6 +108,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tDescricao.setText("");
 		comboTipoTanque.deselectAll();
 		comboSistemaProducao.deselectAll();
+		tFiltro.setText("");
 		entidade = null;
 	}
 

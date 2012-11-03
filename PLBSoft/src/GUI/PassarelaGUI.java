@@ -85,6 +85,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	public void limparDados() {
 		tNome.setText("");
 		tCapacidade.setText("");
+		tFiltro.setText("");
 		entidade = null;
 	}
 

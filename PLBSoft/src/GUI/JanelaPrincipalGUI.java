@@ -202,6 +202,26 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmLote.setText("Lote");
+		
+		MenuItem mntmDoenca = new MenuItem(menu_1, SWT.NONE);
+		mntmDoenca.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				DoencaGUI doencaGUI = new DoencaGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(doencaGUI);
+			}
+		});
+		mntmDoenca.setText("Doen\u00E7a");
+		
+		MenuItem mntmRegistrarDoenca = new MenuItem(menu_1, SWT.NONE);
+		mntmRegistrarDoenca.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				RegistroDoencaGUI registroDoencaGUI = new RegistroDoencaGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(registroDoencaGUI);
+			}
+		});
+		mntmRegistrarDoenca.setText("Registrar Doen\u00E7a");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");

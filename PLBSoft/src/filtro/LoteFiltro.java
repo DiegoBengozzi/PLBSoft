@@ -14,17 +14,35 @@ public class LoteFiltro extends TabelaFiltro {
 			return true;
 
 		Lote lote = (Lote) element;
-		
+
 		if (lote.getId().toString().toLowerCase().matches(filtro.toLowerCase()))
 			return true;
-		
+
 		if (lote.getNome().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+
+		if (lote.getDescricao().toLowerCase().matches(filtro.toLowerCase()))
 			return true;
 
 		if (FormatoHelper.getDecimalFormato().format(lote.getQuantidadePeixe())
 				.matches(filtro.toLowerCase()))
 			return true;
 
+		if (FormatoHelper.dataFormat.format(lote.getDataInicioLote())
+				.toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+
+		if (FormatoHelper.dataFormat.format(lote.getDataFimLote())
+				.toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+
+//		if (FormatoHelper.dataFormat.format(lote.getSafraId()).toLowerCase()
+//				.matches(filtro.toLowerCase()))
+//			return true;
+
+		if (lote.getEspecieId().getEspecie().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
 
 		return false;
 	}

@@ -57,7 +57,8 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		if (entidade == null)
 			entidade = new Safra();
 
-		entidade.setDataInicio(FormatoHelper.dataFormat.parse(tInicioSafra.getText()));
+		entidade.setDataInicio(FormatoHelper.dataFormat.parse(tInicioSafra
+				.getText()));
 		entidade.setDataFim(FormatoHelper.dataFormat.parse(tFimSafra.getText()));
 		entidade.setDescricao(tDescricao.getText());
 		entidade.setStatus(true);
@@ -75,7 +76,8 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 	public void carregar() {
 		tvSafra.setInput(safraService.buscarTodosSafraAtivo());
 		tvSafra.refresh();
-		tInicioSafra.setText(FormatoHelper.dataFormat.format(CalendarioHelper.retornaData()));
+		tInicioSafra.setText(FormatoHelper.dataFormat.format(CalendarioHelper
+				.retornaData()));
 
 	}
 
@@ -85,7 +87,9 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tFimSafra.setText("");
 		tDescricao.setText("");
 		CalendarioHelper.limparData();
-		tInicioSafra.setText(FormatoHelper.dataFormat.format(CalendarioHelper.retornaData()));
+		tInicioSafra.setText(FormatoHelper.dataFormat.format(CalendarioHelper
+				.retornaData()));
+		tFiltro.setText("");
 		entidade = null;
 	}
 
@@ -93,8 +97,8 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 	public void carregarComponentes() {
 		tInicioSafra.setText(FormatoHelper.dataFormat.format(entidade
 				.getDataInicio()));
-		tFimSafra.setText(FormatoHelper.dataFormat.format(entidade
-				.getDataFim()));
+		tFimSafra
+				.setText(FormatoHelper.dataFormat.format(entidade.getDataFim()));
 		tDescricao.setText(entidade.getDescricao());
 
 	}
@@ -108,7 +112,7 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 	public void adicionarComponentes(Composite composite) {
 		safraService = new SafraService();
 		filtro = new SafraFiltro();
-		
+
 		composite.setLayout(new GridLayout(1, false));
 
 		Group grpSafra = new Group(composite, SWT.NONE);
@@ -141,7 +145,7 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 
 		Label lblFiltro = new Label(grpSafra, SWT.NONE);
 		lblFiltro.setText("Filtro:");
-		
+
 		tFiltro = new Text(grpSafra, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
 				1, 1));
@@ -167,10 +171,10 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tvSafra.setContentProvider(ArrayContentProvider.getInstance());
 
 		tvcId = new TableViewerColumn(tvSafra, SWT.NONE);
-		tvcId.setLabelProvider(new ColumnLabelProvider(){
+		tvcId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Safra)element).getId().toString();
+				return ((Safra) element).getId().toString();
 			}
 		});
 		TableColumn tblclmnId = tvcId.getColumn();
@@ -178,10 +182,11 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tblclmnId.setText("Id");
 
 		tvcInicioSafra = new TableViewerColumn(tvSafra, SWT.NONE);
-		tvcInicioSafra.setLabelProvider(new ColumnLabelProvider(){
+		tvcInicioSafra.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.dataFormat.format(((Safra)element).getDataInicio());
+				return FormatoHelper.dataFormat.format(((Safra) element)
+						.getDataInicio());
 			}
 		});
 		TableColumn tblclmnInicioDaSafra = tvcInicioSafra.getColumn();
@@ -189,10 +194,11 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tblclmnInicioDaSafra.setText("Inicio da Safra");
 
 		tvcFimSafra = new TableViewerColumn(tvSafra, SWT.NONE);
-		tvcFimSafra.setLabelProvider(new ColumnLabelProvider(){
+		tvcFimSafra.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.dataFormat.format(((Safra)element).getDataFim());
+				return FormatoHelper.dataFormat.format(((Safra) element)
+						.getDataFim());
 			}
 		});
 		TableColumn tblclmnFinalDaSafra = tvcFimSafra.getColumn();
@@ -200,10 +206,10 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tblclmnFinalDaSafra.setText("Final da Safra");
 
 		tvcDescricao = new TableViewerColumn(tvSafra, SWT.NONE);
-		tvcDescricao.setLabelProvider(new ColumnLabelProvider(){
+		tvcDescricao.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Safra)element).getDescricao();
+				return ((Safra) element).getDescricao();
 			}
 		});
 		TableColumn tblclmnDescrio = tvcDescricao.getColumn();
