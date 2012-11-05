@@ -172,7 +172,7 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		composite.setLayout(new GridLayout(5, false));
 
 		Group grpEspcie = new Group(composite, SWT.NONE);
-		grpEspcie.setLayout(new GridLayout(7, false));
+		grpEspcie.setLayout(new GridLayout(8, false));
 		grpEspcie.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 5,
 				1));
 		grpEspcie.setText("Esp\u00E9cie");
@@ -181,10 +181,12 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		lblEspecie.setText("Esp\u00E9cie:");
 
 		tEspecie = new Text(grpEspcie, SWT.BORDER);
-		tEspecie.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6,
+		tEspecie.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 7,
 				1));
 
 		Label lblLinhagem = new Label(grpEspcie, SWT.NONE);
+		lblLinhagem.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblLinhagem.setText("Linhagem:");
 
 		tLinhagem = new Text(grpEspcie, SWT.BORDER);
@@ -195,19 +197,19 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		lblHibrdo.setText("H\u00EDbrido:");
 
 		tHibrido = new Text(grpEspcie, SWT.BORDER);
-		tHibrido.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6,
+		tHibrido.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 7,
 				1));
 
 		Label lblGenero = new Label(grpEspcie, SWT.NONE);
 		lblGenero.setText("G\u00E9nero:");
 
 		tGenero = new Text(grpEspcie, SWT.BORDER);
-		tGenero.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6,
+		tGenero.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 7,
 				1));
 
 		Label lblMaturaoSexual = new Label(grpEspcie, SWT.NONE);
 		lblMaturaoSexual.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
-				false, false, 2, 1));
+				false, false, 3, 1));
 		lblMaturaoSexual.setText("Matura\u00E7\u00E3o Sexual:");
 
 		tMaturacaoSexual = new Text(grpEspcie, SWT.BORDER);
@@ -217,7 +219,7 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 		Group groupSalinidade = new Group(grpEspcie, SWT.NONE);
 		groupSalinidade.setText("Tolerancia a Salinidade");
 		GridData gd_groupSalinidade = new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 6, 1);
+				false, 7, 1);
 		gd_groupSalinidade.heightHint = 30;
 		groupSalinidade.setLayoutData(gd_groupSalinidade);
 		groupSalinidade.setLayout(new GridLayout(3, false));
@@ -248,6 +250,7 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 
 		Label lblFiltro = new Label(grpEspcie, SWT.NONE);
 		lblFiltro.setText("Filtro:");
+		new Label(grpEspcie, SWT.NONE);
 
 		tFiltro = new Text(grpEspcie, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 6,
@@ -267,10 +270,10 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 			}
 		});
 		table = tvEspecie.getTable();
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 7, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 8, 1));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
+
 		tvEspecie.addFilter(filtro);
 		tvEspecie.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -282,7 +285,7 @@ public class EspecieGUI extends TelaEdicaoGUI<Especie> {
 			}
 		});
 		TableColumn tblclmnId = tvcId.getColumn();
-		tblclmnId.setWidth(39);
+		tblclmnId.setWidth(40);
 		tblclmnId.setText("Id");
 
 		tvcEspecie = new TableViewerColumn(tvEspecie, SWT.NONE);

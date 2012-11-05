@@ -131,21 +131,22 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		composite.setLayout(new GridLayout(3, false));
 		grpTanqueRede = new Group(composite, SWT.NONE);
 		grpTanqueRede.setText("Tanque Rede");
-		grpTanqueRede.setLayout(new GridLayout(2, false));
+		grpTanqueRede.setLayout(new GridLayout(3, false));
 		grpTanqueRede.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 3, 1));
 		Label lblNome = new Label(grpTanqueRede, SWT.NONE);
 		lblNome.setSize(36, 15);
 		lblNome.setText("Nome:");
-
-		tNome = new Text(grpTanqueRede, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
-		tNome.setSize(196, 21);
+		
+				tNome = new Text(grpTanqueRede, SWT.BORDER);
+				tNome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2,
+						1));
+				tNome.setSize(196, 21);
 
 		Label lblTamanho = new Label(grpTanqueRede, SWT.NONE);
+		lblTamanho.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		lblTamanho.setSize(71, 15);
-		lblTamanho.setText("Tamanha m\u00B3:");
+		lblTamanho.setText("Tamanho m\u00B3:");
 
 		tTamanho = new Text(grpTanqueRede, SWT.BORDER);
 		tTamanho.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
@@ -155,29 +156,29 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 		lblTanque = new Label(grpTanqueRede, SWT.NONE);
 		lblTanque.setSize(43, 15);
 		lblTanque.setText("Tanque:");
-
-		cvTanque = new ComboViewer(grpTanqueRede, SWT.READ_ONLY);
-		comboTanque = cvTanque.getCombo();
-		comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
-		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
-		cvTanque.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				return ((Tanque) element).getNome();
-			}
-		});
-		cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());
+		
+				cvTanque = new ComboViewer(grpTanqueRede, SWT.READ_ONLY);
+				comboTanque = cvTanque.getCombo();
+				comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2,
+						1));
+				cvTanque.setContentProvider(ArrayContentProvider.getInstance());
+				cvTanque.setLabelProvider(new ColumnLabelProvider() {
+					@Override
+					public String getText(Object element) {
+						return ((Tanque) element).getNome();
+					}
+				});
+				cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());
 
 		lblFiltro = new Label(grpTanqueRede, SWT.NONE);
 		lblFiltro.setSize(36, 15);
 		lblFiltro.setText("Filtro:");
-
-		tFiltro = new Text(grpTanqueRede, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
-		tFiltro.setSize(196, 21);
-		tFiltro.setMessage("Filtro de Busca!!");
+		
+				tFiltro = new Text(grpTanqueRede, SWT.BORDER);
+				tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+						2, 1));
+				tFiltro.setSize(196, 21);
+				tFiltro.setMessage("Filtro de Busca!!");
 
 		tvTanqueRede = new TableViewer(grpTanqueRede, SWT.BORDER
 				| SWT.FULL_SELECTION);
@@ -192,7 +193,7 @@ public class TanqueRedeGUI extends TelaEdicaoGUI<TanqueRede> {
 			}
 		});
 		table = tvTanqueRede.getTable();
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		table.setSize(272, 77);
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);

@@ -59,9 +59,12 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		if (entidade == null)
 			entidade = new SistemaProducao();
 		entidade.setSistemaProducao(tSistemaCultivo.getText().trim());
-		entidade.setBiomasaCritica(new BigDecimal(tBiomassaCritica.getText().trim().replaceAll(",", ".")));
-		entidade.setBiomassaEconomica(new BigDecimal(tBiomassaEconomica.getText().trim().replaceAll(",", ".")));
-		entidade.setCapacidadeSuporte(new BigDecimal(tCapacidadeSuporte.getText().trim().replaceAll(",", ".")));
+		entidade.setBiomasaCritica(new BigDecimal(tBiomassaCritica.getText()
+				.trim().replaceAll(",", ".")));
+		entidade.setBiomassaEconomica(new BigDecimal(tBiomassaEconomica
+				.getText().trim().replaceAll(",", ".")));
+		entidade.setCapacidadeSuporte(new BigDecimal(tCapacidadeSuporte
+				.getText().trim().replaceAll(",", ".")));
 		entidade.setStatus(true);
 		sistemaProducaoService.salvar(entidade);
 	}
@@ -73,7 +76,8 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 
 	@Override
 	public void carregar() {
-		tvSistemaProducao.setInput(sistemaProducaoService.buscarTodosSistemaProducaoAtivo());
+		tvSistemaProducao.setInput(sistemaProducaoService
+				.buscarTodosSistemaProducaoAtivo());
 		tvSistemaProducao.refresh();
 
 	}
@@ -85,17 +89,19 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		tBiomassaCritica.setText("");
 		tBiomassaEconomica.setText("");
 		tFiltro.setText("");
-		entidade=null;
-		
+		entidade = null;
 
 	}
 
 	@Override
 	public void carregarComponentes() {
 		tSistemaCultivo.setText(entidade.getSistemaProducao());
-		tBiomassaCritica.setText(FormatoHelper.getDecimalFormato().format(entidade.getBiomasaCritica()));
-		tBiomassaEconomica.setText(FormatoHelper.getDecimalFormato().format(entidade.getBiomassaEconomica()));
-		tCapacidadeSuporte.setText(FormatoHelper.getDecimalFormato().format(entidade.getCapacidadeSuporte()));
+		tBiomassaCritica.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getBiomasaCritica()));
+		tBiomassaEconomica.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getBiomassaEconomica()));
+		tCapacidadeSuporte.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getCapacidadeSuporte()));
 	}
 
 	@Override
@@ -112,9 +118,11 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		grpSistemaDeProduo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 2, 1));
 		grpSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
-		grpSistemaDeProduo.setLayout(new GridLayout(2, false));
+		grpSistemaDeProduo.setLayout(new GridLayout(3, false));
 
 		Label lblSistemaDeProduo = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblSistemaDeProduo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblSistemaDeProduo.setText("Sistema de Cultivo:");
 
 		tSistemaCultivo = new Text(grpSistemaDeProduo, SWT.BORDER);
@@ -122,6 +130,8 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 				false, 1, 1));
 
 		Label lblBiomassaEconomica = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblBiomassaEconomica.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblBiomassaEconomica.setText("Biomassa Economica:");
 
 		tBiomassaEconomica = new Text(grpSistemaDeProduo, SWT.BORDER);
@@ -129,6 +139,8 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 				false, 1, 1));
 
 		Label lblBiomassaCritica = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblBiomassaCritica.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblBiomassaCritica.setText("Biomassa Critica:");
 
 		tBiomassaCritica = new Text(grpSistemaDeProduo, SWT.BORDER);
@@ -136,6 +148,8 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 				false, 1, 1));
 
 		Label lblCapacidadeDeSuporte = new Label(grpSistemaDeProduo, SWT.NONE);
+		lblCapacidadeDeSuporte.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblCapacidadeDeSuporte.setText("Capacidade de Suporte:");
 
 		tCapacidadeSuporte = new Text(grpSistemaDeProduo, SWT.BORDER);
@@ -146,7 +160,7 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpSistemaDeProduo, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2,
 				1));
 		tFiltro.setMessage("Filtro de Busca!!");
 
@@ -154,7 +168,8 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 				| SWT.FULL_SELECTION);
 		tvSistemaProducao.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent arg0) {
-				IStructuredSelection itemSelecao = (IStructuredSelection) tvSistemaProducao.getSelection();
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvSistemaProducao
+						.getSelection();
 				if (itemSelecao.isEmpty())
 					return;
 				limparDados();
@@ -163,11 +178,12 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 			}
 		});
 		table = tvSistemaProducao.getTable();
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		tvSistemaProducao.addFilter(filtro);
-		tvSistemaProducao.setContentProvider(ArrayContentProvider.getInstance());
+		tvSistemaProducao
+				.setContentProvider(ArrayContentProvider.getInstance());
 
 		tvcId = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
 		tvcId.setLabelProvider(new ColumnLabelProvider() {
@@ -205,10 +221,11 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 		tblclmnBiomassaEconomica.setText("Biomassa Economica");
 
 		tvcBiomassaCritica = new TableViewerColumn(tvSistemaProducao, SWT.NONE);
-		tvcBiomassaCritica.setLabelProvider(new ColumnLabelProvider(){
+		tvcBiomassaCritica.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.getDecimalFormato().format(((SistemaProducao)element).getBiomasaCritica());
+				return FormatoHelper.getDecimalFormato().format(
+						((SistemaProducao) element).getBiomasaCritica());
 			}
 		});
 		TableColumn tblclmnBiomassaCritica = tvcBiomassaCritica.getColumn();
@@ -217,10 +234,11 @@ public class SistemaProducaoGUI extends TelaEdicaoGUI<SistemaProducao> {
 
 		tvcCapacidadeSuporte = new TableViewerColumn(tvSistemaProducao,
 				SWT.NONE);
-		tvcCapacidadeSuporte.setLabelProvider(new ColumnLabelProvider(){
+		tvcCapacidadeSuporte.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.getDecimalFormato().format(((SistemaProducao)element).getCapacidadeSuporte());
+				return FormatoHelper.getDecimalFormato().format(
+						((SistemaProducao) element).getCapacidadeSuporte());
 			}
 		});
 		TableColumn tblclmnCapacidadeDeSuporte = tvcCapacidadeSuporte

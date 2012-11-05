@@ -120,23 +120,29 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		Label lblCausa = new Label(grpDoena, SWT.NONE);
 		lblCausa.setText("Causa:");
 
-		tCausa = new Text(grpDoena, SWT.BORDER);
-		tCausa.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
+		tCausa = new Text(grpDoena, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_tCausa = new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+				1);
+		gd_tCausa.heightHint = 50;
+		tCausa.setLayoutData(gd_tCausa);
 
 		Label lblSintoma = new Label(grpDoena, SWT.NONE);
 		lblSintoma.setText("Sintoma:");
 
-		tSintoma = new Text(grpDoena, SWT.BORDER);
-		tSintoma.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+		tSintoma = new Text(grpDoena, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_tSintoma = new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1);
+		gd_tSintoma.heightHint = 50;
+		tSintoma.setLayoutData(gd_tSintoma);
 
 		Label lblTratamento = new Label(grpDoena, SWT.NONE);
 		lblTratamento.setText("Tratamento:");
 
-		tTratamento = new Text(grpDoena, SWT.BORDER);
-		tTratamento.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		tTratamento = new Text(grpDoena, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_tTratamento = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1);
+		gd_tTratamento.heightHint = 50;
+		tTratamento.setLayoutData(gd_tTratamento);
 
 		Label lblFiltro = new Label(grpDoena, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -168,10 +174,10 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		tvDoenca.setContentProvider(ArrayContentProvider.getInstance());
 
 		tvcId = new TableViewerColumn(tvDoenca, SWT.NONE);
-		tvcId.setLabelProvider(new ColumnLabelProvider(){
+		tvcId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Doenca)element).getId().toString();
+				return ((Doenca) element).getId().toString();
 			}
 		});
 		TableColumn tblclmnId = tvcId.getColumn();
@@ -179,10 +185,10 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		tblclmnId.setText("Id");
 
 		tvcNome = new TableViewerColumn(tvDoenca, SWT.NONE);
-		tvcNome.setLabelProvider(new ColumnLabelProvider(){
+		tvcNome.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Doenca)element).getNome();
+				return ((Doenca) element).getNome();
 			}
 		});
 		TableColumn tblclmnNome = tvcNome.getColumn();
@@ -190,10 +196,10 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		tblclmnNome.setText("Nome");
 
 		tvcCausa = new TableViewerColumn(tvDoenca, SWT.NONE);
-		tvcCausa.setLabelProvider(new ColumnLabelProvider(){
+		tvcCausa.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Doenca)element).getCausa();
+				return ((Doenca) element).getCausa();
 			}
 		});
 		TableColumn tblclmnCausa = tvcCausa.getColumn();
@@ -201,10 +207,10 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		tblclmnCausa.setText("Causa");
 
 		tvcSintoma = new TableViewerColumn(tvDoenca, SWT.NONE);
-		tvcSintoma.setLabelProvider(new ColumnLabelProvider(){
+		tvcSintoma.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Doenca)element).getSintoma();
+				return ((Doenca) element).getSintoma();
 			}
 		});
 		TableColumn tblclmnSintoma = tvcSintoma.getColumn();
@@ -212,10 +218,10 @@ public class DoencaGUI extends TelaEdicaoGUI<Doenca> {
 		tblclmnSintoma.setText("Sintoma");
 
 		tvcTratamento = new TableViewerColumn(tvDoenca, SWT.NONE);
-		tvcTratamento.setLabelProvider(new ColumnLabelProvider(){
+		tvcTratamento.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Doenca)element).getTratamento();
+				return ((Doenca) element).getTratamento();
 			}
 		});
 		TableColumn tblclmnTratamento = tvcTratamento.getColumn();

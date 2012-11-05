@@ -40,7 +40,6 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	private ComboViewer cvPassarela;
 	private TanqueService tanqueService;
 	private Combo comboPassarela;
-	
 
 	public PassarelaGUI(Composite parent, int style) {
 		super(parent, style);
@@ -59,14 +58,14 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 
 	@Override
 	public void salvar() {
-		if(entidade == null)
+		if (entidade == null)
 			entidade = new Passarela();
-		
+
 		entidade.setNome(tNome.getText().trim());
 		entidade.setCapacidade(new Long(tCapacidade.getText().trim()));
 		entidade.setStatus(true);
 		valorCombo = (IStructuredSelection) cvPassarela.getSelection();
-		entidade.setTanqueId((Tanque)valorCombo.getFirstElement());
+		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
 		passarelaService.salvar(entidade);
 	}
 
@@ -92,9 +91,11 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	@Override
 	public void carregarComponentes() {
 		tNome.setText(entidade.getNome());
-		tCapacidade.setText(FormatoHelper.getDecimalFormato().format(entidade.getCapacidade()));
-		comboPassarela.select(tanqueService.buscarTodosTanqueAtivo().indexOf(entidade.getTanqueId()));
-		
+		tCapacidade.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getCapacidade()));
+		comboPassarela.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
+				entidade.getTanqueId()));
+
 	}
 
 	@Override
@@ -114,15 +115,17 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		grpPassarela.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
 				1, 1));
 		grpPassarela.setText("Passarela");
-		grpPassarela.setLayout(new GridLayout(2, false));
+		grpPassarela.setLayout(new GridLayout(3, false));
 
 		Label lblNome = new Label(grpPassarela, SWT.NONE);
 		lblNome.setText("Nome:");
 
 		tNome = new Text(grpPassarela, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 
 		Label lblCapacidadeDeHapas = new Label(grpPassarela, SWT.NONE);
+		lblCapacidadeDeHapas.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblCapacidadeDeHapas.setText("Capacidade de Hapa:");
 
 		tCapacidade = new Text(grpPassarela, SWT.BORDER);
@@ -134,13 +137,13 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 
 		cvPassarela = new ComboViewer(grpPassarela, SWT.READ_ONLY);
 		comboPassarela = cvPassarela.getCombo();
-		comboPassarela.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
-				1));
+		comboPassarela.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 		cvPassarela.setContentProvider(ArrayContentProvider.getInstance());
-		cvPassarela.setLabelProvider(new ColumnLabelProvider(){
+		cvPassarela.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Tanque)element).getNome();
+				return ((Tanque) element).getNome();
 			}
 		});
 		cvPassarela.setInput(tanqueService.buscarTodosTanqueAtivo());
@@ -149,7 +152,7 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpPassarela, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2,
 				1));
 		tFiltro.setMessage("Filtro de Busca!!");
 
@@ -169,8 +172,8 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 		table = tvPassarela.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
+
 		tvPassarela.addFilter(filtro);
 		tvPassarela.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -205,21 +208,20 @@ public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 			}
 		});
 		TableColumn tblclmnCapacidadeDeHapa = tvcCapacidadeHapa.getColumn();
-		tblclmnCapacidadeDeHapa.setWidth(100);
+		tblclmnCapacidadeDeHapa.setWidth(144);
 		tblclmnCapacidadeDeHapa.setText("Capacidade de Hapa");
 
 		tvcTanqueId = new TableViewerColumn(tvPassarela, SWT.NONE);
-		tvcTanqueId.setLabelProvider(new ColumnLabelProvider(){
+		tvcTanqueId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				Passarela p = (Passarela) element;
-				return p.getTanqueId() == null ? "" : p.getTanqueId()
-						.getNome();
+				return p.getTanqueId() == null ? "" : p.getTanqueId().getNome();
 			}
 		});
-		
+
 		TableColumn tblclmnTanque = tvcTanqueId.getColumn();
-		tblclmnTanque.setWidth(100);
+		tblclmnTanque.setWidth(139);
 		tblclmnTanque.setText("Tanque");
 
 	}

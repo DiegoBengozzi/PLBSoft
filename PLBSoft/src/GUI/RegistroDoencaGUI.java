@@ -64,25 +64,19 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 	public void salvar() throws Exception {
 		if (entidade == null)
 			entidade = new RegistroDoenca();
-
 		entidade.setData(CalendarioHelper.retornaData());
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
-
 		valorComboDoenca = (IStructuredSelection) cvDoenca.getSelection();
 		entidade.setDoencaId((Doenca) valorComboDoenca.getFirstElement());
-
 		valorComboLote = (IStructuredSelection) cvLote.getSelection();
 		entidade.setLoteId((Lote) valorComboLote.getFirstElement());
-
 		registroDoencaService.salvar(entidade);
-
 	}
 
 	@Override
 	public void validar() throws Exception {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -90,7 +84,6 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		tvRegistroDoenca.setInput(registroDoencaService
 				.buscarTodosRegistroDoencaAtivo());
 		tvRegistroDoenca.refresh();
-
 	}
 
 	@Override
@@ -102,7 +95,6 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		comboLote.deselectAll();
 		tFiltro.setText("");
 		entidade = null;
-
 	}
 
 	@Override
@@ -111,10 +103,8 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 				entidade.getDoencaId()));
 		comboLote.select(loteService.buscarTodosLoteAtivo().indexOf(
 				entidade.getLoteId()));
-
 		tData.setText(FormatoHelper.dataFormat.format(entidade.getData()));
 		tDescricao.setText(entidade.getDescricao());
-
 	}
 
 	@Override
@@ -132,7 +122,7 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		composite.setLayout(new GridLayout(1, false));
 
 		Group grpRegistroDeDoenas = new Group(composite, SWT.NONE);
-		grpRegistroDeDoenas.setLayout(new GridLayout(2, false));
+		grpRegistroDeDoenas.setLayout(new GridLayout(3, false));
 		grpRegistroDeDoenas.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true, 1, 1));
 		grpRegistroDeDoenas.setText("Registro de Doen\u00E7as");
@@ -143,7 +133,7 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		cvLote = new ComboViewer(grpRegistroDeDoenas, SWT.READ_ONLY);
 		comboLote = cvLote.getCombo();
 		comboLote.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+				2, 1));
 		cvLote.setContentProvider(ArrayContentProvider.getInstance());
 		cvLote.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -154,6 +144,8 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		cvLote.setInput(loteService.buscarTodosLoteAtivo());
 
 		Label lblDoena = new Label(grpRegistroDeDoenas, SWT.NONE);
+		lblDoena.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false,
+				2, 1));
 		lblDoena.setText("Doen\u00E7a:");
 
 		cvDoenca = new ComboViewer(grpRegistroDeDoenas, SWT.READ_ONLY);
@@ -173,22 +165,28 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		lblData.setText("Data:");
 
 		tData = new Text(grpRegistroDeDoenas, SWT.BORDER);
-		tData.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+		tData.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2,
 				1));
 
 		Label lblDescrio = new Label(grpRegistroDeDoenas, SWT.NONE);
+		lblDescrio.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
 
-		tDescricao = new Text(grpRegistroDeDoenas, SWT.BORDER);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		tDescricao = new Text(grpRegistroDeDoenas, SWT.BORDER | SWT.V_SCROLL
+				| SWT.MULTI);
+		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1);
+		gd_tDescricao.heightHint = 50;
+		tDescricao.setLayoutData(gd_tDescricao);
 
 		Label lblFiltro = new Label(grpRegistroDeDoenas, SWT.NONE);
 		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpRegistroDeDoenas, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+				2, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvRegistroDoenca = new TableViewer(grpRegistroDeDoenas, SWT.BORDER
 				| SWT.FULL_SELECTION);
@@ -207,7 +205,7 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		tableRegistroDoenca.setLinesVisible(true);
 		tableRegistroDoenca.setHeaderVisible(true);
 		tableRegistroDoenca.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-				true, true, 2, 1));
+				true, true, 3, 1));
 
 		tvRegistroDoenca.addFilter(filtro);
 		tvRegistroDoenca.setContentProvider(ArrayContentProvider.getInstance());
@@ -248,11 +246,11 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		tblclmnDoena.setText("Doen\u00E7a");
 
 		tvcData = new TableViewerColumn(tvRegistroDoenca, SWT.NONE);
-		tvcData.setLabelProvider(new ColumnLabelProvider(){
+		tvcData.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.dataFormat.format(((RegistroDoenca) element)
-						.getData());
+				return FormatoHelper.dataFormat
+						.format(((RegistroDoenca) element).getData());
 			}
 		});
 		TableColumn tblclmnData = tvcData.getColumn();
@@ -260,10 +258,10 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		tblclmnData.setText("Data");
 
 		tvcDescricao = new TableViewerColumn(tvRegistroDoenca, SWT.NONE);
-		tvcDescricao.setLabelProvider(new ColumnLabelProvider(){
+		tvcDescricao.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((RegistroDoenca)element).getDescricao();
+				return ((RegistroDoenca) element).getDescricao();
 			}
 		});
 		TableColumn tblclmnDescrio = tvcDescricao.getColumn();

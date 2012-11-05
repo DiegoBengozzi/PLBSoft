@@ -142,8 +142,10 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 				.setText("Descri\u00E7\u00E3o \r\n      da \r\naduba\u00E7\u00E3o:");
 
 		tDescricao = new Text(grpAdubao, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
-				1, 1));
+		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.FILL, true, false,
+				1, 1);
+		gd_tDescricao.heightHint = 50;
+		tDescricao.setLayoutData(gd_tDescricao);
 		/**
 		 * calendario!!
 		 * 

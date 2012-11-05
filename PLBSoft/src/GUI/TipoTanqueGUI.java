@@ -104,15 +104,16 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 		grpTipoDeTanque.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 2, 1));
 		grpTipoDeTanque.setText("Tipo de Tanque");
-		grpTipoDeTanque.setLayout(new GridLayout(2, false));
+		grpTipoDeTanque.setLayout(new GridLayout(3, false));
 
 		Label lblNome = new Label(grpTipoDeTanque, SWT.NONE);
 		lblNome.setText("Nome:");
-
-		tNome = new Text(grpTipoDeTanque, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+				tNome = new Text(grpTipoDeTanque, SWT.BORDER);
+				tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 
 		Label lblRevestimento = new Label(grpTipoDeTanque, SWT.NONE);
+		lblRevestimento.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		lblRevestimento.setText("Revestimento:");
 
 		tRevestimento = new Text(grpTipoDeTanque, SWT.BORDER);
@@ -122,11 +123,11 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 
 		lblFiltro = new Label(grpTipoDeTanque, SWT.NONE);
 		lblFiltro.setText("Filtro:");
-
-		tFiltro = new Text(grpTipoDeTanque, SWT.BORDER);
-		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
-		tFiltro.setMessage("Filtro de Busca!!");
+		
+				tFiltro = new Text(grpTipoDeTanque, SWT.BORDER);
+				tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+						2, 1));
+				tFiltro.setMessage("Filtro de Busca!!");
 
 		tvTipoTanque = new TableViewer(grpTipoDeTanque, SWT.BORDER
 				| SWT.FULL_SELECTION);
@@ -142,7 +143,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 		table = tvTipoTanque.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		tvTipoTanque.addFilter(filtro);
 		tvTipoTanque.setContentProvider(ArrayContentProvider.getInstance());
 
@@ -154,7 +155,7 @@ public class TipoTanqueGUI extends TelaEdicaoGUI<TipoTanque> {
 			}
 		});
 		tblclmnId = tvcId.getColumn();
-		tblclmnId.setWidth(100);
+		tblclmnId.setWidth(40);
 		tblclmnId.setText("Id");
 
 		tvcNome = new TableViewerColumn(tvTipoTanque, SWT.NONE);

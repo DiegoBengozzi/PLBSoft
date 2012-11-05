@@ -66,15 +66,15 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 	public void salvar() {
 		if (entidade == null)
 			entidade = new Hapa();
-		
+
 		entidade.setNome(tNome.getText().trim());
 		entidade.setStatus(true);
 		entidade.setTamanho(new BigDecimal(tTamanho.getText().trim()
 				.replaceAll(",", ".")));
-		
+
 		valorCombo = (IStructuredSelection) cvPassarelaId.getSelection();
 		entidade.setPassarelaId((Passarela) valorCombo.getFirstElement());
-		
+
 		hapaService.salvar(entidade);
 	}
 
@@ -126,15 +126,17 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 		Group grpHapa = new Group(composite, SWT.NONE);
 		grpHapa.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		grpHapa.setText("Hapa");
-		grpHapa.setLayout(new GridLayout(2, false));
+		grpHapa.setLayout(new GridLayout(3, false));
 
 		Label lblNome = new Label(grpHapa, SWT.NONE);
 		lblNome.setText("Nome:");
 
 		tNome = new Text(grpHapa, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
 
 		Label lblTamanho = new Label(grpHapa, SWT.NONE);
+		lblTamanho.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblTamanho.setText("Tamanho:");
 
 		tTamanho = new Text(grpHapa, SWT.BORDER);
@@ -142,6 +144,8 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 				1));
 
 		Label lblPassarela = new Label(grpHapa, SWT.NONE);
+		lblPassarela.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblPassarela.setText("Passarela:");
 
 		cvPassarelaId = new ComboViewer(grpHapa, SWT.READ_ONLY);
@@ -162,7 +166,7 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 
 		tFiltro = new Text(grpHapa, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+				2, 1));
 		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvHapa = new TableViewer(grpHapa, SWT.BORDER | SWT.FULL_SELECTION);
@@ -180,7 +184,7 @@ public class HapaGUI extends TelaEdicaoGUI<Hapa> {
 		table = tvHapa.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 
 		tvHapa.addFilter(filtro);
 		tvHapa.setContentProvider(ArrayContentProvider.getInstance());

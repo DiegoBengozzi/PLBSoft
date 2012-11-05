@@ -119,9 +119,11 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		grpSafra.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 				1));
 		grpSafra.setText("Safra");
-		grpSafra.setLayout(new GridLayout(2, false));
+		grpSafra.setLayout(new GridLayout(5, false));
 
 		Label lblIncioDaSafra = new Label(grpSafra, SWT.NONE);
+		lblIncioDaSafra.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 4, 1));
 		lblIncioDaSafra.setText("In\u00EDcio da Safra:");
 
 		tInicioSafra = new Text(grpSafra, SWT.BORDER);
@@ -130,6 +132,8 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 				false, 1, 1));
 
 		Label lblFinalDaSafra = new Label(grpSafra, SWT.NONE);
+		lblFinalDaSafra.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 4, 1));
 		lblFinalDaSafra.setText("Final da Safra:");
 
 		tFimSafra = new Text(grpSafra, SWT.BORDER);
@@ -137,18 +141,23 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 				1, 1));
 
 		Label lblDescricao = new Label(grpSafra, SWT.NONE);
+		lblDescricao.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblDescricao.setText("Descri\u00E7\u00E3o:");
 
-		tDescricao = new Text(grpSafra, SWT.BORDER);
-		tDescricao.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 1, 1));
+		tDescricao = new Text(grpSafra, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 3, 1);
+		gd_tDescricao.heightHint = 50;
+		tDescricao.setLayoutData(gd_tDescricao);
 
 		Label lblFiltro = new Label(grpSafra, SWT.NONE);
 		lblFiltro.setText("Filtro:");
 
 		tFiltro = new Text(grpSafra, SWT.BORDER);
 		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+				4, 1));
+		tFiltro.setMessage("Filtro de Busca!!");
 
 		tvSafra = new TableViewer(grpSafra, SWT.BORDER | SWT.FULL_SELECTION);
 		tvSafra.addDoubleClickListener(new IDoubleClickListener() {
@@ -166,7 +175,7 @@ public class SafraGUI extends TelaEdicaoGUI<Safra> {
 		tableSafra.setLinesVisible(true);
 		tableSafra.setHeaderVisible(true);
 		tableSafra.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
-				2, 1));
+				5, 1));
 		tvSafra.addFilter(filtro);
 		tvSafra.setContentProvider(ArrayContentProvider.getInstance());
 

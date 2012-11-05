@@ -232,7 +232,7 @@ public class TanqueGUI extends TelaEdicaoGUI<Tanque> {
 		tDescricao = new Text(grpTanque, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.FILL, true, false,
 				13, 1);
-		gd_tDescricao.heightHint = 30;
+		gd_tDescricao.heightHint = 50;
 		tDescricao.setLayoutData(gd_tDescricao);
 		tDescricao.setSize(439, 50);
 
