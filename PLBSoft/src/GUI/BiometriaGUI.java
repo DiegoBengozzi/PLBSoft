@@ -81,7 +81,6 @@ public class BiometriaGUI extends TelaEdicaoGUI<Biometria> {
 
 	@Override
 	public void validar() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -186,7 +185,13 @@ public class BiometriaGUI extends TelaEdicaoGUI<Biometria> {
 				| SWT.FULL_SELECTION);
 		tvBiometria.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent arg0) {
-				// doubleClick
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvBiometria
+						.getSelection();
+				if (itemSelecao.isEmpty())
+					return;
+				limparDados();
+				entidade = (Biometria) itemSelecao.getFirstElement();
+				carregarComponentes();
 			}
 		});
 		tableBiometria = tvBiometria.getTable();
@@ -195,11 +200,14 @@ public class BiometriaGUI extends TelaEdicaoGUI<Biometria> {
 		tableBiometria.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 5, 1));
 
+		tvBiometria.addFilter(filtro);
+		tvBiometria.setContentProvider(ArrayContentProvider.getInstance());
+
 		tvcId = new TableViewerColumn(tvBiometria, SWT.NONE);
 		tvcId.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((Biometria) element).getLoteId().toString();
+				return ((Biometria) element).getId().toString();
 			}
 		});
 		TableColumn tblclmnId = tvcId.getColumn();
@@ -219,10 +227,11 @@ public class BiometriaGUI extends TelaEdicaoGUI<Biometria> {
 		tblclmnLote.setText("Lote");
 
 		tvcPesoMedio = new TableViewerColumn(tvBiometria, SWT.NONE);
-		tvcPesoMedio.setLabelProvider(new ColumnLabelProvider(){
+		tvcPesoMedio.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return FormatoHelper.getDecimalFormato().format(((Biometria)element).getPesoMedio());
+				return FormatoHelper.getDecimalFormato().format(
+						((Biometria) element).getPesoMedio());
 			}
 		});
 		TableColumn tblclmnPesoMdio = tvcPesoMedio.getColumn();
@@ -230,15 +239,28 @@ public class BiometriaGUI extends TelaEdicaoGUI<Biometria> {
 		tblclmnPesoMdio.setText("Peso M\u00E9dio");
 
 		tvcTamanhoMedio = new TableViewerColumn(tvBiometria, SWT.NONE);
+		tvcTamanhoMedio.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(
+						((Biometria) element).getTamanhoMedio());
+			}
+		});
 		TableColumn tblclmnTamenhoMdio = tvcTamanhoMedio.getColumn();
 		tblclmnTamenhoMdio.setWidth(100);
 		tblclmnTamenhoMdio.setText("Tamanho M\u00E9dio");
 
 		tvcQuantAmostra = new TableViewerColumn(tvBiometria, SWT.NONE);
+		tvcQuantAmostra.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(
+						((Biometria) element).getQuantidadeAmostra());
+			}
+		});
 		TableColumn tblclmnQuantidadeDeAmostra = tvcQuantAmostra.getColumn();
 		tblclmnQuantidadeDeAmostra.setWidth(150);
 		tblclmnQuantidadeDeAmostra.setText("Quantidade de Amostra");
-		// TODO Auto-generated method stub
 
 	}
 

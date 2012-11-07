@@ -24,4 +24,5 @@ public class AlojamentoService {
 	public List<Alojamento> buscarTodosAlojamentoAtivo() {
 		return dao.buscarTodosPorStatus(true);
 	}
+	
 }
