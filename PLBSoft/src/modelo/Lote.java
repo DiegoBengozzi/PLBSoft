@@ -69,8 +69,39 @@ public class Lote implements Serializable {
 	)
 	private List<Lote> listaLote = new ArrayList<Lote>();
 
+	@ManyToOne
+	private Tanque tanqueId;
 	
+	@ManyToOne
+	private TanqueRede tanqueRedeId;
 	
+	@ManyToOne
+	private Hapa hapaId;
+	
+	public TanqueRede getTanqueRedeId() {
+		return tanqueRedeId;
+	}
+
+	public void setTanqueRedeId(TanqueRede tanqueRedeId) {
+		this.tanqueRedeId = tanqueRedeId;
+	}
+
+	public Hapa getHapaId() {
+		return hapaId;
+	}
+
+	public void setHapaId(Hapa hapaId) {
+		this.hapaId = hapaId;
+	}
+
+	public Tanque getTanqueId() {
+		return tanqueId;
+	}
+
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
+	}
+
 	public Long getId() {
 		return id;
 	}
