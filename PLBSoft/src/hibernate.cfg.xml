@@ -22,6 +22,7 @@
 		<mapping class="modelo.Lote"/>
 		<mapping class="modelo.Doenca"/>
 		<mapping class="modelo.RegistroDoenca"/>
+		<mapping class="modelo.Biometria"/>
 		
 
 	</session-factory>

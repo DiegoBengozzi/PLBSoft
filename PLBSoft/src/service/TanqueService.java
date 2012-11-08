@@ -25,8 +25,8 @@ public class TanqueService {
 		return dao.buscarTodosPorStatus(true);
 	}
 	
-//	public List<Tanque> buscarTodosTanqueLivre(){
-//		 
-//	}
+	public List<Tanque> buscarTodosTanqueLivre(){
+		 return dao.buscarTodosPorStatus(true);
+	}
 	
 }

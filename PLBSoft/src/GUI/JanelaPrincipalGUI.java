@@ -222,6 +222,16 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmRegistrarDoenca.setText("Registrar Doen\u00E7a");
+		
+		MenuItem mntmBiometria = new MenuItem(menu_1, SWT.NONE);
+		mntmBiometria.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				BiometriaGUI biometriaGUI = new BiometriaGUI(scrolledComposite, SWT.BORDER);
+				carregarValores(biometriaGUI);
+			}
+		});
+		mntmBiometria.setText("Biometria");
 
 		MenuItem mntmRelatorios = new MenuItem(menu, SWT.CASCADE);
 		mntmRelatorios.setText("Relatorios");

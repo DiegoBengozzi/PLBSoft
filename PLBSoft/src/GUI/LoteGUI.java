@@ -1,12 +1,15 @@
 package GUI;
 
-import java.math.BigDecimal;
-
 import helper.CalendarioHelper;
 import helper.FormatoHelper;
+
+import java.math.BigDecimal;
+import java.util.List;
+
 import modelo.Especie;
 import modelo.Lote;
 import modelo.Safra;
+import modelo.Tanque;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -17,6 +20,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -31,6 +36,7 @@ import org.eclipse.swt.widgets.Text;
 import service.EspecieService;
 import service.LoteService;
 import service.SafraService;
+import service.TanqueService;
 import filtro.LoteFiltro;
 
 public class LoteGUI extends TelaEdicaoGUI<Lote> {
@@ -52,10 +58,15 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private LoteService loteService;
 	private SafraService safraService;
 	private EspecieService especieService;
+	private TanqueService tanqueService;
 	private LoteFiltro filtro;
 	private IStructuredSelection valorComboSafra, valorComboEspecie;
 	private Table tableOrigemLote;
-	private Button btnDividirLotes, btnAdicionarLotes;
+	private Button btnAdd;
+	private Combo comboRedeHapa;
+	private Combo comboTanque;
+	private ComboViewer cvTanque;
+	private ComboViewer cvRedeHapa;
 
 	public LoteGUI(Composite parent, int style) {
 		super(parent, style);
@@ -150,6 +161,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		filtro = new LoteFiltro();
 		loteService = new LoteService();
 		safraService = new SafraService();
+		tanqueService = new TanqueService();
 		especieService = new EspecieService();
 
 		composite.setLayout(new GridLayout(1, false));
@@ -205,10 +217,10 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		lblQuantidade.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
 				false, 2, 1));
 		lblQuantidade.setText("Quantidade:");
-		
-				tQuantidade = new Text(grpLote, SWT.BORDER);
-				tQuantidade.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-						false, 2, 1));
+
+		tQuantidade = new Text(grpLote, SWT.BORDER);
+		tQuantidade.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label lblEspcie = new Label(grpLote, SWT.NONE);
 		lblEspcie.setText("Esp\u00E9cie:");
@@ -230,28 +242,40 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		lblDescrio.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
 				false, 2, 1));
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
-		
-				tDescricao = new Text(grpLote, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
-				GridData gd_tDescricao = new GridData(SWT.FILL, SWT.CENTER, true,
-						false, 2, 1);
-				gd_tDescricao.heightHint = 50;
-				tDescricao.setLayoutData(gd_tDescricao);
-		
+
+		tDescricao = new Text(grpLote, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_tDescricao = new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1);
+		gd_tDescricao.heightHint = 50;
+		tDescricao.setLayoutData(gd_tDescricao);
+
 		Label lblTanque = new Label(grpLote, SWT.NONE);
-		lblTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblTanque.setText("Tanque:");
-		
-		ComboViewer comboViewer = new ComboViewer(grpLote, SWT.READ_ONLY);
-		Combo combo = comboViewer.getCombo();
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
+		cvTanque = new ComboViewer(grpLote, SWT.READ_ONLY);
+		comboTanque = cvTanque.getCombo();
+		comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3,
+				1));
+		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
+		cvTanque.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((Tanque)element).getNome();
+			}
+		});
+		cvTanque.setInput(tanqueService.buscarTodosTanqueAtivo());//buscarTodosTanqueLivre();
+
 		Label lblNewLabel = new Label(grpLote, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 3, 1));
+		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 3, 1));
 		lblNewLabel.setText("Tanque Rede / Hapa:");
-		
-		ComboViewer comboViewer_1 = new ComboViewer(grpLote, SWT.READ_ONLY);
-		Combo combo_1 = comboViewer_1.getCombo();
-		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+
+		cvRedeHapa = new ComboViewer(grpLote, SWT.READ_ONLY);
+		comboRedeHapa = cvRedeHapa.getCombo();
+		comboRedeHapa.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
 
 		Group grpOrigemDoLote = new Group(grpLote, SWT.NONE);
 		grpOrigemDoLote.setText("Origem do Lote");
@@ -261,15 +285,16 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 		tvOrigemLote = new TableViewer(grpOrigemDoLote, SWT.BORDER
 				| SWT.FULL_SELECTION);
-		tvOrigemLote.addDoubleClickListener(new IDoubleClickListener() {
-			public void doubleClick(DoubleClickEvent arg0) {
-			}
-		});
 		tableOrigemLote = tvOrigemLote.getTable();
-		tableOrigemLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 2));
+		GridData gd_tableOrigemLote = new GridData(SWT.FILL, SWT.FILL, true,
+				true, 1, 2);
+		gd_tableOrigemLote.widthHint = 740;
+		tableOrigemLote.setLayoutData(gd_tableOrigemLote);
 		tableOrigemLote.setLinesVisible(true);
 		tableOrigemLote.setHeaderVisible(true);
+
+		tvOrigemLote.addFilter(filtro);
+		tvOrigemLote.setContentProvider(ArrayContentProvider.getInstance());
 
 		tvcOrigemId = new TableViewerColumn(tvOrigemLote, SWT.NONE);
 		tvcOrigemId.setLabelProvider(new ColumnLabelProvider() {
@@ -362,15 +387,27 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcTextDescricao.setWidth(150);
 		tvcTextDescricao.setText("Descri\u00E7\u00E3o");
 
-		btnAdicionarLotes = new Button(grpOrigemDoLote, SWT.NONE);
-		btnAdicionarLotes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-				true, 1, 1));
-		btnAdicionarLotes.setText("Unir Lotes");
+		btnAdd = new Button(grpOrigemDoLote, SWT.NONE);
+		btnAdd.addSelectionListener(new SelectionAdapter() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvLote
+						.getSelection();
+				if (itemSelecao.isEmpty())
+					return;
 
-		btnDividirLotes = new Button(grpOrigemDoLote, SWT.NONE);
-		btnDividirLotes.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
-				true, 1, 1));
-		btnDividirLotes.setText("Dividir Lotes");
+				entidade.setListaLote((List<Lote>) itemSelecao
+						.getFirstElement());
+				loteService.salvar(entidade);
+
+				tvOrigemLote.setInput(loteService.buscarTodosLoteAtivo());
+				tvOrigemLote.refresh();
+			}
+		});
+		btnAdd.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false,
+				1, 2));
+		btnAdd.setText("Adicionar");
 
 		Label lblFiltro = new Label(grpLote, SWT.NONE);
 		lblFiltro.setText("Filtro:");
@@ -382,7 +419,8 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				1, 1));
 		tFiltro.setMessage("Filtro de Busca!!");
 
-		tvLote = new TableViewer(grpLote, SWT.BORDER | SWT.FULL_SELECTION);
+		tvLote = new TableViewer(grpLote, SWT.BORDER | SWT.FULL_SELECTION
+				| SWT.MULTI);
 		tvLote.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent arg0) {
 				IStructuredSelection itemSelecao = (IStructuredSelection) tvLote
