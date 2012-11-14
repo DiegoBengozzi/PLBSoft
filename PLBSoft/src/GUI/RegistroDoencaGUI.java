@@ -64,7 +64,7 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 	public void salvar() throws Exception {
 		if (entidade == null)
 			entidade = new RegistroDoenca();
-		entidade.setData(CalendarioHelper.retornaData());
+		entidade.setData(FormatoHelper.dataFormat.parse(tData.getText()));
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
 		valorComboDoenca = (IStructuredSelection) cvDoenca.getSelection();
@@ -84,12 +84,13 @@ public class RegistroDoencaGUI extends TelaEdicaoGUI<RegistroDoenca> {
 		tvRegistroDoenca.setInput(registroDoencaService
 				.buscarTodosRegistroDoencaAtivo());
 		tvRegistroDoenca.refresh();
+		tData.setText(FormatoHelper.dataFormat.format(CalendarioHelper.retornaData()));
 	}
 
 	@Override
 	public void limparDados() {
 		CalendarioHelper.limparData();
-		tData.setText("");
+		tData.setText(FormatoHelper.dataFormat.format(CalendarioHelper.retornaData()));
 		tDescricao.setText("");
 		comboDoenca.deselectAll();
 		comboLote.deselectAll();

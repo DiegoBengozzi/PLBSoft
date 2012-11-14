@@ -96,6 +96,80 @@ public class JanelaPrincipalGUI {
 
 		Menu menu_1 = new Menu(mntmCadastros);
 		mntmCadastros.setMenu(menu_1);
+				
+						MenuItem mntmSistemaDeProduo = new MenuItem(menu_1, SWT.NONE);
+						mntmSistemaDeProduo.addSelectionListener(new SelectionAdapter() {
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								SistemaProducaoGUI sistemaProducaoGUI = new SistemaProducaoGUI(
+										scrolledComposite, SWT.BORDER);
+								carregarValores(sistemaProducaoGUI);
+							}
+						});
+						mntmSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
+				
+						MenuItem mntmSafra = new MenuItem(menu_1, SWT.NONE);
+						mntmSafra.addSelectionListener(new SelectionAdapter() {
+							@Override
+							public void widgetSelected(SelectionEvent e) {
+								SafraGUI safraGUI = new SafraGUI(scrolledComposite, SWT.BORDER);
+								carregarValores(safraGUI);
+							}
+						});
+						mntmSafra.setText("Safra");
+		
+				MenuItem mntmTipoDeTanque = new MenuItem(menu_1, SWT.NONE);
+				mntmTipoDeTanque.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						TipoTanqueGUI tipoTanque = new TipoTanqueGUI(scrolledComposite,
+								SWT.BORDER);
+						carregarValores(tipoTanque);
+					}
+				});
+				mntmTipoDeTanque.setText("Tipo de Tanque");
+		
+				MenuItem mntmEspcie = new MenuItem(menu_1, SWT.NONE);
+				mntmEspcie.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						EspecieGUI especie = new EspecieGUI(scrolledComposite,
+								SWT.BORDER);
+						carregarValores(especie);
+					}
+				});
+				mntmEspcie.setText("Esp\u00E9cie");
+		
+				MenuItem mntmCadastroDeTanque = new MenuItem(menu_1, SWT.NONE);
+				mntmCadastroDeTanque.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						TanqueGUI tanque = new TanqueGUI(scrolledComposite, SWT.BORDER);
+						carregarValores(tanque);
+					}
+				});
+				mntmCadastroDeTanque.setText("Tanque");
+		
+				MenuItem mntmPassarela = new MenuItem(menu_1, SWT.NONE);
+				mntmPassarela.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						PassarelaGUI passarela = new PassarelaGUI(scrolledComposite,
+								SWT.BORDER);
+						carregarValores(passarela);
+					}
+				});
+				mntmPassarela.setText("Passarela");
+		
+				MenuItem mntmHapa = new MenuItem(menu_1, SWT.NONE);
+				mntmHapa.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						HapaGUI hapaGUI = new HapaGUI(scrolledComposite, SWT.BORDER);
+						carregarValores(hapaGUI);
+					}
+				});
+				mntmHapa.setText("Hapa");
 
 		MenuItem mntmTanqueRede = new MenuItem(menu_1, SWT.NONE);
 		mntmTanqueRede.addSelectionListener(new SelectionAdapter() {
@@ -108,27 +182,6 @@ public class JanelaPrincipalGUI {
 		});
 		mntmTanqueRede.setText("Tanque Rede");
 
-		MenuItem mntmTipoDeTanque = new MenuItem(menu_1, SWT.NONE);
-		mntmTipoDeTanque.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				TipoTanqueGUI tipoTanque = new TipoTanqueGUI(scrolledComposite,
-						SWT.BORDER);
-				carregarValores(tipoTanque);
-			}
-		});
-		mntmTipoDeTanque.setText("Tipo de Tanque");
-
-		MenuItem mntmCadastroDeTanque = new MenuItem(menu_1, SWT.NONE);
-		mntmCadastroDeTanque.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				TanqueGUI tanque = new TanqueGUI(scrolledComposite, SWT.BORDER);
-				carregarValores(tanque);
-			}
-		});
-		mntmCadastroDeTanque.setText("Tanque");
-
 		MenuItem mntmAdubao = new MenuItem(menu_1, SWT.NONE);
 		mntmAdubao.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -139,59 +192,6 @@ public class JanelaPrincipalGUI {
 			}
 		});
 		mntmAdubao.setText("Aduba\u00E7\u00E3o");
-
-		MenuItem mntmEspcie = new MenuItem(menu_1, SWT.NONE);
-		mntmEspcie.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				EspecieGUI especie = new EspecieGUI(scrolledComposite,
-						SWT.BORDER);
-				carregarValores(especie);
-			}
-		});
-		mntmEspcie.setText("Esp\u00E9cie");
-
-		MenuItem mntmPassarela = new MenuItem(menu_1, SWT.NONE);
-		mntmPassarela.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				PassarelaGUI passarela = new PassarelaGUI(scrolledComposite,
-						SWT.BORDER);
-				carregarValores(passarela);
-			}
-		});
-		mntmPassarela.setText("Passarela");
-
-		MenuItem mntmSistemaDeProduo = new MenuItem(menu_1, SWT.NONE);
-		mntmSistemaDeProduo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				SistemaProducaoGUI sistemaProducaoGUI = new SistemaProducaoGUI(
-						scrolledComposite, SWT.BORDER);
-				carregarValores(sistemaProducaoGUI);
-			}
-		});
-		mntmSistemaDeProduo.setText("Sistema de Produ\u00E7\u00E3o");
-
-		MenuItem mntmHapa = new MenuItem(menu_1, SWT.NONE);
-		mntmHapa.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				HapaGUI hapaGUI = new HapaGUI(scrolledComposite, SWT.BORDER);
-				carregarValores(hapaGUI);
-			}
-		});
-		mntmHapa.setText("Hapa");
-
-		MenuItem mntmSafra = new MenuItem(menu_1, SWT.NONE);
-		mntmSafra.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				SafraGUI safraGUI = new SafraGUI(scrolledComposite, SWT.BORDER);
-				carregarValores(safraGUI);
-			}
-		});
-		mntmSafra.setText("Safra");
 
 		MenuItem mntmLote = new MenuItem(menu_1, SWT.NONE);
 		mntmLote.addSelectionListener(new SelectionAdapter() {
