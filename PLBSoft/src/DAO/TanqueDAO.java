@@ -1,8 +1,11 @@
 package DAO;
 
 import java.util.List;
+
 import modelo.Tanque;
+
 import org.hibernate.Query;
+
 import utils.TanqueUtils;
 import conexao.HibernateConnection;
 
@@ -39,5 +42,4 @@ public class TanqueDAO extends HibernateConnection implements TanqueUtils {
 		q.setParameter("aux", b);
 		return q.list();
 	}
-
 }
