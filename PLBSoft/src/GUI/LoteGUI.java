@@ -9,6 +9,7 @@ import java.util.List;
 import modelo.Especie;
 import modelo.Hapa;
 import modelo.Lote;
+import modelo.Passarela;
 import modelo.Safra;
 import modelo.Tanque;
 import modelo.TanqueRede;
@@ -38,6 +39,7 @@ import org.eclipse.swt.widgets.Text;
 import service.EspecieService;
 import service.HapaService;
 import service.LoteService;
+import service.PassarelaService;
 import service.SafraService;
 import service.TanqueRedeService;
 import service.TanqueService;
@@ -64,6 +66,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private EspecieService especieService;
 	private TanqueService tanqueService;
 	private HapaService hapaService;
+	private PassarelaService passarelaService;
 	private LoteFiltro filtro;
 	private IStructuredSelection valorComboSafra, valorComboEspecie,
 			valorComboTanque, valorComboTanqueRede, valorComboHapa;
@@ -85,6 +88,8 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	private TableViewerColumn tvcFiltroHapa;
 	private TanqueRedeService tanqueRedeService;
 	private Text tId;
+	private ComboViewer cvPassarela;
+	private Combo comboPassarela;
 
 	public LoteGUI(Composite parent, int style) {
 		super(parent, style);
@@ -95,6 +100,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		entidade.setStatus(false);
 		entidade.setDataFimLote(FormatoHelper.dataFormat.parse(tDataFim
 				.getText().trim()));
+
 	}
 
 	@Override
@@ -129,14 +135,14 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				.getSelection();
 		entidade.setTanqueRedeId((TanqueRede) valorComboTanqueRede
 				.getFirstElement());
-
+		
 		valorComboHapa = (IStructuredSelection) cvHapa.getSelection();
 		entidade.setHapaId((Hapa) valorComboHapa.getFirstElement());
 
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
 		loteService.salvar(entidade);
-		
+
 	}
 
 	@Override
@@ -170,6 +176,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tDescricao.setText("");
 		tFiltro.setText("");
 		entidade = new Lote();
+		tvOrigemLote.setInput(null);
 		tvOrigemLote.refresh();
 	}
 
@@ -199,8 +206,12 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 		tDescricao.setText(entidade.getDescricao());
 
+
 		tvOrigemLote.setInput(loteService.buscarLoteOrigem(entidade.getId()));
 		tvOrigemLote.refresh();
+		tvLote.setInput(loteService.buscarTodosLoteAtivo());
+
+
 	}
 
 	@Override
@@ -210,15 +221,16 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
-		entidade = new   Lote();
+		entidade = new Lote();
 		filtro = new LoteFiltro();
 		loteService = new LoteService();
 		hapaService = new HapaService();
 		safraService = new SafraService();
 		tanqueService = new TanqueService();
 		especieService = new EspecieService();
+		passarelaService = new PassarelaService();
 		tanqueRedeService = new TanqueRedeService();
-
+		
 		composite.setLayout(new GridLayout(1, false));
 
 		Group grpLote = new Group(composite, SWT.NONE);
@@ -232,7 +244,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		lblId.setText("Id:");
 
 		tId = new Text(grpLote, SWT.BORDER);
-		tId.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		GridData gd_tId = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		gd_tId.widthHint = 49;
+		tId.setLayoutData(gd_tId);
 		tId.setEditable(false);
 
 		Label lblSafra = new Label(grpLote, SWT.NONE);
@@ -325,13 +339,15 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 		Label lblTanque = new Label(grpLote, SWT.NONE);
 		lblTanque.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
-				false, 1, 2));
+				false, 1, 1));
 		lblTanque.setText("Tanque:");
 
 		cvTanque = new ComboViewer(grpLote, SWT.READ_ONLY);
 		comboTanque = cvTanque.getCombo();
-		comboTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-				false, 4, 2));
+		GridData gd_comboTanque = new GridData(SWT.FILL, SWT.CENTER, false,
+				false, 4, 1);
+		gd_comboTanque.widthHint = 324;
+		comboTanque.setLayoutData(gd_comboTanque);
 		cvTanque.setContentProvider(ArrayContentProvider.getInstance());
 		cvTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -357,7 +373,24 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				return ((TanqueRede) element).getNome();
 			}
 		});
-		cvTanqueRede.setInput(tanqueRedeService.buscarTodosTanqueRedeAtivo());
+		cvTanqueRede.setInput(tanqueRedeService.buscarTodosTanqueRedeLivre());
+		
+		Label lblPassarela = new Label(grpLote, SWT.NONE);
+		lblPassarela.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPassarela.setText("Passarela:");
+		
+		cvPassarela = new ComboViewer(grpLote, SWT.READ_ONLY);
+		comboPassarela = cvPassarela.getCombo();
+		comboPassarela.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 4, 1));
+		cvPassarela.setContentProvider(ArrayContentProvider.getInstance());
+		cvPassarela.setLabelProvider(new ColumnLabelProvider(){
+			@Override
+			public String getText(Object element) {
+				return ((Passarela)element).getNome();
+			}
+		});
+		cvPassarela.setInput(passarelaService.buscarTodosPassarelaAtivo());
+
 
 		Label lblHapa = new Label(grpLote, SWT.NONE);
 		lblHapa.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
@@ -375,7 +408,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				return ((Hapa) element).getNome();
 			}
 		});
-		cvHapa.setInput(hapaService.buscarTodosHapaAtivo());
+		cvHapa.setInput(hapaService.buscarTodasHapaLivre());
 
 		Group grpOrigemDoLote = new Group(grpLote, SWT.NONE);
 		grpOrigemDoLote.setText("Origem do Lote");
@@ -580,8 +613,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 					return;
 				limparDados();
 				entidade = (Lote) itemSelecao.getFirstElement();
-				tvLote.remove(entidade);
 				carregarComponentes();
+				tvLote.remove(entidade);
+				
 			}
 		});
 		tableLote = tvLote.getTable();
@@ -689,8 +723,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcFiltroTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Tanque x=((Lote) element).getTanqueId();
-				if(x==null) return "";
+				Tanque x = ((Lote) element).getTanqueId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getTanqueId().getNome();
 			}
 		});

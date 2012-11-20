@@ -31,7 +31,7 @@ public class HapaService {
 		List<Hapa> t = buscarTodosHapaAtivo();
 		List<Lote> l = loteService.buscarTodosLoteAtivo();
 		for (Lote lote : l) {
-			t.remove(lote.getTanqueId());
+			t.remove(lote.getHapaId());
 		}
 		return t;
 	}

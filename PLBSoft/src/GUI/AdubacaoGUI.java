@@ -2,6 +2,9 @@ package GUI;
 
 import helper.CalendarioHelper;
 import helper.FormatoHelper;
+
+import java.text.ParseException;
+
 import modelo.Adubacao;
 import modelo.Tanque;
 
@@ -58,16 +61,15 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	}
 
 	@Override
-	public void salvar() {
+	public void salvar() throws ParseException {
 		if (entidade == null)
-			entidade = new Adubacao();
+			entidade = new Adubacao();	
 
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
 		valorCombo = (IStructuredSelection) cvTanque.getSelection();
 		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
-		// entidade.setData(FormatoHelper.dataFormato().format());
-		entidade.setData(CalendarioHelper.retornaData());
+		entidade.setData(FormatoHelper.dataFormat.parse(textData.getText()));
 		adubacaoService.salvar(entidade);
 	}
 
@@ -80,6 +82,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 	public void carregar() {
 		tvAdubacao.setInput(adubacaoService.buscarTodosAdubacaoAtivo());
 		tvAdubacao.refresh();
+		textData.setText(FormatoHelper.dataFormat.format(CalendarioHelper
+				.retornaData()));
 	}
 
 	@Override
@@ -87,7 +91,8 @@ public class AdubacaoGUI extends TelaEdicaoGUI<Adubacao> {
 		CalendarioHelper.limparData();
 		tDescricao.setText("");
 		comboTanque.deselectAll();
-		textData.setText("");
+		textData.setText(FormatoHelper.dataFormat.format(CalendarioHelper
+				.retornaData()));
 		tFiltro.setText("");
 		entidade = null;
 	}

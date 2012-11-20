@@ -36,14 +36,30 @@ public class LoteFiltro extends TabelaFiltro {
 				.toLowerCase().matches(filtro.toLowerCase()))
 			return true;
 
-//		if (FormatoHelper.dataFormat.format(lote.getSafraId()).toLowerCase()
-//				.matches(filtro.toLowerCase()))
-//			return true;
+		if (FormatoHelper.dataFormat.format(lote.getSafraId()).toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
 
 		if (lote.getEspecieId().getEspecie().toLowerCase()
 				.matches(filtro.toLowerCase()))
 			return true;
+		
+		if (lote.getTanqueId().getNome().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
 
+		if (lote.getTanqueRedeId().getNome().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
+		
+		if (lote.getHapaId().getNome().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
+		
+		if (lote.getHapaId().getPassarelaId().getNome().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
+		
 		return false;
 	}
 
