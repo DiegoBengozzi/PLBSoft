@@ -136,6 +136,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		entidade.setDescricao(tDescricao.getText().trim());
 		entidade.setStatus(true);
 		loteService.salvar(entidade);
+		
 	}
 
 	@Override
@@ -146,7 +147,6 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 	@Override
 	public void carregar() {
 		tvLote.setInput(loteService.buscarTodosLoteAtivo());
-		// tvOrigemLote.setInput(loteService.buscarLoteOrigem());
 		tvLote.refresh();
 		tDataInicio.setText(FormatoHelper.dataFormat.format(CalendarioHelper
 				.retornaData()));
@@ -162,7 +162,6 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tDataFim.setText("01/01/0001");
 		tDataInicio.setText(FormatoHelper.dataFormat.format(CalendarioHelper
 				.retornaData()));
-		tDataFim.setText("");
 		tQuantidade.setText("");
 		comboEspecie.deselectAll();
 		comboTanque.deselectAll();
@@ -170,7 +169,8 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		comboHapa.deselectAll();
 		tDescricao.setText("");
 		tFiltro.setText("");
-		entidade = null;
+		entidade = new Lote();
+		tvOrigemLote.refresh();
 	}
 
 	@Override
@@ -210,6 +210,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 
 	@Override
 	public void adicionarComponentes(Composite composite) {
+		entidade = new   Lote();
 		filtro = new LoteFiltro();
 		loteService = new LoteService();
 		hapaService = new HapaService();
@@ -387,13 +388,14 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tableOrigemLote = tvOrigemLote.getTable();
 		GridData gd_tableOrigemLote = new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 2);
-		gd_tableOrigemLote.widthHint = 740;
+		gd_tableOrigemLote.widthHint = 840;
 		tableOrigemLote.setLayoutData(gd_tableOrigemLote);
 		tableOrigemLote.setLinesVisible(true);
 		tableOrigemLote.setHeaderVisible(true);
 
 		tvOrigemLote.addFilter(filtro);
 		tvOrigemLote.setContentProvider(ArrayContentProvider.getInstance());
+		tvOrigemLote.setInput(entidade.getListaLote());
 
 		tvcOrigemId = new TableViewerColumn(tvOrigemLote, SWT.NONE);
 		tvcOrigemId.setLabelProvider(new ColumnLabelProvider() {
@@ -490,6 +492,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcOrigemTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Tanque x = ((Lote) element).getTanqueId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getTanqueId().getNome();
 			}
 		});
@@ -501,7 +506,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcOrigemTanqueRede.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-
+				TanqueRede x = ((Lote) element).getTanqueRedeId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getTanqueRedeId().getNome();
 			}
 		});
@@ -513,6 +520,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcOrigemPassarela.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Hapa x = ((Lote) element).getHapaId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getHapaId().getPassarelaId().getNome();
 			}
 		});
@@ -524,6 +534,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcOrigemHapa.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Hapa x = ((Lote) element).getHapaId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getHapaId().getNome();
 			}
 		});
@@ -543,7 +556,6 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 				List<Lote> lista = (List<Lote>) itemSelecao.toList();
 				entidade.getListaLote().addAll(lista);
 				tvOrigemLote.refresh();
-				// OK isso ta errado e eu nao sei como arrumar =(
 			}
 		});
 		btnAdd.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false,
@@ -568,6 +580,7 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 					return;
 				limparDados();
 				entidade = (Lote) itemSelecao.getFirstElement();
+				tvLote.remove(entidade);
 				carregarComponentes();
 			}
 		});
@@ -676,6 +689,8 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcFiltroTanque.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Tanque x=((Lote) element).getTanqueId();
+				if(x==null) return "";
 				return ((Lote) element).getTanqueId().getNome();
 			}
 		});
@@ -687,6 +702,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcFiltroTanqueRede.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				TanqueRede x = ((Lote) element).getTanqueRedeId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getTanqueRedeId().getNome();
 			}
 		});
@@ -698,6 +716,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcFiltroPassarela.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Hapa x = ((Lote) element).getHapaId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getHapaId().getPassarelaId().getNome();
 			}
 		});
@@ -709,6 +730,9 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		tvcFiltroHapa.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
+				Hapa x = ((Lote) element).getHapaId();
+				if (x == null)
+					return "";
 				return ((Lote) element).getHapaId().getNome();
 			}
 		});
