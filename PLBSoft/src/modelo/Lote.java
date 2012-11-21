@@ -43,7 +43,7 @@ public class Lote implements Serializable {
 	private Date dataFimLote;
 	
 	@Column
-	private String nome;
+	private String nomeLote;
 	
 	@Column
 	private String descricao;
@@ -135,11 +135,11 @@ public class Lote implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeLote;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomeLote = nome;
 	}
 
 	public String getDescricao() {

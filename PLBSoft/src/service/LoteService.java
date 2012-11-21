@@ -26,16 +26,8 @@ public class LoteService {
 	}
 	
 	public List<Lote> buscarLoteOrigem(Long id){
-		
 		Lote l = buscar(id);
 		List <Lote> x = l.getListaLote();
-//		List<Lote> x = buscarTodosLoteAtivo();
-//		for (Lote lote : x) {
-//			if(lote.getListaLote()==null){
-//				x.remove(lote.getListaLote());
-//			}
-//		}
-		
 		return x;
 	}
 

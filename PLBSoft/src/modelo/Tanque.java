@@ -25,7 +25,7 @@ import javax.persistence.Table;
 		private Long id;
 
 		@Column
-		private String nome;
+		private String nomeTanque;
 
 		@Column
 		private String descricao;
@@ -57,11 +57,11 @@ import javax.persistence.Table;
 		}
 
 		public String getNome() {
-			return nome;
+			return nomeTanque;
 		}
 
 		public void setNome(String nome) {
-			this.nome = nome;
+			this.nomeTanque = nome;
 		}
 
 		public String getDescricao() {

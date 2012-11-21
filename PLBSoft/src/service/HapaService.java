@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.Hapa;
 import modelo.Lote;
+import modelo.Passarela;
 import DAO.HapaDAO;
 
 public class HapaService {
@@ -34,5 +35,9 @@ public class HapaService {
 			t.remove(lote.getHapaId());
 		}
 		return t;
+	}
+	
+	public List<Hapa> buscarHapaPassarela(Passarela p){
+		return dao.buscarHP(p);
 	}
 }

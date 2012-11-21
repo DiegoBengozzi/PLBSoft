@@ -14,45 +14,45 @@
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.text_3.5.101.r371_v20110810-0800.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.forms_3.5.100.v20110425.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.workbench_3.7.0.I20110519-0100.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/aopalliance.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/classmate-0.5.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-beanutils-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-javaflow-20060411.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-lang-2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/commons-logging-1.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-assistedinject-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-grapher-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-jmx-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-jndi-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-multibindings-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-persist-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-spring-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-struts2-plugin-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/guice-throwingproviders-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/hibernate-commons-annotations-4.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/hibernate-core-4.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/hibernate-validator-4.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/jandex-1.0.3.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/jasperreports-3.7.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/javassist-3.12.1.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/javax.inject.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/jboss-logging-3.1.0.CR2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/jpa-api-2.0.Beta-20090815.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/postgresql-9.1-901.jdbc3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/slf4j-api-1.5.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/swing2swt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/swtjasperviewer-1.2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DIEGO/git/PLBSoft/PLBSoft/jars/xstream-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/aopalliance.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/classmate-0.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-assistedinject-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-grapher-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-jmx-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-jndi-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-multibindings-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-persist-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-spring-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-struts2-plugin-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/guice-throwingproviders-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/hibernate-core-4.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/hibernate-validator-4.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/jandex-1.0.3.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/jasperreports-3.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/javassist-3.12.1.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/javax.inject.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/jboss-logging-3.1.0.CR2.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/jpa-api-2.0.Beta-20090815.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/postgresql-9.1-901.jdbc3.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/swing2swt.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/swtjasperviewer-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/validation-api-1.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Administrador/git/PLBSoft/PLBSoft/jars/xstream-1.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

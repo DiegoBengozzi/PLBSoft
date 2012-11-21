@@ -24,7 +24,7 @@ public class TanqueRede implements Serializable {
 	private Long id;
 
 	@Column
-	private String nome;
+	private String nomeTanqueRede;
 
 	@Column
 	private BigDecimal tamanho;
@@ -45,11 +45,11 @@ public class TanqueRede implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeTanqueRede;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomeTanqueRede = nome;
 	}
 
 	public BigDecimal getTamanho() {

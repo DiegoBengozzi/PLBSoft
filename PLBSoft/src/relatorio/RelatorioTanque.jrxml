@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioTanque" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1">
+		<queryString>
+			<![CDATA[select * from tanque
+where tanque.status = true]]>
+		</queryString>
+		<field name="id" class="java.lang.Long"/>
+		<field name="acessibilidade" class="java.lang.String"/>
+		<field name="descricao" class="java.lang.String"/>
+		<field name="laminaagua" class="java.math.BigDecimal"/>
+		<field name="nome" class="java.lang.String"/>
+		<field name="profundidade" class="java.math.BigDecimal"/>
+		<field name="status" class="java.lang.Boolean"/>
+		<field name="sistemaproducaoid_id" class="java.lang.Long"/>
+		<field name="tipotanqueid_id" class="java.lang.Long"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[select * from tanque
+join tipo_tanque on tipo_tanque.id = tipotanqueid_id
+where tanque.status = true]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="acessibilidade" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="laminaagua" class="java.math.BigDecimal"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="profundidade" class="java.math.BigDecimal"/>
+	<field name="status" class="java.lang.Boolean"/>
+	<field name="sistemaproducaoid_id" class="java.lang.Long"/>
+	<field name="tipotanqueid_id" class="java.lang.Long"/>
+	<field name="revestimento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="12" width="56" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Documents and Settings\\Administrador\\git\\PLBSoft\\PLBSoft\\src\\Icone\\Logo3-32x32.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="76" y="12" width="140" height="54"/>
+				<textElement textAlignment="Center">
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[PLBSoft]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="23" width="319" height="31"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Picicultura Lagoa dos Bagres]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="206" height="35"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Tanque]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="0" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lamina de água m²]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="274" y="0" width="111" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acessibilidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revestimento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20"/>
+			</rectangle>
+			<textField>
+				<reportElement x="56" y="0" width="78" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{laminaagua}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="274" y="0" width="111" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{acessibilidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="0" width="109" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{revestimento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="28" splitType="Stretch"/>
+	</summary>
+</jasperReport>

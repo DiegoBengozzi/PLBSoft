@@ -2,6 +2,7 @@ package DAO;
 
 import java.util.List;
 
+import modelo.Tanque;
 import modelo.TanqueRede;
 
 import org.hibernate.Query;
@@ -40,6 +41,16 @@ public class TanqueRedeDAO extends HibernateConnection implements TanqueRedeUtil
 		Query q = getSession().createQuery("select t from TanqueRede t  where t.status is :aux");
 		q.setParameter("aux", b);
 		return  q.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TanqueRede> buscarTRT(Tanque p){
+		Query q = getSession().createQuery("select tr from tanque_rede tr" +
+				" join tanque on tanqueid_id = tanque.id" +
+				" where (tanque.id = 2 or 2 is null)" +
+				" and tr.status = true");
+		q.setParameter("aux", p.getId());
+		return q.list();
 	}
 
 

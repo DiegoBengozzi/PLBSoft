@@ -25,7 +25,7 @@ public class Hapa implements Serializable {
 	private Long id;
 
 	@Column
-	private String nome;
+	private String nomeHapa;
 
 	@Column
 	private BigDecimal tamanho;
@@ -45,11 +45,11 @@ public class Hapa implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeHapa;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomeHapa = nome;
 	}
 
 	public BigDecimal getTamanho() {

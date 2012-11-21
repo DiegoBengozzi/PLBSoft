@@ -3,6 +3,7 @@ package DAO;
 import java.util.List;
 
 import modelo.Hapa;
+import modelo.Passarela;
 
 import org.hibernate.Query;
 
@@ -40,6 +41,16 @@ public class HapaDAO extends HibernateConnection implements HapaUtils{
 		Query q = getSession().createQuery(
 				"select t from Hapa t where t.status is :aux");
 		q.setParameter("aux", b);
+		return q.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Hapa> buscarHP(Passarela p){
+		Query q = getSession().createQuery("select * from hapa " +
+				"join passarela on passarelaid_id = hapa.id " +
+				"where (hapa.id = :aux or :aux is null) " +
+				"and hapa.status = true ");
+		q.setParameter("aux", p);
 		return q.list();
 	}
 

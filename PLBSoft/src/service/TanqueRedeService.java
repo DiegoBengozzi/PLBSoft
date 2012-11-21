@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import modelo.Lote;
+import modelo.Tanque;
 import modelo.TanqueRede;
 import DAO.TanqueRedeDAO;
 
@@ -34,6 +35,10 @@ public class TanqueRedeService {
 			t.remove(lote.getTanqueRedeId());
 		}
 		return t;
+	}
+	
+	public List<TanqueRede> buscarTanqueRedeTanque(Tanque t){
+		return dao.buscarTRT(t);
 	}
 
 }

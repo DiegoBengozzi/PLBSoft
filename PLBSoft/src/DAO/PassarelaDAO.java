@@ -3,20 +3,21 @@ package DAO;
 import java.util.List;
 
 import modelo.Passarela;
+import modelo.Tanque;
 
 import org.hibernate.Query;
 
 import utils.PassarelaUtils;
 import conexao.HibernateConnection;
 
-public class PassarelaDAO extends HibernateConnection implements PassarelaUtils{
+public class PassarelaDAO extends HibernateConnection implements PassarelaUtils {
 
 	@Override
 	public void salvar(Passarela entidade) {
 		if (entidade.getId() != null)
 			merge(entidade);
 		else
-			persist(entidade);		
+			persist(entidade);
 	}
 
 	@Override
@@ -43,4 +44,14 @@ public class PassarelaDAO extends HibernateConnection implements PassarelaUtils{
 		return q.list();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Passarela> buscarPT(Tanque p) {
+		Query q = getSession().createQuery(
+				"select * from passarela "
+						+ "join tanque on tanqueid_id = tanque.id "
+						+ "where (tanque.id = :aux or :aux is null) "
+						+ "and passarela.status = true ");
+		q.setParameter("aux", p);
+		return q.list();
+	}
 }

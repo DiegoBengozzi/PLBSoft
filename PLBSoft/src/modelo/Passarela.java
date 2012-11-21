@@ -24,7 +24,7 @@ public class Passarela implements Serializable {
 	private Long id;
 
 	@Column
-	private String nome;
+	private String nomePassarela;
 
 	@Column
 	private Long capacidade;
@@ -44,11 +44,11 @@ public class Passarela implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomePassarela;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomePassarela = nome;
 	}
 
 	public Long getCapacidade() {
