@@ -230,16 +230,25 @@ public class JanelaPrincipalGUI {
 
 		Menu menu_2 = new Menu(mntmRelatorios);
 		mntmRelatorios.setMenu(menu_2);
-
-		MenuItem mntmRelatoriosNok = new MenuItem(menu_2, SWT.NONE);
-		mntmRelatoriosNok.addSelectionListener(new SelectionAdapter() {
+		
+		MenuItem mntmRelatorioDeLote = new MenuItem(menu_2, SWT.NONE);
+		mntmRelatorioDeLote.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				StatusHelper.mensagemError("Relatórios não disponiveis");
-				// CalendarioHelper.getCalendario();
+				mensagemInfo("Relatorio de Lote!");
+				
 			}
 		});
-		mntmRelatoriosNok.setText("Relatorios NOK");
+		mntmRelatorioDeLote.setText("Relatorio de Lote");
+		
+		MenuItem mntmRelatorioDeTanque = new MenuItem(menu_2, SWT.NONE);
+		mntmRelatorioDeTanque.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				mensagemInfo("Relatorio de Tanque!");
+			}
+		});
+		mntmRelatorioDeTanque.setText("Relatorio de Tanque");
 		/**
 		 * Fim da barra de munu superior e inicio da barra de menus lateral
 		 */
