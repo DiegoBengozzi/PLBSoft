@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table
-@Entity(name = "ESPECIE")
+@Table(name = "ESPECIE")
+@Entity
 public class Especie implements Serializable{
 
 	/**
@@ -29,19 +30,22 @@ public class Especie implements Serializable{
 	private String linhegem;
 
 	@Column
-	private String hidrido;
+	private String hibrido;
 
 	@Column
 	private String genero;
 
 	@Column
-	private Long toleranciaSalinidade;
+	private String toleranciaSalinidade;
 
 	@Column
-	private Long toleranciaFrio;
+	private String toleranciaFrio;
 
 	@Column
-	private Long maturacaoSexual;
+	private BigDecimal maturacaoSexual;
+	
+	@Column
+	private Boolean status;
 
 	public Long getId() {
 		return id;
@@ -67,12 +71,12 @@ public class Especie implements Serializable{
 		this.linhegem = linhegem;
 	}
 
-	public String getHidrido() {
-		return hidrido;
+	public String getHibrido() {
+		return hibrido;
 	}
 
-	public void setHidrido(String hidrido) {
-		this.hidrido = hidrido;
+	public void setHibrido(String hibrido) {
+		this.hibrido = hibrido;
 	}
 
 	public String getGenero() {
@@ -83,28 +87,36 @@ public class Especie implements Serializable{
 		this.genero = genero;
 	}
 
-	public Long getToleranciaSalinidade() {
+	public String getToleranciaSalinidade() {
 		return toleranciaSalinidade;
 	}
 
-	public void setToleranciaSalinidade(Long toleranciaSalinidade) {
+	public void setToleranciaSalinidade(String toleranciaSalinidade) {
 		this.toleranciaSalinidade = toleranciaSalinidade;
 	}
 
-	public Long getToleranciaFrio() {
+	public String getToleranciaFrio() {
 		return toleranciaFrio;
 	}
 
-	public void setToleranciaFrio(Long toleranciaFrio) {
+	public void setToleranciaFrio(String toleranciaFrio) {
 		this.toleranciaFrio = toleranciaFrio;
 	}
 
-	public Long getMaturacaoSexual() {
+	public BigDecimal getMaturacaoSexual() {
 		return maturacaoSexual;
 	}
 
-	public void setMaturacaoSexual(Long maturacaoSexual) {
+	public void setMaturacaoSexual(BigDecimal maturacaoSexual) {
 		this.maturacaoSexual = maturacaoSexual;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override
@@ -131,5 +143,6 @@ public class Especie implements Serializable{
 			return false;
 		return true;
 	}
+
 
 }

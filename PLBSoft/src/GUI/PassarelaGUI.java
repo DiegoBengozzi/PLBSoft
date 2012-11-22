@@ -1,85 +1,228 @@
 package GUI;
 
+import helper.FormatoHelper;
 import modelo.Passarela;
+import modelo.Tanque;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.Text;
 
-public class PassarelaGUI extends TelaEdicaoGUI<Passarela>{
+import service.PassarelaService;
+import service.TanqueService;
+import filtro.PassarelaFiltro;
+
+public class PassarelaGUI extends TelaEdicaoGUI<Passarela> {
 	private Text tNome;
 	private Text tCapacidade;
+	private Table table;
+	private Text tFiltro;
+	private TableViewer tvPassarela;
+	private TableViewerColumn tvcId, tvcNome, tvcCapacidadeHapa, tvcTanqueId;
+	private PassarelaFiltro filtro;
+	private PassarelaService passarelaService;
+	private IStructuredSelection valorCombo;
+	private ComboViewer cvPassarela;
+	private TanqueService tanqueService;
+	private Combo comboPassarela;
 
 	public PassarelaGUI(Composite parent, int style) {
 		super(parent, style);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void excluir() {
-		// TODO Auto-generated method stub
-		
+		entidade.setStatus(false);
 	}
 
 	@Override
 	public void buscar() {
-		// TODO Auto-generated method stub
-		
+		filtro.setFiltro(tFiltro.getText());
+		tvPassarela.refresh();
 	}
 
 	@Override
 	public void salvar() {
-		// TODO Auto-generated method stub
-		
+		if (entidade == null)
+			entidade = new Passarela();
+
+		entidade.setNome(tNome.getText().trim());
+		entidade.setCapacidade(new Long(tCapacidade.getText().trim()));
+		entidade.setStatus(true);
+		valorCombo = (IStructuredSelection) cvPassarela.getSelection();
+		entidade.setTanqueId((Tanque) valorCombo.getFirstElement());
+		passarelaService.salvar(entidade);
 	}
 
 	@Override
-	public void adicionarComponentes(Composite composite) {
-		composite.setLayout(new GridLayout(2, false));
-		
-		Label lblNome = new Label(composite, SWT.NONE);
-		lblNome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		lblNome.setText("Nome:");
-		
-		tNome = new Text(composite, SWT.BORDER);
-		tNome.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblCapacidadeDeHapas = new Label(composite, SWT.NONE);
-		lblCapacidadeDeHapas.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblCapacidadeDeHapas.setText("Capacidade de Hapas:");
-		
-		tCapacidade = new Text(composite, SWT.BORDER);
-		tCapacidade.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label lblTanque = new Label(composite, SWT.NONE);
-		lblTanque.setText("Tanque:");
-		
-		Combo cbTanque = new Combo(composite, SWT.NONE);
-		cbTanque.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		// TODO Auto-generated method stub
-		
+	public void validar() throws Exception {
+
 	}
 
 	@Override
 	public void carregar() {
-		// TODO Auto-generated method stub
-		
+		tvPassarela.setInput(passarelaService.buscarTodosPassarelaAtivo());
+		tvPassarela.refresh();
 	}
 
 	@Override
 	public void limparDados() {
-		// TODO Auto-generated method stub
-		
+		tNome.setText("");
+		tCapacidade.setText("");
+		tFiltro.setText("");
+		entidade = null;
 	}
 
 	@Override
 	public void carregarComponentes() {
-		// TODO Auto-generated method stub
-		
+		tNome.setText(entidade.getNome());
+		tCapacidade.setText(FormatoHelper.getDecimalFormato().format(
+				entidade.getCapacidade()));
+		comboPassarela.select(tanqueService.buscarTodosTanqueAtivo().indexOf(
+				entidade.getTanqueId()));
+
 	}
 
+	@Override
+	public boolean isEntidadeNula() {
+		return entidade == null;
+	}
+
+	@Override
+	public void adicionarComponentes(Composite composite) {
+		filtro = new PassarelaFiltro();
+		passarelaService = new PassarelaService();
+		tanqueService = new TanqueService();
+
+		composite.setLayout(new GridLayout(1, false));
+
+		Group grpPassarela = new Group(composite, SWT.NONE);
+		grpPassarela.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1));
+		grpPassarela.setText("Passarela");
+		grpPassarela.setLayout(new GridLayout(3, false));
+
+		Label lblNome = new Label(grpPassarela, SWT.NONE);
+		lblNome.setText("Nome:");
+
+		tNome = new Text(grpPassarela, SWT.BORDER);
+		tNome.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+
+		Label lblCapacidadeDeHapas = new Label(grpPassarela, SWT.NONE);
+		lblCapacidadeDeHapas.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
+		lblCapacidadeDeHapas.setText("Capacidade de Hapa:");
+
+		tCapacidade = new Text(grpPassarela, SWT.BORDER);
+		tCapacidade.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
+				1, 1));
+
+		Label lblTanque = new Label(grpPassarela, SWT.NONE);
+		lblTanque.setText("Tanque:");
+
+		cvPassarela = new ComboViewer(grpPassarela, SWT.READ_ONLY);
+		comboPassarela = cvPassarela.getCombo();
+		comboPassarela.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+		cvPassarela.setContentProvider(ArrayContentProvider.getInstance());
+		cvPassarela.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Tanque) element).getNome();
+			}
+		});
+		cvPassarela.setInput(tanqueService.buscarTodosTanqueAtivo());
+
+		Label lblFiltro = new Label(grpPassarela, SWT.NONE);
+		lblFiltro.setText("Filtro:");
+
+		tFiltro = new Text(grpPassarela, SWT.BORDER);
+		tFiltro.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2,
+				1));
+		tFiltro.setMessage("Filtro de Busca!!");
+
+		tvPassarela = new TableViewer(grpPassarela, SWT.BORDER
+				| SWT.FULL_SELECTION);
+		tvPassarela.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent arg0) {
+				IStructuredSelection itemSelecao = (IStructuredSelection) tvPassarela
+						.getSelection();
+				if (itemSelecao.isEmpty())
+					return;
+				limparDados();
+				entidade = (Passarela) itemSelecao.getFirstElement();
+				carregarComponentes();
+			}
+		});
+		table = tvPassarela.getTable();
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
+
+		tvPassarela.addFilter(filtro);
+		tvPassarela.setContentProvider(ArrayContentProvider.getInstance());
+
+		tvcId = new TableViewerColumn(tvPassarela, SWT.NONE);
+		tvcId.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Passarela) element).getId().toString();
+			}
+		});
+		TableColumn tblclmnId = tvcId.getColumn();
+		tblclmnId.setWidth(41);
+		tblclmnId.setText("Id");
+
+		tvcNome = new TableViewerColumn(tvPassarela, SWT.NONE);
+		tvcNome.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((Passarela) element).getNome();
+			}
+		});
+		TableColumn tblclmnNome = tvcNome.getColumn();
+		tblclmnNome.setWidth(100);
+		tblclmnNome.setText("Nome");
+
+		tvcCapacidadeHapa = new TableViewerColumn(tvPassarela, SWT.NONE);
+		tvcCapacidadeHapa.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return FormatoHelper.getDecimalFormato().format(
+						((Passarela) element).getCapacidade());
+			}
+		});
+		TableColumn tblclmnCapacidadeDeHapa = tvcCapacidadeHapa.getColumn();
+		tblclmnCapacidadeDeHapa.setWidth(144);
+		tblclmnCapacidadeDeHapa.setText("Capacidade de Hapa");
+
+		tvcTanqueId = new TableViewerColumn(tvPassarela, SWT.NONE);
+		tvcTanqueId.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Passarela p = (Passarela) element;
+				return p.getTanqueId() == null ? "" : p.getTanqueId().getNome();
+			}
+		});
+
+		TableColumn tblclmnTanque = tvcTanqueId.getColumn();
+		tblclmnTanque.setWidth(139);
+		tblclmnTanque.setText("Tanque");
+
+	}
 }

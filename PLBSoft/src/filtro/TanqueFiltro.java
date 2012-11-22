@@ -15,9 +15,10 @@ public class TanqueFiltro extends TabelaFiltro {
 
 		Tanque tanque = (Tanque) element;
 
-		if (tanque.getId().toString().toLowerCase().matches(filtro.toLowerCase()))
+		if (tanque.getId().toString().toLowerCase()
+				.matches(filtro.toLowerCase()))
 			return true;
-		
+
 		if (tanque.getNome().toLowerCase().matches(filtro.toLowerCase()))
 			return true;
 
@@ -29,14 +30,20 @@ public class TanqueFiltro extends TabelaFiltro {
 				.matches(filtro.toLowerCase()))
 			return true;
 
-		if (FormatoHelper.getDecimalFormato()
-				.format(tanque.getAcessibilidade())
+		if (tanque.getAcessibilidade().toLowerCase()
 				.matches(filtro.toLowerCase()))
 			return true;
 
-		if (tanque.getDescricao().toLowerCase().matches(filtro.toLowerCase())) 
-			return true; 
-		
+		if (tanque.getDescricao().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
+
+		if (tanque.getSistemaProducaoId().getSistemaProducao().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
+
+		if (tanque.getTipoTanqueId().getNome().toLowerCase()
+				.matches(filtro.toLowerCase()))
+			return true;
 
 		return false;
 	}

@@ -1,7 +1,7 @@
 package GUI;
 
-import static helper.StatusHelper.mensagemError;
-import static helper.StatusHelper.mensagemInfo;
+import static helper.StatusHelper.*;
+import helper.CalendarioHelper;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -15,20 +15,21 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import conexao.HibernateConnection;
 
 public abstract class TelaEdicaoGUI<T> extends Composite {
+	
+	/**
+	 * TelaEdicao é destinada a atribuicao de 
+	 * metodos paras as telas de cadastros de 
+	 * uma forma geral
+	 */
 	protected T entidade;
 
-	/**
-	 * Create the composite.
-	 * 
-	 * @param parent
-	 * @param style
-	 * @throws Exception
-	 */
 	public abstract void excluir() throws Exception;
 
 	public abstract void buscar();
 
 	public abstract void salvar() throws Exception;
+	
+	public abstract void validar() throws Exception;
 
 	public abstract void adicionarComponentes(Composite composite);
 
@@ -37,6 +38,19 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	public abstract void limparDados();
 
 	public abstract void carregarComponentes();
+	
+	public abstract boolean isEntidadeNula();
+	
+
+	public void voltar() {
+		dispose();
+		mensagemLimpar();
+		CalendarioHelper.limparData();
+	}
+
+	@Override
+	protected void checkSubclass() {
+	}
 
 	public TelaEdicaoGUI(Composite parent, int style) {
 		super(parent, style);
@@ -58,12 +72,13 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 		btnSalvar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				mensagemLimpar();
 				try {
 					salvar();
 					HibernateConnection.commit();
 					carregar();
 					limparDados();
-					mensagemInfo("Cadastro Realizado!");
+					mensagemInfo("Cadastro realizado!");
 				} catch (Exception e1) {
 					mensagemError("Erro de cadastro!!! ");
 					e1.printStackTrace();
@@ -81,9 +96,11 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					if (entidade == null) return;
+					if (isEntidadeNula()){
+						limparDados();
+						return;
+					}
 					excluir();
-					mensagemError("teste de exclusao001");
 					HibernateConnection.commit();
 					carregar();
 					limparDados();
@@ -118,6 +135,7 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				voltar();
+				CalendarioHelper.limparData();
 			}
 		});
 		btnVoltar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false,
@@ -128,11 +146,4 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 
 	}
 
-	public void voltar() {
-		dispose();
-	}
-
-	@Override
-	protected void checkSubclass() {
-	}
 }

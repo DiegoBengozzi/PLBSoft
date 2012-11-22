@@ -2,6 +2,7 @@ package filtro;
 
 import helper.FormatoHelper;
 import modelo.TanqueRede;
+
 import org.eclipse.jface.viewers.Viewer;
 
 public class TanqueRedeFiltro extends TabelaFiltro {
@@ -18,7 +19,10 @@ public class TanqueRedeFiltro extends TabelaFiltro {
 			return true;
 		
 		if (FormatoHelper.getDecimalFormato().format(tanqueRede.getTamanho()).matches(filtro.toLowerCase()))
-			return true;	
+			return true;
+		
+		if (tanqueRede.getTanqueId().getNome().toLowerCase().matches(filtro.toLowerCase()))
+			return true;
 			
 		return false;
 	}

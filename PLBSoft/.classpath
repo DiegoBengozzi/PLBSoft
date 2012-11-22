@@ -2,39 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="jars/antlr-2.7.7.jar"/>
-	<classpathentry kind="lib" path="jars/aopalliance.jar"/>
-	<classpathentry kind="lib" path="jars/classmate-0.5.4.jar"/>
-	<classpathentry kind="lib" path="jars/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="jars/commons-lang-2.3.jar"/>
-	<classpathentry kind="lib" path="jars/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="jars/guice-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-assistedinject-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-grapher-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-jmx-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-jndi-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-multibindings-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-persist-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-spring-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-struts2-plugin-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/guice-throwingproviders-3.0.jar"/>
-	<classpathentry kind="lib" path="jars/hibernate-commons-annotations-4.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="jars/hibernate-core-4.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="jars/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-	<classpathentry kind="lib" path="jars/hibernate-validator-4.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="jars/jandex-1.0.3.Final.jar"/>
-	<classpathentry kind="lib" path="jars/javassist-3.12.1.GA.jar"/>
-	<classpathentry kind="lib" path="jars/javax.inject.jar"/>
-	<classpathentry kind="lib" path="jars/jboss-logging-3.1.0.CR2.jar"/>
-	<classpathentry kind="lib" path="jars/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="jars/jpa-api-2.0.Beta-20090815.jar"/>
-	<classpathentry kind="lib" path="jars/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="jars/postgresql-9.1-901.jdbc3.jar"/>
-	<classpathentry kind="lib" path="jars/slf4j-api-1.5.6.jar"/>
-	<classpathentry kind="lib" path="jars/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry kind="lib" path="jars/validation-api-1.0.0.GA.jar"/>
-	<classpathentry kind="lib" path="jars/xstream-1.3.1.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/com.ibm.icu.source_4.4.2.v20110208.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.core.commands_3.6.0.I20110111-0800.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
@@ -47,6 +14,44 @@
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.text_3.5.101.r371_v20110810-0800.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.forms_3.5.100.v20110425.jar"/>
 	<classpathentry kind="lib" path="C:/eclipse/plugins/org.eclipse.ui.workbench_3.7.0.I20110519-0100.jar"/>
-	<classpathentry kind="lib" path="swing2swt.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/aopalliance.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/classmate-0.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/commons-logging-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-assistedinject-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-grapher-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-jmx-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-jndi-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-multibindings-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-persist-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-spring-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-struts2-plugin-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/guice-throwingproviders-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/hibernate-commons-annotations-4.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/hibernate-core-4.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/hibernate-validator-4.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/jandex-1.0.3.Final.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/jasperreports-3.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/javassist-3.12.1.GA.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/javax.inject.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/jboss-logging-3.1.0.CR2.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/jpa-api-2.0.Beta-20090815.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/postgresql-9.1-901.jdbc3.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/swtjasperviewer-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/validation-api-1.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="C:/eclipse/plugins/jars/xstream-1.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

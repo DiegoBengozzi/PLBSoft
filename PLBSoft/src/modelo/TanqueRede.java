@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "TANQUE_REDE")
@@ -23,7 +24,7 @@ public class TanqueRede implements Serializable {
 	private Long id;
 
 	@Column
-	private String nome;
+	private String nomeTanqueRede;
 
 	@Column
 	private BigDecimal tamanho;
@@ -31,8 +32,8 @@ public class TanqueRede implements Serializable {
 	@Column
 	private Boolean status;
 
-//	@ManyToOne
-//	private Tanque tanque;
+	@ManyToOne
+	private Tanque tanqueId;
 	
 
 	public Long getId() {
@@ -44,11 +45,11 @@ public class TanqueRede implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeTanqueRede;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomeTanqueRede = nome;
 	}
 
 	public BigDecimal getTamanho() {
@@ -65,6 +66,14 @@ public class TanqueRede implements Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	
+	public Tanque getTanqueId() {
+		return tanqueId;
+	}
+
+	public void setTanqueId(Tanque tanqueId) {
+		this.tanqueId = tanqueId;
 	}
 
 	@Override
@@ -91,13 +100,5 @@ public class TanqueRede implements Serializable {
 			return false;
 		return true;
 	}
-
-//	public Tanque getTanque() {
-//		return tanque;
-//	}
-//
-//	public void setTanque(Tanque tanque) {
-//		this.tanque = tanque;
-//	}
 
 }

@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Table(name = "HAPA")
 @Entity
@@ -26,7 +25,7 @@ public class Hapa implements Serializable {
 	private Long id;
 
 	@Column
-	private String nome;
+	private String nomeHapa;
 
 	@Column
 	private BigDecimal tamanho;
@@ -35,8 +34,7 @@ public class Hapa implements Serializable {
 	private Boolean status;
 
 	@ManyToOne
-	@NotNull
-	private Passarela passarela;
+	private Passarela passarelaId;
 
 	public Long getId() {
 		return id;
@@ -47,11 +45,11 @@ public class Hapa implements Serializable {
 	}
 
 	public String getNome() {
-		return nome;
+		return nomeHapa;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nomeHapa = nome;
 	}
 
 	public BigDecimal getTamanho() {
@@ -70,12 +68,12 @@ public class Hapa implements Serializable {
 		this.status = status;
 	}
 
-	public Passarela getPassarela() {
-		return passarela;
+	public Passarela getPassarelaId() {
+		return passarelaId;
 	}
 
-	public void setPassarela(Passarela passarela) {
-		this.passarela = passarela;
+	public void setPassarelaId(Passarela passarela) {
+		this.passarelaId = passarela;
 	}
 
 	@Override
