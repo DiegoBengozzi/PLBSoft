@@ -6,6 +6,7 @@ import static helper.StatusHelper.mensagemLimpar;
 import static helper.StatusHelper.mensagemWarning;
 import static helper.StatusHelper.txtStatus;
 import helper.CalendarioHelper;
+import helper.LayoutHelper;
 import helper.StatusHelper;
 
 import org.eclipse.swt.SWT;
@@ -66,7 +67,7 @@ public class JanelaPrincipalGUI {
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
-		shellPlbsoft = new Shell();
+		shellPlbsoft = LayoutHelper.getShellAtivo();
 		shellPlbsoft.setMinimumSize(new Point(850, 650));
 		shellPlbsoft.setMaximized(true);
 		shellPlbsoft.setImage(SWTResourceManager.getImage(
@@ -367,8 +368,7 @@ public class JanelaPrincipalGUI {
 				false, 1, 1));
 		btnManejoDeLote.setText("Manejo de Lote");
 
-		scrolledComposite = new ScrolledComposite(shellPlbsoft, SWT.BORDER
-				| SWT.H_SCROLL | SWT.V_SCROLL);
+		scrolledComposite = LayoutHelper.getActiveScroll();
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1));
 		scrolledComposite.setExpandVertical(true);
