@@ -70,6 +70,7 @@ public abstract class ReportCommand {
 		return reportView;
 	}
 
+	public abstract void execute();
 	public abstract Map<String, Object> getParametros();
 
 }
