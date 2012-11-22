@@ -26,7 +26,6 @@ public class RelatorioGUI extends Composite {
 	}
 
 	public void setReport(JasperPrint jPrint) {
-
 		view.getReportViewer().setDocument(jPrint);
 	}
 }

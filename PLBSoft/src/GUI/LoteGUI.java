@@ -202,8 +202,8 @@ public class LoteGUI extends TelaEdicaoGUI<Lote> {
 		comboTanqueRede.select(tanqueRedeService.buscarTodosTanqueRedeAtivo()
 				.indexOf(entidade.getTanqueRedeId()));
 
-		comboPassarela.select(passarelaService.buscarTodosPassarelaAtivo()
-				.indexOf(entidade.getHapaId().getPassarelaId()));
+//		comboPassarela.select(passarelaService.buscarTodosPassarelaAtivo()
+//				.indexOf(entidade.getHapaId().getPassarelaId()));
 
 		comboHapa.select(hapaService.buscarTodosHapaAtivo().indexOf(
 				entidade.getHapaId()));
