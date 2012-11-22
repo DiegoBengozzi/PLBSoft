@@ -1,9 +1,10 @@
 package helper;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Shell;
 
-public class LayoutHelper {	
+public class LayoutHelper {
 	private static Shell shell;
 	private static ScrolledComposite scrolledComposite;
 
@@ -13,11 +14,12 @@ public class LayoutHelper {
 		}
 		return shell;
 	}
-	
-	public static ScrolledComposite getActiveScroll(){
-		if(scrolledComposite == null)
-			scrolledComposite = new ScrolledComposite(shellPlbsoft, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		
+
+	public static ScrolledComposite getActiveScroll() {
+		if (scrolledComposite == null) {
+			scrolledComposite = new ScrolledComposite(getShellAtivo(),
+					SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		}
 		return scrolledComposite;
 	}
 

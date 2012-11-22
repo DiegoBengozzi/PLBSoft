@@ -3,7 +3,6 @@ package GUI;
 import static helper.StatusHelper.mensagemError;
 import static helper.StatusHelper.mensagemInfo;
 import static helper.StatusHelper.mensagemLimpar;
-import static helper.StatusHelper.mensagemWarning;
 import static helper.StatusHelper.txtStatus;
 import helper.CalendarioHelper;
 import helper.LayoutHelper;
@@ -21,10 +20,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wb.swt.SWTResourceManager;
+
+import service.CommandRelatorioLote;
 
 public class JanelaPrincipalGUI {
 
@@ -67,7 +69,12 @@ public class JanelaPrincipalGUI {
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
+		/*
+		 * Nessesario alteracao pra utilizar o WindowsBulder
+		 */
 		shellPlbsoft = LayoutHelper.getShellAtivo();
+		// shellPlbsoft = new Shell();
+
 		shellPlbsoft.setMinimumSize(new Point(850, 650));
 		shellPlbsoft.setMaximized(true);
 		shellPlbsoft.setImage(SWTResourceManager.getImage(
@@ -231,17 +238,23 @@ public class JanelaPrincipalGUI {
 
 		Menu menu_2 = new Menu(mntmRelatorios);
 		mntmRelatorios.setMenu(menu_2);
-		
+
 		MenuItem mntmRelatorioDeLote = new MenuItem(menu_2, SWT.NONE);
 		mntmRelatorioDeLote.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				mensagemInfo("Relatorio de Lote!");
-				
+				try {
+					mensagemInfo("Relatorio de Lote!");
+					CommandRelatorioLote relatorioLote = new CommandRelatorioLote();
+					relatorioLote.execute();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					mensagemError("Erro ao tentar geral o relatorio!!");
+				}
 			}
 		});
 		mntmRelatorioDeLote.setText("Relatorio de Lote");
-		
+
 		MenuItem mntmRelatorioDeTanque = new MenuItem(menu_2, SWT.NONE);
 		mntmRelatorioDeTanque.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -283,41 +296,44 @@ public class JanelaPrincipalGUI {
 		gd_groupMenuRapido.heightHint = 549;
 		groupMenuRapido.setLayoutData(gd_groupMenuRapido);
 
-		Button btTest = new Button(groupMenuRapido, SWT.NONE);
-		btTest.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		btTest.setSize(95, 25);
-		btTest.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
+		// Button btTest = new Button(groupMenuRapido, SWT.NONE);
+		// btTest.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
+		// 1));
+		// btTest.setSize(95, 25);
+		// btTest.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		//
+		// mensagemInfo("" + CalendarioHelper.c.getTime());
+		// }
+		// });
+		// btTest.setText("Test");
 
-				mensagemInfo("" + CalendarioHelper.c.getTime());
-			}
-		});
-		btTest.setText("Test");
+		// Button btTeste = new Button(groupMenuRapido, SWT.NONE);
+		// btTeste.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
+		// 1,
+		// 1));
+		// btTeste.setSize(95, 25);
+		// btTeste.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// mensagemWarning("Botao de Teste!! Mensagem de Alerta!! >>");
+		// }
+		// });
+		// btTeste.setText("Teste");
 
-		Button btTeste = new Button(groupMenuRapido, SWT.NONE);
-		btTeste.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
-				1));
-		btTeste.setSize(95, 25);
-		btTeste.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				mensagemWarning("Botao de Teste!! Mensagem de Alerta!! >>");
-			}
-		});
-		btTeste.setText("Teste");
-
-		Button btTeste2 = new Button(groupMenuRapido, SWT.NONE);
-		btTeste2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1,
-				1));
-		btTeste2.setSize(95, 25);
-		btTeste2.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				mensagemError("Botao de Teste!! Mensagem de Erro!!");
-			}
-		});
-		btTeste2.setText("Teste2");
+		// Button btTeste2 = new Button(groupMenuRapido, SWT.NONE);
+		// btTeste2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false,
+		// 1,
+		// 1));
+		// btTeste2.setSize(95, 25);
+		// btTeste2.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// mensagemError("Botao de Teste!! Mensagem de Erro!!");
+		// }
+		// });
+		// btTeste2.setText("Teste2");
 
 		Button btnLimpar = new Button(groupMenuRapido, SWT.NONE);
 		btnLimpar.addSelectionListener(new SelectionAdapter() {
@@ -355,20 +371,27 @@ public class JanelaPrincipalGUI {
 				1, 1));
 		btnTanque.setText("Tanque");
 
-		Button btnManejoDeLote = new Button(groupMenuRapido, SWT.NONE);
-		btnManejoDeLote.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				ManejoLoteGUI manejoLoteGUI = new ManejoLoteGUI(
-						scrolledComposite, SWT.BORDER);
-				carregarValores(manejoLoteGUI);
-			}
-		});
-		btnManejoDeLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				false, 1, 1));
-		btnManejoDeLote.setText("Manejo de Lote");
+		// Button btnManejoDeLote = new Button(groupMenuRapido, SWT.NONE);
+		// btnManejoDeLote.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// ManejoLoteGUI manejoLoteGUI = new ManejoLoteGUI(
+		// scrolledComposite, SWT.BORDER);
+		// carregarValores(manejoLoteGUI);
+		// }
+		// });
+		// btnManejoDeLote.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+		// false, 1, 1));
+		// btnManejoDeLote.setText("Manejo de Lote");
 
+		/*
+		 * Nessesario alteracao pra utilizar o WindowsBulder
+		 */
 		scrolledComposite = LayoutHelper.getActiveScroll();
+		// scrolledComposite = new
+		// ScrolledComposite(LayoutHelper.getShellAtivo(), SWT.BORDER |
+		// SWT.H_SCROLL | SWT.V_SCROLL);
+
 		scrolledComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1));
 		scrolledComposite.setExpandVertical(true);
@@ -376,6 +399,7 @@ public class JanelaPrincipalGUI {
 		/**
 		 * Fim da barra de menu lateral e inicio da Barra de Menu Inferior
 		 */
+		new Label(shellPlbsoft, SWT.NONE);
 		Group grpBarraDeStatus = new Group(shellPlbsoft, SWT.NONE);
 		GridData gd_grpBarraDeStatus = new GridData(SWT.FILL, SWT.FILL, true,
 				false, 2, 1);

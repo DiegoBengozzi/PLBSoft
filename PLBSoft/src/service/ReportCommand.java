@@ -26,51 +26,44 @@ public abstract class ReportCommand {
 	}
 
 	public JasperPrint getReport(String caminhoRelatorio) {
-
 		try {
 			String urlBanco = "jdbc:postgresql://localhost:5432/BancoPLBSoft";
-
 			DriverManager.registerDriver(new Driver());
-
 			Connection con = DriverManager.getConnection(urlBanco, "postgres",
 					"admin");
-
 			return JasperFillManager
-					.fillReport("/relatorio".concat(caminhoRelatorio),
+					.fillReport("C:\\Users\\DIEGO\\git\\PLBSoft\\PLBSoft\\src\\relatorio\\".concat(caminhoRelatorio),
 							getParametros(), con);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	public JasperPrint getReport(String caminhoRelatorio, List<?> listaObjetos) {
-
 		try {
 			JRDataSource jrds = new JRBeanCollectionDataSource(listaObjetos);
 			return JasperFillManager.fillReport(
-					"/relatorio".concat(caminhoRelatorio), getParametros(),
+					"C:\\Users\\DIEGO\\git\\PLBSoft\\PLBSoft\\src\\relatorio\\".concat(caminhoRelatorio), getParametros(),
 					jrds);
-
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	public RelatorioGUI getView() throws PartInitException {
-
-		RelatorioGUI reportView = new RelatorioGUI(
-				LayoutHelper.getShellAtivo(), SWT.NONE);
+		//LayoutHelper.getShellAtivo()
+		RelatorioGUI reportView = new RelatorioGUI(LayoutHelper.getActiveScroll(), SWT.NONE);
 		return reportView;
 	}
 
-	public abstract void execute();
-	public abstract Map<String, Object> getParametros();
+	public abstract void execute() throws Exception;
+	
 
+	public abstract Map<String, Object> getParametros();
+	
+	
 }

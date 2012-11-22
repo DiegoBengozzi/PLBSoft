@@ -43,7 +43,8 @@ public abstract class TelaEdicaoGUI<T> extends Composite {
 	
 
 	public void voltar() {
-		dispose();
+		//dispose();
+		setVisible(false);
 		mensagemLimpar();
 		CalendarioHelper.limparData();
 	}
