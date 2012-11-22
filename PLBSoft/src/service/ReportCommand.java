@@ -14,14 +14,13 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.PartInitException;
 import org.postgresql.Driver;
 
 import GUI.RelatorioGUI;
 
-public abstract class ReportCommand extends AbstractHandler {
+public abstract class ReportCommand {
 
 	public ReportCommand() {
 	}
@@ -64,17 +63,11 @@ public abstract class ReportCommand extends AbstractHandler {
 
 	}
 
-	public RelatorioGUI getView() {
+	public RelatorioGUI getView() throws PartInitException {
 
-		try {
-			RelatorioGUI reportView = new RelatorioGUI(
-					LayoutHelper.getShellAtivo(), SWT.NONE);
-			return reportView;
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-
-		return null;
+		RelatorioGUI reportView = new RelatorioGUI(
+				LayoutHelper.getShellAtivo(), SWT.NONE);
+		return reportView;
 	}
 
 	public abstract Map<String, Object> getParametros();
